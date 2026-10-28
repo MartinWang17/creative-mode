@@ -46,7 +46,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
 <section class="spillband" aria-label="Every week">
   <div class="wrap">
     <div class="spill" id="spill">
-      <p class="spill-pill">A&nbsp;different niche. A&nbsp;different style.<br class="br"> A&nbsp;different strategy. <em>Every single week.</em></p>
+      <div class="spill-pill" id="spill-pill"><div class="spill-in"><p>A <b>different niche, a different style and a different strategy every single week.</b> You get the numbers, the outlier Reels, the hook pattern behind most of their views, and an apply-it page so you can run it on your own account that night. No course, no theory: what's working right now, and why.</p></div></div>
     </div>
   </div>
 </section>
@@ -150,7 +150,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
   </div>
 </section>
 
-<section class="band">
+<section class="band course-band">
   <div class="wrap">
     <p class="label eyebrow">Why this isn't a course</p>
     <h2 class="big">I bought two courses. Over $5,000. I still had 44 followers.</h2>
