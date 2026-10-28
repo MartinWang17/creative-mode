@@ -1,0 +1,9 @@
+import { NextResponse, type NextRequest } from "next/server";
+import { siteUrl } from "@/lib/env";
+import { createAuthClient } from "@/lib/supabase/server";
+
+export async function POST(request: NextRequest) {
+  const supabase = await createAuthClient();
+  await supabase.auth.signOut();
+  return NextResponse.redirect(`${siteUrl(request.headers)}/`, 303);
+}

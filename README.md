@@ -7,6 +7,10 @@ The Creative Mode website and the Creator Breakdown membership.
 
 Built with Next.js and Tailwind, hosted on Vercel.
 
+## Setup
+
+See `SETUP.md` for connecting Stripe and Supabase.
+
 ## Where to change things
 
 - Brand colors and fonts: `src/app/globals.css`

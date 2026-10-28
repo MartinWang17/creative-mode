@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Wordmark from "@/components/Wordmark";
 import PillLink from "@/components/PillLink";
 import { offer } from "@/lib/offer";
+import PricingGrid from "@/components/PricingGrid";
+
+// Rendered per request so the Nov 11 cart-open date and prices switch on their own.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Creator Breakdown | Creative Mode",
@@ -140,42 +144,7 @@ export default function CreatorBreakdownPage() {
               The founding price ends when the cart closes on November 15 and stays yours for as
               long as you&apos;re a member.
             </p>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {offer.plans.map((plan) => (
-                <div
-                  key={plan.id}
-                  className={`flex flex-col border-2 p-8 ${
-                    plan.featured ? "border-birch bg-forest" : "border-oak bg-bedrock"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="label text-sm">{plan.name}</h3>
-                    {plan.featured && (
-                      <span className="label bg-birch px-2 py-1 text-[10px] text-bedrock">
-                        Best value
-                      </span>
-                    )}
-                  </div>
-                  <p className="font-display mt-6 text-7xl leading-none">
-                    {plan.price}
-                    <span className="font-sans text-lg text-chalk/60">{plan.per}</span>
-                  </p>
-                  <p className="mt-2 text-sm text-birch">{plan.note}</p>
-                  <p className="mt-1 text-sm text-chalk/50 line-through">{plan.later}</p>
-                  {plan.bonus && <p className="mt-6 text-chalk/80">{plan.bonus}</p>}
-                  <div className="mt-auto pt-8">
-                    {/* Checkout gets wired to Stripe in the next step */}
-                    <button
-                      type="button"
-                      disabled
-                      className="label w-full cursor-not-allowed rounded-full border-2 border-chalk/40 px-6 py-4 text-xs text-chalk/60"
-                    >
-                      Opens Nov 11
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PricingGrid />
             <p className="mt-8 text-chalk/75">
               <span className="label text-xs text-birch">30-day guarantee.</span> {offer.guarantee}
             </p>

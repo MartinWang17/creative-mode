@@ -2,36 +2,50 @@
 // so a price or date change is a one-line edit.
 // Source of truth: the "Creator Breakdown: the offer" doc.
 
+export type PlanId = "annual" | "monthly";
+
 export const offer = {
   product: "Creator Breakdown",
   promise:
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
-  // Cart dates, Eastern time
+  currency: "usd",
+  // Cart dates, Eastern time. Founding prices apply until the cart closes.
   cartOpens: "2026-11-11T09:00:00-05:00",
   cartCloses: "2026-11-15T23:59:00-05:00",
   plans: [
     {
-      id: "annual",
+      id: "annual" as PlanId,
       name: "Annual",
-      price: "$197",
+      interval: "year" as const,
       per: "/year",
-      later: "$267/year after launch",
-      note: "Founding price, locked for life",
-      bonus: "Hook Vault: the top 50 hooks from every breakdown, with views and outlier scores. Annual only, first 48 hours.",
+      founding: { cents: 19700, label: "$197" },
+      public: { cents: 26700, label: "$267" },
+      bonus:
+        "Hook Vault: the top 50 hooks from every breakdown, with views and outlier scores. Annual only, first 48 hours.",
       featured: true,
     },
     {
-      id: "monthly",
+      id: "monthly" as PlanId,
       name: "Monthly",
-      price: "$19.99",
+      interval: "month" as const,
       per: "/month",
-      later: "$26.99/month after launch",
-      note: "Founding price, locked for life",
+      founding: { cents: 1999, label: "$19.99" },
+      public: { cents: 2699, label: "$26.99" },
       bonus: null,
       featured: false,
     },
   ],
   guarantee:
     "Read your first 4 breakdowns. If you're unhappy, email within 30 days for a full refund.",
-} as const;
+};
+
+// CHECKOUT_OPEN=true in Vercel opens checkout early (for testing in Stripe test mode).
+export function checkoutOpen(now = new Date()) {
+  if (process.env.CHECKOUT_OPEN === "true") return true;
+  return now >= new Date(offer.cartOpens);
+}
+
+export function foundingPricing(now = new Date()) {
+  return now <= new Date(offer.cartCloses);
+}
