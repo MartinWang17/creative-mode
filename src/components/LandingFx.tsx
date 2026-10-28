@@ -194,6 +194,8 @@ export default function LandingFx({ deadline }: { deadline?: string }) {
       const linesEl = scene.querySelector(".lines")!;
       const stepEl = scene.querySelector(".step")!;
       const label = scene.getAttribute("data-label");
+      const wrapEl = scene.querySelector(".wrap") as HTMLElement;
+      let lastH = 0;
       linesEl.innerHTML = "";
       const chars: Array<{ el: HTMLElement; c: Ch[] }> = [];
       LINES.forEach((parts) => {
@@ -222,6 +224,11 @@ export default function LandingFx({ deadline }: { deadline?: string }) {
       });
       stepEl.textContent = `${label} · 1 of ${LINES.length}`;
       return function render() {
+        const wh = wrapEl.offsetHeight;
+        if (wh && wh !== lastH) {
+          lastH = wh;
+          scene!.style.setProperty("--lead", `${wh / 2 + 72}px`);
+        }
         if (reduced) {
           chars.forEach((L) => (L.el.style.opacity = "1"));
           return;
