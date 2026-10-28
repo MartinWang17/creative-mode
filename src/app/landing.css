@@ -73,8 +73,8 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .cb .bd{display:block;font-family:var(--display);font-size:clamp(56px,8vw,104px);line-height:.85;color:var(--chalk);margin-top:-.18em;white-space:nowrap;cursor:default}
 .cm .cb .bd span{display:inline-block;--k:0;transform:translate(calc(var(--dx)*var(--k)),calc(var(--y) + var(--dy)*var(--k))) rotate(calc(var(--r) + var(--rz)*var(--k)));transition:transform .22s ease-out;will-change:transform}
 .cm .cbhero .pill{margin-top:36px}
-.cm .scene{position:relative;height:var(--h,340vh);margin-top:calc(-50vh + 230px);pointer-events:none}
-.cm .scene.price{margin-top:calc(-50vh + 360px)}
+/* Scene text is centered in the viewport; --lead (set by LandingFx from the text height) keeps a fixed gap below the section above */
+.cm .scene{position:relative;height:var(--h,340vh);margin-top:calc(-50vh + var(--lead,260px));pointer-events:none}
 .cm .scene .stick{pointer-events:none}
 .cm .scene .wrap{pointer-events:auto}
 .cm .line{pointer-events:none}
@@ -217,7 +217,7 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .count,.cm .cred .st,.cm .course .receipts{grid-template-columns:repeat(2,1fr)}
 .cm .scene .wrap{padding-top:0}}
 @media(prefers-reduced-motion:reduce){.cm .drift i,.cm .pill .sq,.cm .scene .hint{animation:none}
-.cm .scene{height:auto}
+.cm .scene{height:auto;margin-top:0}
 .cm .scene .stick{position:static;height:auto}
 .cm .lines{display:block}
 .cm .line{position:static;margin-bottom:.4em}}
