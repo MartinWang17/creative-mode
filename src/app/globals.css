@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Creative Mode brand tokens. Change a color here and it changes everywhere. */
+@theme {
+  --color-bedrock: #121411; /* page background */
+  --color-forest: #1f4a33; /* buttons, panels, shadow under CREATIVE */
+  --color-chalk: #f2efe7; /* main text, logo */
+  --color-oak: #6e4b2f; /* blocks, dividers, shadow under MODE. Never text on Forest. */
+  --color-birch: #d6bc8e; /* accent text, MODE, text on Forest */
+
+  --font-display: var(--font-jersey), monospace; /* big pixel headings */
+  --font-pixel: var(--font-silkscreen), monospace; /* small pixel labels */
+  --font-sans: var(--font-grotesk), system-ui, sans-serif; /* body text */
+}
+
+html {
+  background: var(--color-bedrock);
+}
+
+body {
+  background: var(--color-bedrock);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+}
+
+/* Hard pixel drop shadows from the logo mockup */
+.shadow-forest {
+  text-shadow: 0.045em 0.045em 0 var(--color-forest);
+}
+.shadow-oak {
+  text-shadow: 0.045em 0.045em 0 var(--color-oak);
+}
+
+/* Letter-spaced pixel caps used for labels and buttons */
+.label {
+  font-family: var(--font-pixel);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
