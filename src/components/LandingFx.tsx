@@ -117,6 +117,37 @@ export default function LandingFx({ deadline }: { deadline?: string }) {
       }
     }
 
+    // Blocky pill under the promise: chunks broken off the edges, bits spilling down
+    const spill = document.getElementById("spill");
+    if (spill && !spill.querySelector(".chunk")) {
+      const chunks: Array<[number, number, number, string, number]> = [
+        [97, 62, 22, "var(--forest)", 8],
+        [100.5, 88, 14, "var(--forest)", -12],
+        [93, 96, 12, "var(--oak)", 18],
+        [2, 70, 12, "var(--forest)", -10],
+        [-1.5, 86, 9, "var(--oak)", 14],
+        [60, 101, 10, "var(--forest)", 22],
+        [64, 112, 7, "var(--birch)", -8],
+      ];
+      chunks.forEach(([x, y, s, c, r]) => {
+        const e = document.createElement("i");
+        e.className = "chunk";
+        e.setAttribute("aria-hidden", "true");
+        e.style.cssText = `--x:${x}%;--y:${y}%;--s:${s}px;--c:${c};--r:${r}deg`;
+        spill.appendChild(e);
+      });
+      const spots = [[96, 80], [99, 92], [90, 98], [62, 100], [66, 100], [30, 100], [4, 84], [1, 92], [78, 99], [48, 100]];
+      const bcols = ["var(--forest)", "var(--oak)", "var(--birch)", "var(--forest)"];
+      for (let q = 0; q < 26; q++) {
+        const [sx, sy] = spots[q % spots.length];
+        const e = document.createElement("i");
+        e.className = "bit";
+        e.setAttribute("aria-hidden", "true");
+        e.style.cssText = `--x:${(sx + (rnd() - 0.5) * 4).toFixed(1)}%;--y:${sy}%;--s:${4 + Math.round(rnd() * 7)}px;--c:${bcols[q % bcols.length]};--dx:${Math.round((rnd() - 0.5) * 40)}px;--fall:${60 + Math.round(rnd() * 90)}px;--r:${Math.round((rnd() - 0.5) * 180)}deg;--d:${(2.6 + rnd() * 2.4).toFixed(2)}s;--o:-${(rnd() * 5).toFixed(2)}s`;
+        spill.appendChild(e);
+      }
+    }
+
     // Scroll scenes: each line breaks apart to reveal the next
     const ease = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
     type Part = [string, 0 | 1];

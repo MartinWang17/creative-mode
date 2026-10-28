@@ -74,13 +74,12 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .cb .bd span{display:inline-block;--k:0;transform:translate(calc(var(--dx)*var(--k)),calc(var(--y) + var(--dy)*var(--k))) rotate(calc(var(--r) + var(--rz)*var(--k)));transition:transform .22s ease-out;will-change:transform}
 .cm .cbhero .pill{margin-top:36px}
 .cm .scene{position:relative;height:var(--h,340vh)}
-.cm .scene .stick{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:flex-start;overflow:hidden}
-.cm .scene .wrap{width:100%;padding-block:28px 40px}
-.cm .scene.price .wrap{padding-top:7vh}
+.cm .scene .stick{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;overflow:hidden}
+.cm .scene .wrap{width:100%;padding-block:0 40px}
 .cm .scene .omg-h{font-family:var(--display);font-size:clamp(32px,4.4vw,60px);line-height:.95;margin:10px 0 34px;max-width:18ch;text-wrap:balance;font-weight:400;color:var(--chalk)}
 .cm .scene.price .lines{font-size:clamp(36px,6vw,80px)}
-.cm .lines{position:relative;min-height:5.2em;font-family:var(--display);font-size:clamp(40px,7.2vw,96px);line-height:1;letter-spacing:.01em}
-.cm .line{position:absolute;inset:0;display:block;max-width:15ch;text-wrap:balance}
+.cm .lines{position:relative;display:grid;font-family:var(--display);font-size:clamp(40px,7.2vw,96px);line-height:1;letter-spacing:.01em}
+.cm .line{grid-area:1/1;position:relative;display:block;max-width:15ch;text-wrap:balance}
 .cm .line .w{display:inline-block;white-space:nowrap}
 .cm .line .w span{display:inline-block;white-space:pre;will-change:transform,opacity}
 .cm .line .em{color:var(--birch)}
@@ -211,11 +210,11 @@ html:has(.cm){scroll-behavior:smooth}
 @media(max-width:900px){.cm .cbhero .grid,.cm .course{grid-template-columns:1fr}}
 @media(max-width:760px){.cm .ba,.cm .stats,.cm .isnt,.cm .ex .row,.cm .bigmac .grid,.cm .plans,.cm .fit,.cm .niche,.cm .pages,.cm .guar{grid-template-columns:1fr}
 .cm .count,.cm .cred .st,.cm .course .receipts{grid-template-columns:repeat(2,1fr)}
-.cm .scene .wrap{padding-top:8vh}}
+.cm .scene .wrap{padding-top:0}}
 @media(prefers-reduced-motion:reduce){.cm .drift i,.cm .pill .sq,.cm .scene .hint{animation:none}
 .cm .scene{height:auto}
 .cm .scene .stick{position:static;height:auto}
-.cm .lines{min-height:0}
+.cm .lines{display:block}
 .cm .line{position:static;margin-bottom:.4em}}
 /* Plan buttons as real checkout forms */
 .cm .plan .plan-form{margin-top:auto;padding-top:28px}
@@ -224,3 +223,20 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .plan .pill.closed .sq{animation:none;background:var(--oak)}
 .cm .plan .pill.closed:hover{background:none;color:var(--chalk)}
 .cm .plan .pill.solid.closed:hover{background:var(--birch);color:var(--bedrock)}
+/* Blocky pill under the promise: chunks breaking off, bits spilling down */
+.cm .spillband{padding-block:40px 120px;text-align:center}
+.cm .spill{position:relative;display:inline-block;max-width:min(980px,100%)}
+.cm .spill-pill{position:relative;z-index:2;margin:0;background:var(--forest);color:var(--chalk);
+  font-family:var(--display);font-size:clamp(30px,4vw,54px);line-height:1;letter-spacing:.01em;text-wrap:balance;
+  padding:30px clamp(30px,5vw,64px) 34px;
+  clip-path:polygon(0 24px,8px 24px,8px 16px,16px 16px,16px 8px,24px 8px,24px 0,calc(100% - 24px) 0,calc(100% - 24px) 8px,calc(100% - 16px) 8px,calc(100% - 16px) 16px,calc(100% - 8px) 16px,calc(100% - 8px) 24px,100% 24px,100% calc(100% - 24px),calc(100% - 8px) calc(100% - 24px),calc(100% - 8px) calc(100% - 16px),calc(100% - 16px) calc(100% - 16px),calc(100% - 16px) calc(100% - 8px),calc(100% - 24px) calc(100% - 8px),calc(100% - 24px) 100%,24px 100%,24px calc(100% - 8px),16px calc(100% - 8px),16px calc(100% - 16px),8px calc(100% - 16px),8px calc(100% - 24px),0 calc(100% - 24px));
+  box-shadow:inset 0 -8px 0 rgba(0,0,0,.28),inset 0 8px 0 rgba(255,255,255,.06)}
+.cm .spill-pill em{font-style:normal;color:var(--birch);white-space:nowrap}
+.cm .spill .chunk{position:absolute;z-index:1;width:var(--s);height:var(--s);background:var(--c);left:var(--x);top:var(--y);transform:rotate(var(--r));
+  box-shadow:inset 0 calc(var(--s)*-.18) 0 rgba(0,0,0,.3)}
+.cm .spill .bit{position:absolute;z-index:1;width:var(--s);height:var(--s);background:var(--c);left:var(--x);top:var(--y);opacity:0;
+  animation:spillfall var(--d) cubic-bezier(.45,0,.9,.6) infinite;animation-delay:var(--o)}
+@keyframes spillfall{0%{opacity:0;transform:translate(0,-6px) rotate(0)}12%{opacity:1}80%{opacity:.9}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--r))}}
+@media(prefers-reduced-motion:reduce){.cm .spill .bit{display:none}}
+@media(max-width:760px){.cm .spill-pill .br{display:none}}
+
