@@ -15,7 +15,6 @@ export const breakdownsHtml = `<div class="wrap topbar">
         </span>
         <p class="label tagline" style="margin-top:14px">A weekly membership · 4 breakdowns a month</p>
         <h1>Every week I take one fast-growing creator apart and hand you <em>their strategy.</em></h1>
-        <p class="lead">A <b>different niche, a different style and a different strategy every single week.</b> You get the numbers, the outlier Reels, the hook pattern behind most of their views, and an apply-it page so you can run it on your own account that night. No course, no theory: what's working right now, and why.</p>
         <div class="cta">
           <a class="pill solid plain" href="#pricing" data-scroll><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
           <span class="ends"><b>Founding price</b> ends Sat Nov 21 · 30-day guarantee</span>
@@ -41,6 +40,14 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="lines" aria-live="polite"></div>
     </div>
     <p class="hint label">Scroll</p>
+  </div>
+</section>
+
+<section class="spillband" aria-label="Every week">
+  <div class="wrap">
+    <div class="spill" id="spill">
+      <div class="spill-pill" id="spill-pill"><div class="spill-in"><p>A <b>different niche, a different style and a different strategy every single week.</b> You get the numbers, the outlier Reels, the hook pattern behind most of their views, and an apply-it page so you can run it on your own account that night. No course, no theory: what's working right now, and why.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -143,7 +150,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
   </div>
 </section>
 
-<section class="band">
+<section class="band course-band">
   <div class="wrap">
     <p class="label eyebrow">Why this isn't a course</p>
     <h2 class="big">I bought two courses. Over $5,000. I still had 44 followers.</h2>

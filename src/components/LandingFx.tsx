@@ -117,6 +117,73 @@ export default function LandingFx({ deadline }: { deadline?: string }) {
       }
     }
 
+    // Pill under the promise: holes masked out of its edges, chunks sitting below each hole, bits falling from them
+    const spill = document.getElementById("spill");
+    const pill = document.getElementById("spill-pill");
+    if (spill && pill && !spill.querySelector(".chunk")) {
+      // Each hole: distance from the pill's right (r) or left (l) edge, from its bottom (b), and size. Negative = cuts through the edge.
+      type Hole = { r?: number; l?: number; b: number; s: number };
+      const holes: Hole[] = [
+        { r: 26, b: -3, s: 16 }, { r: 50, b: 5, s: 10 }, { r: -3, b: 34, s: 14 }, { r: 9, b: 56, s: 8 },
+        { r: 128, b: -3, s: 12 }, { r: 154, b: 7, s: 7 }, { l: 44, b: -3, s: 12 }, { l: 70, b: 6, s: 8 },
+        { r: 320, b: -3, s: 9 }, { l: -3, b: 70, s: 10 },
+      ];
+      const chunks: HTMLElement[] = [];
+      const bits: Array<{ el: HTMLElement; h: number }> = [];
+      const bcols = ["var(--birch)", "var(--forest)", "var(--oak)"];
+      holes.forEach((h, i) => {
+        const c = document.createElement("i");
+        c.className = "chunk";
+        c.setAttribute("aria-hidden", "true");
+        spill.appendChild(c);
+        chunks.push(c);
+        for (let q = 0; q < 2; q++) {
+          const e = document.createElement("i");
+          e.className = "bit";
+          e.setAttribute("aria-hidden", "true");
+          e.style.cssText = `--s:${3 + Math.round(rnd() * 5)}px;--c:${bcols[(i + q) % 3]};--dx:${Math.round((rnd() - 0.5) * 36)}px;--fall:${50 + Math.round(rnd() * 80)}px;--r:${Math.round((rnd() - 0.5) * 200)}deg;--d:${(2.4 + rnd() * 2.4).toFixed(2)}s;--o:-${(rnd() * 5).toFixed(2)}s`;
+          spill.appendChild(e);
+          bits.push({ el: e, h: i });
+        }
+      });
+      const holeXY = (h: Hole, W: number, H: number) => [h.l != null ? h.l : W - (h.r || 0) - h.s, H - h.b - h.s];
+      const layout = () => {
+        const W = pill.offsetWidth;
+        const H = pill.offsetHeight;
+        if (!W || !H) return;
+        const imgs = ["linear-gradient(#000 0 0)"];
+        const pos = ["0 0"];
+        const size = ["100% 100%"];
+        holes.forEach((h, i) => {
+          const [x, y] = holeXY(h, W, H);
+          imgs.push("linear-gradient(#000 0 0)");
+          pos.push(`${x}px ${y}px`);
+          size.push(`${h.s}px ${h.s}px`);
+          chunks[i].style.cssText = `--s:${h.s}px;--x:${(x + (i % 2 ? -3 : 4)).toFixed(0)}px;--y:${(y + h.s * 0.9 + 6 + (i % 3) * 5).toFixed(0)}px;--r:${(i % 2 ? -1 : 1) * (8 + ((i * 7) % 22))}deg`;
+        });
+        bits.forEach((b) => {
+          const [x, y] = holeXY(holes[b.h], W, H);
+          b.el.style.setProperty("--x", `${x + holes[b.h].s / 2 - 3}px`);
+          b.el.style.setProperty("--y", `${y + holes[b.h].s}px`);
+        });
+        const st = pill.style as CSSStyleDeclaration & { webkitMaskImage?: string; webkitMaskPosition?: string; webkitMaskSize?: string; webkitMaskRepeat?: string; webkitMaskComposite?: string };
+        st.maskImage = st.webkitMaskImage = imgs.join(",");
+        st.maskPosition = st.webkitMaskPosition = pos.join(",");
+        st.maskSize = st.webkitMaskSize = size.join(",");
+        st.maskRepeat = st.webkitMaskRepeat = "no-repeat";
+        st.maskComposite = "exclude";
+        st.webkitMaskComposite = "xor";
+      };
+      layout();
+      on(window, "resize", layout);
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(layout);
+        ro.observe(pill);
+        cleanups.push(() => ro.disconnect());
+      }
+      if (document.fonts) document.fonts.ready.then(layout);
+    }
+
     // Scroll scenes: each line breaks apart to reveal the next
     const ease = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
     type Part = [string, 0 | 1];

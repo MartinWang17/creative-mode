@@ -47,7 +47,7 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .topbar a.home .m{color:var(--birch);text-shadow:2px 2px 0 var(--oak)}
 .cm .topbar a.pricing{color:var(--muted);text-decoration:none}
 .cm .topbar a.pricing:hover{color:var(--chalk)}
-.cm .cbhero{padding-block:12px 18px}
+.cm .cbhero{padding-block:12px 0}
 .cm .cbhero .grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:32px 56px;align-items:start;margin-top:0}
 .cm .cbhero .cred{margin-top:34px}
 .cm .cbhero .tagline{color:var(--birch);margin:0}
@@ -73,14 +73,17 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .cb .bd{display:block;font-family:var(--display);font-size:clamp(56px,8vw,104px);line-height:.85;color:var(--chalk);margin-top:-.18em;white-space:nowrap;cursor:default}
 .cm .cb .bd span{display:inline-block;--k:0;transform:translate(calc(var(--dx)*var(--k)),calc(var(--y) + var(--dy)*var(--k))) rotate(calc(var(--r) + var(--rz)*var(--k)));transition:transform .22s ease-out;will-change:transform}
 .cm .cbhero .pill{margin-top:36px}
-.cm .scene{position:relative;height:var(--h,340vh)}
-.cm .scene .stick{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:flex-start;overflow:hidden}
-.cm .scene .wrap{width:100%;padding-block:28px 40px}
-.cm .scene.price .wrap{padding-top:7vh}
+.cm .scene{position:relative;height:var(--h,340vh);margin-top:calc(-50vh + 230px);pointer-events:none}
+.cm .scene.price{margin-top:calc(-50vh + 360px)}
+.cm .scene .stick{pointer-events:none}
+.cm .scene .wrap{pointer-events:auto}
+.cm .line{pointer-events:none}
+.cm .scene .stick{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;overflow:hidden}
+.cm .scene .wrap{width:100%;padding-block:0 40px}
 .cm .scene .omg-h{font-family:var(--display);font-size:clamp(32px,4.4vw,60px);line-height:.95;margin:10px 0 34px;max-width:18ch;text-wrap:balance;font-weight:400;color:var(--chalk)}
 .cm .scene.price .lines{font-size:clamp(36px,6vw,80px)}
-.cm .lines{position:relative;min-height:5.2em;font-family:var(--display);font-size:clamp(40px,7.2vw,96px);line-height:1;letter-spacing:.01em}
-.cm .line{position:absolute;inset:0;display:block;max-width:15ch;text-wrap:balance}
+.cm .lines{position:relative;display:grid;font-family:var(--display);font-size:clamp(40px,7.2vw,96px);line-height:1;letter-spacing:.01em}
+.cm .line{grid-area:1/1;position:relative;display:block;max-width:15ch;text-wrap:balance}
 .cm .line .w{display:inline-block;white-space:nowrap}
 .cm .line .w span{display:inline-block;white-space:pre;will-change:transform,opacity}
 .cm .line .em{color:var(--birch)}
@@ -133,6 +136,7 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .weekly{margin-top:28px;border:2px solid var(--birch);background:var(--forest);padding:26px 28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between}
 .cm .weekly p{margin:0;max-width:60ch}
 .cm .weekly p b{color:var(--birch);font-weight:500}
+.cm .course-band{padding-bottom:30px}
 .cm .course{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px 56px;margin-top:48px;align-items:start}
 .cm .course .shot{margin:0}
 .cm .course .shot .tag{top:auto;bottom:12px}
@@ -211,11 +215,11 @@ html:has(.cm){scroll-behavior:smooth}
 @media(max-width:900px){.cm .cbhero .grid,.cm .course{grid-template-columns:1fr}}
 @media(max-width:760px){.cm .ba,.cm .stats,.cm .isnt,.cm .ex .row,.cm .bigmac .grid,.cm .plans,.cm .fit,.cm .niche,.cm .pages,.cm .guar{grid-template-columns:1fr}
 .cm .count,.cm .cred .st,.cm .course .receipts{grid-template-columns:repeat(2,1fr)}
-.cm .scene .wrap{padding-top:8vh}}
+.cm .scene .wrap{padding-top:0}}
 @media(prefers-reduced-motion:reduce){.cm .drift i,.cm .pill .sq,.cm .scene .hint{animation:none}
 .cm .scene{height:auto}
 .cm .scene .stick{position:static;height:auto}
-.cm .lines{min-height:0}
+.cm .lines{display:block}
 .cm .line{position:static;margin-bottom:.4em}}
 /* Plan buttons as real checkout forms */
 .cm .plan .plan-form{margin-top:auto;padding-top:28px}
@@ -224,3 +228,15 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .plan .pill.closed .sq{animation:none;background:var(--oak)}
 .cm .plan .pill.closed:hover{background:none;color:var(--chalk)}
 .cm .plan .pill.solid.closed:hover{background:var(--birch);color:var(--bedrock)}
+/* Pill under the promise: Birch-outlined, holes punched out of its edges, chunks and bits falling from them */
+.cm .spillband{padding-block:0 110px;text-align:center}
+.cm .spill{position:relative;display:inline-block;max-width:min(880px,100%);text-align:left}
+.cm .spill-pill{position:relative;z-index:2;background:var(--birch);padding:3px;clip-path:polygon(0 18px,6px 18px,6px 12px,12px 12px,12px 6px,18px 6px,18px 0,calc(100% - 18px) 0,calc(100% - 18px) 6px,calc(100% - 12px) 6px,calc(100% - 12px) 12px,calc(100% - 6px) 12px,calc(100% - 6px) 18px,100% 18px,100% calc(100% - 18px),calc(100% - 6px) calc(100% - 18px),calc(100% - 6px) calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) calc(100% - 6px),calc(100% - 18px) calc(100% - 6px),calc(100% - 18px) 100%,18px 100%,18px calc(100% - 6px),12px calc(100% - 6px),12px calc(100% - 12px),6px calc(100% - 12px),6px calc(100% - 18px),0 calc(100% - 18px))}
+.cm .spill-in{background:var(--forest);padding:28px clamp(24px,4vw,44px) 32px;clip-path:polygon(0 18px,6px 18px,6px 12px,12px 12px,12px 6px,18px 6px,18px 0,calc(100% - 18px) 0,calc(100% - 18px) 6px,calc(100% - 12px) 6px,calc(100% - 12px) 12px,calc(100% - 6px) 12px,calc(100% - 6px) 18px,100% 18px,100% calc(100% - 18px),calc(100% - 6px) calc(100% - 18px),calc(100% - 6px) calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) calc(100% - 6px),calc(100% - 18px) calc(100% - 6px),calc(100% - 18px) 100%,18px 100%,18px calc(100% - 6px),12px calc(100% - 6px),12px calc(100% - 12px),6px calc(100% - 12px),6px calc(100% - 18px),0 calc(100% - 18px));box-shadow:inset 0 -8px 0 rgba(0,0,0,.25)}
+.cm .spill-in p{margin:0;font-family:var(--sans);font-size:clamp(17px,1.6vw,21px);line-height:1.5;color:rgba(242,239,231,.78)}
+.cm .spill-in p b{color:var(--chalk);font-weight:600}
+.cm .spill .chunk{position:absolute;z-index:3;width:var(--s);height:var(--s);background:var(--forest);box-shadow:inset 0 0 0 2px var(--birch);left:var(--x);top:var(--y);transform:rotate(var(--r))}
+.cm .spill .bit{position:absolute;z-index:1;width:var(--s);height:var(--s);background:var(--c);left:var(--x);top:var(--y);opacity:0;
+  animation:spillfall var(--d) cubic-bezier(.45,0,.9,.6) infinite;animation-delay:var(--o)}
+@keyframes spillfall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:1}80%{opacity:.9}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--r))}}
+@media(prefers-reduced-motion:reduce){.cm .spill .bit{display:none}}
