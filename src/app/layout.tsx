@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Jersey_10, Silkscreen, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import "./landing.css";
 
 const jersey = Jersey_10({
   variable: "--font-jersey",

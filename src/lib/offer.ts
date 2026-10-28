@@ -10,9 +10,9 @@ export const offer = {
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
   currency: "usd",
-  // Cart dates, Eastern time. Founding prices apply until the cart closes.
+  // Cart dates, Eastern time. Founding prices apply until the cart closes (Sat Nov 21, per Martin on Oct 28).
   cartOpens: "2026-11-11T09:00:00-05:00",
-  cartCloses: "2026-11-15T23:59:00-05:00",
+  cartCloses: "2026-11-21T23:59:00-05:00",
   plans: [
     {
       id: "annual" as PlanId,
@@ -22,7 +22,7 @@ export const offer = {
       founding: { cents: 19700, label: "$197" },
       public: { cents: 26700, label: "$267" },
       bonus:
-        "Hook Vault: the top 50 hooks from every breakdown, with views and outlier scores. Annual only, first 48 hours.",
+        "Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores. Annual members only.",
       featured: true,
     },
     {
@@ -37,7 +37,7 @@ export const offer = {
     },
   ],
   guarantee:
-    "Read your first 4 breakdowns. If you're unhappy, email within 30 days for a full refund.",
+    "Read your first 4 breakdowns. If you're unhappy for any reason, you get a full refund within 30 days.",
 };
 
 // CHECKOUT_OPEN=true in Vercel opens checkout early (for testing in Stripe test mode).
