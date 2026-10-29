@@ -10,5 +10,5 @@ export const homeHtml = `<section class="hero">
     <a class="pill label" href="/creator-breakdown"><span class="sq"></span><span>Creator Breakdowns</span><span aria-hidden="true">→</span></a>
   </div>
 </section>
-<footer><div class="wrap"><span>© 2026 Creative Mode</span><span>Creators featured are not affiliated with or endorsed by Creative Mode.</span></div></footer>
+<footer><div class="wrap"><span>© 2026 Creative Mode</span><span>Creators featured are not affiliated with or endorsed by Creative Mode.</span><span class="legal"><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/refunds">Refunds</a></span></div></footer>
 `;
