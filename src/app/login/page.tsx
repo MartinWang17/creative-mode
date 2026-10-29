@@ -4,11 +4,11 @@ import Shell from "@/components/Shell";
 import { hasSupabase, siteUrl } from "@/lib/env";
 import { createAuthClient } from "@/lib/supabase/server";
 
-type Search = Promise<{ next?: string; sent?: string; error?: string }>;
+type Search = Promise<{ next?: string; sent?: string; error?: string; why?: string }>;
 
 // Email magic link login. No passwords.
 export default async function LoginPage({ searchParams }: { searchParams: Search }) {
-  const { next = "/library", sent, error } = await searchParams;
+  const { next = "/library", sent, error, why } = await searchParams;
 
   async function sendLink(formData: FormData) {
     "use server";
@@ -21,7 +21,11 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
       email,
       options: { emailRedirectTo: `${base}/auth/confirm?next=${encodeURIComponent(nextPath)}` },
     });
-    redirect(error ? `/login?error=send` : `/login?sent=1`);
+    if (error) {
+      console.error("signInWithOtp failed", error.status, error.code, error.message);
+      redirect(`/login?error=send&why=${encodeURIComponent(error.message.slice(0, 160))}`);
+    }
+    redirect(`/login?sent=1`);
   }
 
   return (
@@ -60,6 +64,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
                 {error === "link"
                   ? "That link has expired. Request a new one."
                   : "Couldn't send the link. Check the email and try again."}
+                {why && <span className="mt-1 block text-xs text-chalk/50">Reason: {why}</span>}
               </p>
             )}
             {!hasSupabase() && (
