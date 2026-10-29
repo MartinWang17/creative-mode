@@ -37,7 +37,7 @@ export const offer = {
     },
   ],
   // Shown on the Terms, Privacy and Refund pages and in the footer.
-  contactEmail: "hello@joincreativemode.com",
+  contactEmail: "martin@joincreativemode.com",
   guarantee:
     "Read your first 4 breakdowns. If you're unhappy for any reason, you get a full refund within 30 days.",
 };
