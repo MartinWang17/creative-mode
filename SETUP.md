@@ -34,7 +34,7 @@ When you go live, repeat steps 1 and 2 with live keys and swap the two values in
 | `STRIPE_SECRET_KEY` | from Stripe |
 | `STRIPE_WEBHOOK_SECRET` | from Stripe |
 | `ADMIN_EMAILS` | your email address |
-| `CHECKOUT_OPEN` | `true` while testing, `false` until Nov 11 |
+| `CHECKOUT_OPEN` | `true` while testing, `false` until Nov 17 |
 | `STRIPE_AUTOMATIC_TAX` | `false` until Stripe Tax is registered |
 
 Then **Deployments → ⋯ on the latest → Redeploy** so the keys take effect.
