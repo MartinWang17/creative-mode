@@ -210,6 +210,8 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .cta-final{padding-block:90px 120px;text-align:left}
 .cm footer{padding-block:28px 40px;color:var(--faint);font-size:13px;border-top:2px solid var(--line)}
 .cm footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
+.cm footer .legal a{color:inherit}
+.cm footer .legal a:hover{color:var(--chalk)}
 .cm a:focus-visible,.cm button:focus-visible,.cm summary:focus-visible{outline:2px solid var(--birch);outline-offset:4px}
 .cm [hidden]{display:none!important}
 @media(max-width:900px){.cm .cbhero .grid,.cm .course{grid-template-columns:1fr}}
