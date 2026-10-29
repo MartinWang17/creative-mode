@@ -10,8 +10,8 @@ export const offer = {
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
   currency: "usd",
-  // Cart dates, Eastern time. Founding prices apply until the cart closes (Sat Nov 21, per Martin on Oct 28).
-  cartOpens: "2026-11-11T09:00:00-05:00",
+  // Cart dates, Eastern time. Founding prices apply until the cart closes (Sat Nov 21). Cart opens Tue Nov 17 (moved from Nov 11 on Oct 29).
+  cartOpens: "2026-11-17T09:00:00-05:00",
   cartCloses: "2026-11-21T23:59:00-05:00",
   plans: [
     {
