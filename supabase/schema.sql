@@ -27,6 +27,13 @@ create table if not exists public.breakdowns (
   created_at timestamptz not null default now()
 );
 
+-- Emails from the sales page after doors close, for the next launch.
+create table if not exists public.waitlist (
+  email text primary key,
+  created_at timestamptz not null default now()
+);
+
 -- Only the server (secret key) can read or write these. No public access.
 alter table public.members enable row level security;
 alter table public.breakdowns enable row level security;
+alter table public.waitlist enable row level security;

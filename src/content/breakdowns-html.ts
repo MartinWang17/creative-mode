@@ -16,8 +16,10 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p class="label tagline" style="margin-top:14px">A weekly membership · 4 breakdowns a month</p>
         <h1>Every week I take one fast-growing creator apart and hand you <em>their strategy.</em></h1>
         <div class="cta">
-          <a class="pill solid plain" href="#pricing" data-scroll><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
-          <span class="ends"><b>Founding price</b> ends Sat Nov 21 · 30-day guarantee</span>
+          <!--open--><a class="pill solid plain" href="#pricing" data-scroll><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
+          <span class="ends"><b>Doors close</b> Sun Nov 22 · 30-day guarantee</span><!--/open-->
+          <!--closed--><a class="pill solid plain" href="#waitlist" data-scroll><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a>
+          <span class="ends"><b>Doors are closed</b> until the next launch</span><!--/closed-->
         </div>
       </div>
       <aside class="cred" aria-label="Who's behind this">
@@ -172,7 +174,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
   </div>
 </section>
 
-<section class="scene price" id="scene-price" data-label="The price" style="--h:360vh">
+<!--open--><section class="scene price" id="scene-price" data-label="The price" style="--h:360vh">
   <div class="stick">
     <div class="wrap">
       <p class="label eyebrow">Okay but</p>
@@ -183,8 +185,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
     </div>
     <p class="hint label">Scroll</p>
   </div>
-</section>
-<section class="bigmac">
+</section><!--/open-->
+<!--open--><section class="bigmac">
   <div class="wrap">
     <p class="lead">$19.99 a month for four breakdowns. Here's what that actually is.</p>
     <div class="grid">
@@ -193,7 +195,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="tile"><b>1 day</b><span>a week without Starbucks and you can afford this.</span></div>
     </div>
   </div>
-</section>
+</section><!--/open-->
 
 <section class="band" id="pricing">
   <div class="wrap">
@@ -207,7 +209,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <div class="row"><span>The full library of past breakdowns, growing every month</span><span>$60</span></div>
         <div class="row"><span>Your vote on the Creator of the Month</span><span>Priceless</span></div>
       </div>
-      <div class="grp">
+      <!--open--><div class="grp">
         <p class="label eyebrow">Founding bonuses</p>
         <div class="row"><span>Every existing breakdown unlocked on day one</span><span>$40</span></div>
         <div class="row"><span>Founding price locked for life ($197 a year instead of $267)</span><span>$70 a year, every year</span></div>
@@ -217,14 +219,19 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="today">
         <div><p class="label eyebrow">Founding price</p><p class="t" style="margin:8px 0 0">Today's price</p><p class="off">All of it for <em>$19.99 a month</em>. Or <em>$197 a year</em> and the Hook Vault is yours too.</p></div>
         <p class="p" style="margin:0">$19.99<small>/month</small><span class="yr">or $197/year</span></p>
-      </div>
+      </div><!--/open-->
+      <!--closed--><div class="today">
+        <div><p class="label eyebrow">Next launch</p><p class="t" style="margin:8px 0 0">Doors are closed</p><p class="off">When doors open again it's <em>$26.99 a month</em> or <em>$267 a year</em>. The waitlist hears first.</p></div>
+        <p class="p" style="margin:0">$26.99<small>/month</small><span class="yr">or $267/year</span></p>
+      </div><!--/closed-->
     </div>
-    <div class="plans">
+    <!--closed--><a class="pill label solid" href="#waitlist" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a><!--/closed-->
+    <!--open--><div class="plans">
       <div class="plan best">
         <span class="best-tag label">Best deal</span>
         <p class="label">Annual</p>
         <p class="price">$197<small>/year</small></p>
-        <p class="was">$267/year after launch</p>
+        <p class="was">$267/year next launch</p>
         <p class="lock">Founding price, locked for life</p>
         <p class="bonus">Includes the Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores.</p>
         %%PLAN_ANNUAL%%
@@ -232,12 +239,12 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="plan">
         <p class="label">Monthly</p>
         <p class="price">$19.99<small>/month</small></p>
-        <p class="was">$26.99/month after launch</p>
+        <p class="was">$26.99/month next launch</p>
         <p class="lock">Founding price, locked for life</p>
         <p class="bonus">Cancel anytime from your account page. Hook Vault is annual only.</p>
         %%PLAN_MONTHLY%%
       </div>
-    </div>
+    </div><!--/open-->
     <div class="guar">
       <div class="seal">30<small>days</small></div>
       <div>
@@ -248,20 +255,32 @@ export const breakdownsHtml = `<div class="wrap topbar">
   </div>
 </section>
 
-<section class="deadline">
+<!--open--><section class="deadline">
   <div class="wrap">
-    <p class="label eyebrow">Founding pricing ends</p>
-    <h2>Saturday, November 21. 11:59pm Eastern.</h2>
-    <p class="when">After that it's $26.99 a month or $267 a year, and the founding price is gone for good.</p>
-    <div class="count" id="count" aria-label="Time left at the founding price">
+    <p class="label eyebrow">Doors close</p>
+    <h2>Sunday, November 22. 11:59pm Eastern.</h2>
+    <p class="when">Doors close November 22nd until the next launch. And I don't know when that is yet.</p>
+    <div class="count" id="count" aria-label="Time left until doors close">
       <div><b data-u="d">0</b><small>days</small></div>
       <div><b data-u="h">0</b><small>hours</small></div>
       <div><b data-u="m">0</b><small>minutes</small></div>
       <div><b data-u="s">0</b><small>seconds</small></div>
     </div>
-    <p class="after">Whoever joins before the deadline keeps $19.99 a month or $197 a year for as long as they stay a member. The price rise is real, and it's the only reason to decide now.</p>
+    <p class="after">Whoever joins before then keeps $19.99 a month or $197 a year for as long as they stay a member. The next launch will be $26.99 a month or $267 a year.</p>
   </div>
-</section>
+</section><!--/open-->
+<!--closed--><section class="deadline" id="waitlist">
+  <div class="wrap">
+    <p class="label eyebrow">Doors are closed</p>
+    <h2>Join the waitlist for the next launch.</h2>
+    <p class="when">Doors closed on November 22. I don't know when the next launch is yet, so the waitlist is how you hear first.</p>
+    <form action="/api/waitlist" method="post" class="wl-form">
+      <input type="email" name="email" required placeholder="you@email.com" aria-label="Email">
+      <button type="submit" class="pill label solid"><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></button>
+    </form>
+    %%WL_NOTE%%
+  </div>
+</section><!--/closed-->
 
 <section class="band">
   <div class="wrap">
@@ -303,17 +322,22 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <details><summary><span>Is it just Instagram?</span><i>+</i></summary><p>The data comes from Instagram Reels. The hook, topic and format patterns carry to TikTok and Shorts.</p></details>
       <details><summary><span>Can I cancel?</span><i>+</i></summary><p>Anytime, from your account page. No emails, no calls. You keep access until the end of the period you paid for.</p></details>
       <details><summary><span>Is there a guarantee?</span><i>+</i></summary><p>Yes, 30 days. Read your first 4 breakdowns. If you're unhappy for any reason, you get a full refund within 30 days, on monthly or annual.</p></details>
-      <details><summary><span>Does the founding price really stay the same?</span><i>+</i></summary><p>Yes. Join before the deadline and you pay $19.99 a month or $197 a year for as long as you stay a member, even after the public price goes up.</p></details>
+      <!--open--><details><summary><span>Does the founding price really stay the same?</span><i>+</i></summary><p>Yes. Join before doors close and you pay $19.99 a month or $197 a year for as long as you stay a member, even when the next launch is priced higher.</p></details><!--/open-->
+      <!--closed--><details><summary><span>When do doors open again?</span><i>+</i></summary><p>There's no date yet. Join the waitlist and you'll hear first.</p></details><!--/closed-->
     </div>
   </div>
 </section>
 
 <section class="cta-final">
   <div class="wrap">
-    <p class="label eyebrow">Founding price until Nov 21</p>
+    <!--open--><p class="label eyebrow">Doors close Nov 22</p>
     <h2 class="big">Four breakdowns a month. $5 each.</h2>
-    <p class="lead">A fresh strategy from a different niche every week. Lock in the founding price before the cart closes.</p>
-    <a class="pill label solid" href="#pricing" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
+    <p class="lead">A fresh strategy from a different niche every week. Lock in the founding price before doors close.</p>
+    <a class="pill label solid" href="#pricing" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a><!--/open-->
+    <!--closed--><p class="label eyebrow">Doors are closed</p>
+    <h2 class="big">Four breakdowns a month.</h2>
+    <p class="lead">A fresh strategy from a different niche every week. Join the waitlist and you'll hear first when doors open again.</p>
+    <a class="pill label solid" href="#waitlist" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a><!--/closed-->
   </div>
 </section>
 

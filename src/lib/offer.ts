@@ -10,9 +10,10 @@ export const offer = {
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
   currency: "usd",
-  // Cart dates, Eastern time. Founding prices apply until the cart closes (Sat Nov 21). Cart opens Tue Nov 17 (moved from Nov 11 on Oct 29).
+  // Cart dates, Eastern time. Doors open Tue Nov 17 and close Sun Nov 22 (per Martin on Nov 1).
+  // After the close nobody can join until the next launch (waitlist only), which uses the public prices.
   cartOpens: "2026-11-17T09:00:00-05:00",
-  cartCloses: "2026-11-21T23:59:00-05:00",
+  cartCloses: "2026-11-22T23:59:00-05:00",
   plans: [
     {
       id: "annual" as PlanId,
@@ -43,9 +44,15 @@ export const offer = {
 };
 
 // CHECKOUT_OPEN=true in Vercel opens checkout early (for testing in Stripe test mode).
+// Once doors close, checkout stays shut either way.
 export function checkoutOpen(now = new Date()) {
+  if (cartClosed(now)) return false;
   if (process.env.CHECKOUT_OPEN === "true") return true;
   return now >= new Date(offer.cartOpens);
+}
+
+export function cartClosed(now = new Date()) {
+  return now > new Date(offer.cartCloses);
 }
 
 export function foundingPricing(now = new Date()) {

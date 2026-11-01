@@ -19,13 +19,14 @@ type Row = {
 export default async function AdminPage() {
   const viewer = await requireAdmin();
   const db = createAdminClient();
-  const [{ data: breakdowns }, { count: active }, { count: total }] = await Promise.all([
+  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }] = await Promise.all([
     db
       .from("breakdowns")
       .select("slug, title, creator_handle, published, is_free, published_at")
       .order("created_at", { ascending: false }),
     db.from("members").select("*", { count: "exact", head: true }).in("status", ["active", "trialing", "past_due"]),
     db.from("members").select("*", { count: "exact", head: true }),
+    db.from("waitlist").select("*", { count: "exact", head: true }),
   ]);
 
   async function upload(formData: FormData) {
@@ -72,11 +73,15 @@ export default async function AdminPage() {
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Dashboard</h1>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat value={active ?? 0} label="active members" />
         <Stat value={total ?? 0} label="people who ever bought" />
         <Stat value={(breakdowns ?? []).filter((b) => b.published).length} label="breakdowns live" />
+        <Stat value={waitlist ?? 0} label="on the waitlist" />
       </div>
+      <a href="/admin/waitlist" className="label mt-3 inline-block text-[10px] text-birch hover:text-chalk">
+        Download waitlist (CSV)
+      </a>
 
       <section className="mt-14">
         <h2 className="label text-sm">Upload a breakdown</h2>
