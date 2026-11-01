@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import LandingFx from "@/components/LandingFx";
 import { planButtonHtml } from "@/components/PlanButton";
 import { breakdownsHtml } from "@/content/breakdowns-html";
-import { offer } from "@/lib/offer";
+import { cartClosed, offer } from "@/lib/offer";
 
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
 export const dynamic = "force-dynamic";
@@ -13,14 +13,31 @@ export const metadata: Metadata = {
     "Every week Martin Wang takes one fast-growing creator apart and hands you their strategy. A different niche, style and strategy every week.",
 };
 
-export default function CreatorBreakdownPage() {
+const WL_NOTES: Record<string, string> = {
+  joined: "You're on the list. You'll hear first when doors open again.",
+  invalid: "That email doesn't look right. Try again?",
+  error: "Something went wrong. Try again in a minute.",
+};
+
+// The page carries both versions of the launch copy; <!--open--> parts show until doors close,
+// <!--closed--> parts (waitlist) after.
+export default async function CreatorBreakdownPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ waitlist?: string }>;
+}) {
+  const { waitlist } = await searchParams;
+  const closed = cartClosed();
+  const note = waitlist && WL_NOTES[waitlist] ? `<p class="wl-note">${WL_NOTES[waitlist]}</p>` : "";
   const html = breakdownsHtml
+    .replace(closed ? /<!--open-->[\s\S]*?<!--\/open-->/g : /<!--closed-->[\s\S]*?<!--\/closed-->/g, "")
     .replace("%%PLAN_ANNUAL%%", planButtonHtml("annual", true))
-    .replace("%%PLAN_MONTHLY%%", planButtonHtml("monthly", false));
+    .replace("%%PLAN_MONTHLY%%", planButtonHtml("monthly", false))
+    .replace("%%WL_NOTE%%", note);
   return (
     <div className="cm">
       <div dangerouslySetInnerHTML={{ __html: html }} />
-      <LandingFx deadline={offer.cartCloses} />
+      <LandingFx deadline={closed ? undefined : offer.cartCloses} />
     </div>
   );
 }
