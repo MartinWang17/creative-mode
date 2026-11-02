@@ -10,10 +10,10 @@ export const offer = {
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
   currency: "usd",
-  // Cart dates, Eastern time. Doors open Tue Nov 17 and close Sun Nov 22 (per Martin on Nov 1).
+  // Cart dates, Eastern time. Doors open Tue Nov 17 and close Sun Nov 29 (per Martin on Nov 2).
   // After the close nobody can join until the next launch (waitlist only), which uses the public prices.
   cartOpens: "2026-11-17T09:00:00-05:00",
-  cartCloses: "2026-11-22T23:59:00-05:00",
+  cartCloses: "2026-11-29T23:59:00-05:00",
   plans: [
     {
       id: "annual" as PlanId,
