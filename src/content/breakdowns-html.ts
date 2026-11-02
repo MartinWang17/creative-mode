@@ -17,10 +17,12 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <h1>Every week I take one fast-growing creator apart and hand you <em>their strategy.</em></h1>
         <div class="cta">
           <!--open--><a class="pill solid plain" href="#pricing" data-scroll><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
-          <span class="ends"><b>Doors close</b> Sun Nov 22 · 30-day guarantee</span><!--/open-->
+          <span class="ends">30-day guarantee</span><!--/open-->
           <!--closed--><a class="pill solid plain" href="#waitlist" data-scroll><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a>
-          <span class="ends"><b>Doors are closed</b> until the next launch</span><!--/closed-->
+          <span class="ends">Until the next launch</span><!--/closed-->
         </div>
+        <!--open--><div class="doors" role="note"><span class="label">Doors close</span><b>Sun Nov 22 · 11:59pm ET</b><span class="sub">After that, nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/open-->
+        <!--closed--><div class="doors shut" role="note"><span class="label">Doors are closed</span><b>Closed Nov 22</b><span class="sub">Nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/closed-->
       </div>
       <aside class="cred" aria-label="Who's behind this">
         <div class="who"><span class="label eyebrow">Built by Martin Wang</span><a href="https://www.instagram.com/martinwang.mp4/" target="_blank" rel="noreferrer">@martinwang.mp4</a></div>
@@ -226,7 +228,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
       </div><!--/closed-->
     </div>
     <!--closed--><a class="pill label solid" href="#waitlist" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a><!--/closed-->
-    <!--open--><div class="plans">
+    <!--open--><div class="doors wide" role="note"><span class="label">Doors close</span><b>Sun Nov 22 · 11:59pm ET</b><span class="sub">After that, nobody can join until the next launch. And I don't know when that is yet lol.</span></div>
+    <div class="plans">
       <div class="plan best">
         <span class="best-tag label">Best deal</span>
         <p class="label">Annual</p>
@@ -257,9 +260,10 @@ export const breakdownsHtml = `<div class="wrap topbar">
 
 <!--open--><section class="deadline">
   <div class="wrap">
-    <p class="label eyebrow">Doors close</p>
-    <h2>Sunday, November 22. 11:59pm Eastern.</h2>
-    <p class="when">Doors close November 22nd until the next launch. And I don't know when that is yet.</p>
+    <p class="label eyebrow">Read this part twice</p>
+    <h2 class="shout">Doors close Sunday, November 22.</h2>
+    <p class="time">11:59pm Eastern.</p>
+    <p class="when">After that, nobody can join until the next launch. And I don't know when that is yet lol.</p>
     <div class="count" id="count" aria-label="Time left until doors close">
       <div><b data-u="d">0</b><small>days</small></div>
       <div><b data-u="h">0</b><small>hours</small></div>
@@ -330,8 +334,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
 
 <section class="cta-final">
   <div class="wrap">
-    <!--open--><p class="label eyebrow">Doors close Nov 22</p>
-    <h2 class="big">Four breakdowns a month. $5 each.</h2>
+    <!--open--><div class="doors wide" role="note"><span class="label">Doors close</span><b>Sun Nov 22 · 11:59pm ET</b><span class="sub">After that, nobody can join until the next launch. And I don't know when that is yet lol.</span></div>
+    <h2 class="big" style="margin-top:34px">Four breakdowns a month. $5 each.</h2>
     <p class="lead">A fresh strategy from a different niche every week. Lock in the founding price before doors close.</p>
     <a class="pill label solid" href="#pricing" data-scroll style="margin-top:30px"><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a><!--/open-->
     <!--closed--><p class="label eyebrow">Doors are closed</p>
