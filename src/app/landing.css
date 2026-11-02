@@ -204,6 +204,16 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .count div{background:var(--bedrock);padding:18px 10px;text-align:center}
 .cm .count b{display:block;font-family:var(--display);font-size:56px;line-height:.9;color:var(--birch);font-weight:400;font-variant-numeric:tabular-nums}
 .cm .count small{display:block;margin-top:8px;color:var(--muted)}
+.cm .wl-hero{padding-block:48px 110px;min-height:calc(100dvh - 160px);display:flex;align-items:center}
+.cm .wl-hero .wrap{width:100%}
+.cm .wl-hero h1{font-family:var(--display);font-size:clamp(40px,5.6vw,78px);line-height:.95;margin:16px 0 0;font-weight:400;max-width:20ch;text-wrap:balance}
+.cm .wl-hero h1 em{color:var(--birch);font-style:normal}
+.cm .wl-hero .lead{max-width:62ch;color:var(--muted);margin-top:24px;font-size:18px}
+.cm .wl-hero .count{margin-top:16px}
+.cm .wl-hero .count div{background:var(--forest)}
+.cm .wl-hero .when{font-family:var(--display);font-size:clamp(26px,3vw,40px);line-height:1;margin:18px 0 0;color:var(--chalk)}
+.cm .wl-hero .wl-form{margin-top:30px}
+.cm .wl-note.muted{color:var(--muted)}
 .cm .wl-form{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;max-width:620px}
 .cm .wl-form input{flex:1 1 260px;min-width:0;background:var(--bedrock);border:2px solid var(--oak);color:var(--chalk);font:inherit;font-size:17px;padding:14px 16px;outline:none}
 .cm .wl-form input:focus{border-color:var(--birch)}

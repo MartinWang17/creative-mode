@@ -2,13 +2,16 @@ import { NextResponse, type NextRequest } from "next/server";
 import { siteUrl } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/server";
 
-// The waitlist form on the sales page (shown once doors close) posts here.
+// The waitlist forms (pre-launch page, and the sales page once doors close) post here.
+const PAGES = ["/creator-breakdowns-waitlist", "/creator-breakdown"];
+
 export async function POST(request: NextRequest) {
   const base = siteUrl(request.headers);
-  const back = (state: string) =>
-    NextResponse.redirect(`${base}/creator-breakdown?waitlist=${state}#waitlist`, 303);
-
   const form = await request.formData();
+  const page = String(form.get("back") ?? "");
+  const path = PAGES.includes(page) ? page : "/creator-breakdown";
+  const back = (state: string) => NextResponse.redirect(`${base}${path}?waitlist=${state}#waitlist`, 303);
+
   const email = String(form.get("email") ?? "").trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) return back("invalid");
 
