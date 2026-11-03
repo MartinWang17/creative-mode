@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import LandingFx from "@/components/LandingFx";
+import TypeHero from "@/components/TypeHero";
 import { doorsOpen, offer } from "@/lib/offer";
 
 // Pre-launch page: the home button points here until the cart opens. Martin's copy, a countdown
@@ -38,10 +39,13 @@ export default async function WaitlistPage({
       <section className="wl-hero">
         <div className="wrap">
           <p className="label eyebrow">Creator Breakdowns · doors open Tue Nov 24</p>
-          <h1>
-            I will share the exact strategy I used to grow to <em>200k followers</em> after being stuck at
-            a plateau at 44 followers for 10 months.
-          </h1>
+          <TypeHero
+            segments={[
+              { text: "I will share the exact strategy I used to grow to " },
+              { text: "200k followers", em: true },
+              { text: " after being stuck at a plateau at 44 followers for 10 months." },
+            ]}
+          />
           <p className="lead">
             (It&apos;s not a course, I bought over $5,000 worth of courses and I was still stuck. No one
             shares this because it&apos;s hard to package it, but I&apos;m going to reveal everything that
