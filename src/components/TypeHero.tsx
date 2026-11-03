@@ -36,6 +36,39 @@ export default function TypeHero({ segments, speed = 28 }: { segments: Seg[]; sp
     return () => clearInterval(iv);
   }, [total, speed]);
 
+  // Idle jitter: at most MAX_MOVING letters nudge a pixel at any one time, picked at random.
+  useEffect(() => {
+    const el = h1.current;
+    if (!el || !typed) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const MAX_MOVING = 3;
+    const STEPS = ["0,-1px", "1px,-1px", "-1px,0", "0,1px", "-1px,1px", "1px,0"];
+    const moving = new Set<HTMLElement>();
+    const timers: number[] = [];
+    const tick = () => {
+      const all = Array.from(el.querySelectorAll<HTMLElement>(".ti"));
+      if (all.length && moving.size < MAX_MOVING) {
+        const pick = all[Math.floor(Math.random() * all.length)];
+        if (!moving.has(pick)) {
+          moving.add(pick);
+          const a = STEPS[Math.floor(Math.random() * STEPS.length)];
+          const b = STEPS[Math.floor(Math.random() * STEPS.length)];
+          pick.style.transform = `translate(${a})`;
+          timers.push(
+            window.setTimeout(() => (pick.style.transform = `translate(${b})`), 450),
+            window.setTimeout(() => {
+              pick.style.transform = "";
+              moving.delete(pick);
+            }, 900 + Math.random() * 600),
+          );
+        }
+      }
+      timers.push(window.setTimeout(tick, 350 + Math.random() * 500));
+    };
+    timers.push(window.setTimeout(tick, 600));
+    return () => timers.forEach(clearTimeout);
+  }, [typed]);
+
   // Local hover break: letters near the cursor shift and tilt, and settle back when it leaves.
   useEffect(() => {
     const el = h1.current;
@@ -81,8 +114,6 @@ export default function TypeHero({ segments, speed = 28 }: { segments: Seg[]; sp
       if (/^\s+$/.test(word)) return start < shown ? " " : null;
       const chars = Array.from(word).map((ch, ci) => {
         const style = {
-          "--d": `${(rnd() * 6).toFixed(2)}s`,
-          "--t": `${(5 + rnd() * 5).toFixed(2)}s`,
           "--dx": `${((rnd() - 0.5) * 14).toFixed(1)}px`,
           "--dy": `${(4 + rnd() * 12).toFixed(1)}px`,
           "--rz": `${((rnd() - 0.5) * 10).toFixed(2)}deg`,
