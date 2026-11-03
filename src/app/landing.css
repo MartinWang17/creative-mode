@@ -211,12 +211,14 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .wl-hero h1.type{position:relative;text-wrap:wrap}
 .cm .wl-hero h1.type .sizer{visibility:hidden}
 .cm .wl-hero h1.type .live{position:absolute;inset:0}
-.cm .wl-hero .tw{display:inline-block}
-.cm .wl-hero .typed .tw{animation:blockdrift var(--t,6s) steps(1,end) var(--d,0s) infinite}
-@keyframes blockdrift{0%,100%{transform:none}31%{transform:translate(0,-2px)}47%{transform:translate(1px,-2px)}63%{transform:none}80%{transform:translate(-1px,1px)}}
+.cm .wl-hero .tw{display:inline-block;white-space:nowrap}
+.cm .wl-hero .tc{display:inline-block;--k:0;transform:translate(calc(var(--dx)*var(--k)),calc(var(--dy)*var(--k))) rotate(calc(var(--rz)*var(--k)));transition:transform .22s ease-out;will-change:transform}
+.cm .wl-hero .ti{display:inline-block}
+.cm .wl-hero .typed .ti{animation:letterdrift var(--t,7s) steps(1,end) var(--d,0s) infinite}
+@keyframes letterdrift{0%,100%{transform:none}23%{transform:translate(0,-1px)}38%{transform:translate(1px,-1px)}51%{transform:none}70%{transform:translate(-1px,1px)}84%{transform:translate(0,1px)}}
 .cm .wl-hero .cursor{display:inline-block;width:.42em;height:.82em;margin-left:.08em;margin-right:-.5em;vertical-align:-.06em;background:var(--birch);animation:blink 1s steps(1,end) infinite}
 @keyframes blink{50%{opacity:0}}
-@media(prefers-reduced-motion:reduce){.cm .wl-hero .typed .tw{animation:none}}
+@media(prefers-reduced-motion:reduce){.cm .wl-hero .typed .ti{animation:none}}
 .cm .wl-hero .lead{max-width:62ch;color:var(--muted);margin-top:24px;font-size:18px}
 .cm .wl-hero .count{margin-top:16px}
 .cm .wl-hero .count div{background:var(--forest)}
