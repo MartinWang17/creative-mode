@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import LandingFx from "@/components/LandingFx";
-import { checkoutOpen, offer } from "@/lib/offer";
+import { doorsOpen, offer } from "@/lib/offer";
 
 // Pre-launch page: the home button points here until the cart opens. Martin's copy, a countdown
 // to the doors opening, and an email box so nobody has to remember to come back.
@@ -25,7 +25,7 @@ export default async function WaitlistPage({
 }: {
   searchParams: Promise<{ waitlist?: string }>;
 }) {
-  if (checkoutOpen()) redirect("/creator-breakdown");
+  if (doorsOpen()) redirect("/creator-breakdown");
   const { waitlist } = await searchParams;
   const note = waitlist && NOTES[waitlist] ? NOTES[waitlist] : null;
   return (

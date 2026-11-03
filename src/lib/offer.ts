@@ -51,6 +51,12 @@ export function checkoutOpen(now = new Date()) {
   return now >= new Date(offer.cartOpens);
 }
 
+// Date only, ignoring CHECKOUT_OPEN: decides whether the home button goes to the waitlist page
+// or the sales page, so testing checkout early doesn't hide the pre-launch page.
+export function doorsOpen(now = new Date()) {
+  return now >= new Date(offer.cartOpens) && !cartClosed(now);
+}
+
 export function cartClosed(now = new Date()) {
   return now > new Date(offer.cartCloses);
 }
