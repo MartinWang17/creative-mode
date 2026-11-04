@@ -1,8 +1,11 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import Shell from "@/components/Shell";
+import ResourceForm from "@/components/ResourceForm";
 import { requireAdmin } from "@/lib/members";
+import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
+import { deleteResource, toggleResource } from "./resources/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +22,7 @@ type Row = {
 export default async function AdminPage() {
   const viewer = await requireAdmin();
   const db = createAdminClient();
-  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }] = await Promise.all([
+  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }] = await Promise.all([
     db
       .from("breakdowns")
       .select("slug, title, creator_handle, published, is_free, published_at")
@@ -27,6 +30,7 @@ export default async function AdminPage() {
     db.from("members").select("*", { count: "exact", head: true }).in("status", ["active", "trialing", "past_due"]),
     db.from("members").select("*", { count: "exact", head: true }),
     db.from("waitlist").select("*", { count: "exact", head: true }),
+    db.from("resources").select(RESOURCE_COLS).order("sort", { ascending: true }).order("created_at", { ascending: true }),
   ]);
 
   async function upload(formData: FormData) {
@@ -138,6 +142,75 @@ export default async function AdminPage() {
           {(breakdowns ?? []).length === 0 && <li className="py-4 text-chalk/60">Nothing uploaded yet.</li>}
         </ul>
       </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Add a resource</h2>
+        <p className="mt-2 max-w-2xl text-sm text-chalk/60">
+          Training videos: paste a YouTube (unlisted), Vimeo or Loom link. PDFs and zips: upload the file. Members only
+          ever get short-lived links, so files stay private.
+        </p>
+        <div className="mt-4">
+          <ResourceForm />
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Resources</h2>
+        <ul className="mt-4 divide-y-2 divide-oak border-y-2 border-oak">
+          {((resources ?? []) as Resource[]).map((r) => (
+            <li key={r.id} className="py-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <Link href={`/resources/${r.slug}`} className="font-display text-3xl hover:text-birch">
+                    {r.title}
+                  </Link>
+                  <p className="label mt-1 text-[10px] text-chalk/50">
+                    /resources/{r.slug}
+                    {r.published ? " · live" : " · draft"}
+                    {r.annual_only ? " · annual only" : " · all members"}
+                    {r.available_at ? ` · from ${releaseLabel(r.available_at)} ET` : ""}
+                    {r.storage_path ? " · file" : ""}
+                    {r.link ? " · link" : ""}
+                    {r.cover_path ? " · cover" : " · no cover"}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Toggle action={toggleResource} id={r.id} field="published" value={!r.published}>
+                    {r.published ? "Unpublish" : "Publish"}
+                  </Toggle>
+                  <Toggle action={toggleResource} id={r.id} field="annual_only" value={!r.annual_only}>
+                    {r.annual_only ? "Open to all members" : "Make annual-only"}
+                  </Toggle>
+                </div>
+              </div>
+              <details className="mt-3">
+                <summary className="label cursor-pointer text-[10px] text-chalk/60 hover:text-chalk">Edit</summary>
+                <div className="mt-4">
+                  <ResourceForm
+                    existing={{
+                      id: r.id,
+                      title: r.title,
+                      slug: r.slug,
+                      blurb: r.blurb ?? "",
+                      link: r.link ?? "",
+                      annual_only: r.annual_only,
+                      sort: r.sort,
+                      available_local: toLocalInput(r.available_at),
+                    }}
+                  />
+                  <form action={deleteResource} className="mt-4">
+                    <input type="hidden" name="id" value={r.id} />
+                    <button type="submit" className="label text-[10px] text-red-300 hover:text-red-200">
+                      Delete this resource and its files
+                    </button>
+                  </form>
+                </div>
+              </details>
+            </li>
+          ))}
+          {(resources ?? []).length === 0 && <li className="py-4 text-chalk/60">No resources yet.</li>}
+        </ul>
+      </section>
     </Shell>
   );
 }
@@ -146,6 +219,17 @@ export default async function AdminPage() {
 function stripWrapper(html: string) {
   const i = html.search(/<(title|style|meta|link|div|section|main|header)[\s>]/i);
   return i > 0 && !/<!doctype|<html/i.test(html.slice(0, i)) ? html.slice(i) : html;
+}
+
+// ISO -> "2026-11-27T09:00" in Eastern time, for the datetime-local box.
+function toLocalInput(iso: string | null) {
+  if (!iso) return "";
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/New_York",
+    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false,
+  }).formatToParts(new Date(iso));
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "00";
+  return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
 }
 
 function Stat({ value, label }: { value: number; label: string }) {
@@ -174,19 +258,22 @@ function Field(props: { name: string; label: string; placeholder?: string; requi
 function Toggle({
   action,
   slug,
+  id,
   field,
   value,
   children,
 }: {
   action: (formData: FormData) => Promise<void>;
-  slug: string;
+  slug?: string;
+  id?: string;
   field: string;
   value: boolean;
   children: React.ReactNode;
 }) {
   return (
     <form action={action}>
-      <input type="hidden" name="slug" value={slug} />
+      {slug && <input type="hidden" name="slug" value={slug} />}
+      {id && <input type="hidden" name="id" value={id} />}
       <input type="hidden" name="field" value={field} />
       <input type="hidden" name="value" value={String(value)} />
       <button type="submit" className="label border-2 border-oak px-3 py-2 text-[10px] text-chalk hover:border-birch">

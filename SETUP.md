@@ -5,7 +5,7 @@ One-time setup. Nothing here needs code. Keys go into Vercel, never into chat.
 ## 1. Supabase
 
 1. In Supabase, open your `creative-mode` project.
-2. **SQL Editor → New query.** Paste the whole of `supabase/schema.sql` from this repo and click **Run**.
+2. **SQL Editor → New query.** Paste the whole of `supabase/schema.sql` from this repo and click **Run**. Run it again whenever the file changes (it is safe to re-run); the latest version also creates the `waitlist` table, the `resources` table and the private `resources` storage bucket that the member Resources page uses.
 3. **Authentication → URL Configuration.** Set **Site URL** to your Vercel URL (e.g. `https://creative-mode.vercel.app`). Under **Redirect URLs** add `https://creative-mode.vercel.app/**` (and later your real domain the same way).
 4. **Project Settings → API Keys.** You'll copy three values into Vercel in step 3:
    - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
