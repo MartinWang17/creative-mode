@@ -14,6 +14,13 @@ export const offer = {
   // After the close nobody can join until the next launch (waitlist only), which uses the public prices.
   cartOpens: "2026-11-24T09:00:00-05:00",
   cartCloses: "2026-11-29T23:59:00-05:00",
+  // Second annual bonus, announced mid-cart. Hidden on the sales page until this moment.
+  scriptPack: {
+    announcedAt: "2026-11-27T09:00:00-05:00",
+    name: "Script Pack",
+    blurb: "10 fill-in scripts built from the formats that keep winning. Annual members only.",
+    value: "$37",
+  },
   plans: [
     {
       id: "annual" as PlanId,
@@ -55,6 +62,10 @@ export function checkoutOpen(now = new Date()) {
 // or the sales page, so testing checkout early doesn't hide the pre-launch page.
 export function doorsOpen(now = new Date()) {
   return now >= new Date(offer.cartOpens) && !cartClosed(now);
+}
+
+export function scriptPackAnnounced(now = new Date()) {
+  return now >= new Date(offer.scriptPack.announcedAt);
 }
 
 export function cartClosed(now = new Date()) {

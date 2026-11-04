@@ -5,6 +5,7 @@ import { createAdminClient, createAuthClient } from "@/lib/supabase/server";
 export type Member = {
   email: string;
   stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
   plan: string | null;
   status: string | null;
   founding: boolean | null;
@@ -23,7 +24,7 @@ export async function getViewer() {
 
   const { data: member } = await createAdminClient()
     .from("members")
-    .select("email, stripe_customer_id, plan, status, founding, current_period_end")
+    .select("email, stripe_customer_id, stripe_subscription_id, plan, status, founding, current_period_end")
     .eq("email", email)
     .maybeSingle<Member>();
 
