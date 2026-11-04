@@ -216,6 +216,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <div class="row"><span>Every existing breakdown unlocked on day one</span><span>$40</span></div>
         <div class="row"><span>Founding price locked for life ($197 a year instead of $267)</span><span>$70 a year, every year</span></div>
         <div class="row new"><span>Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores (annual members)</span><span>$47</span></div>
+        %%SCRIPT_PACK_ROW%%
       </div>
       <div class="total"><span>Total value</span><span>$397+</span></div>
       <div class="today">
@@ -236,7 +237,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p class="price">$197<small>/year</small></p>
         <p class="was">$267/year next launch</p>
         <p class="lock">Founding price, locked for life</p>
-        <p class="bonus">Includes the Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores.</p>
+        <p class="bonus">Includes the Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores.%%SCRIPT_PACK_CARD%%</p>
         %%PLAN_ANNUAL%%
       </div>
       <div class="plan">
@@ -323,6 +324,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <details><summary><span>How long does a breakdown take to read?</span><i>+</i></summary><p>About 30 minutes, including the apply-it page at the end.</p></details>
       <details><summary><span>Which creators do you break down?</span><i>+</i></summary><p>A different niche, style and strategy every week, on purpose. Fitness one week, finance the next, then comedy, then a niche you've never heard of. The best strategies usually come from outside your own corner, and I pick creators whose Reels are outperforming their own average so the pattern is real. Members vote on the Creator of the Month.</p></details>
       <details><summary><span>Do I get the Hook Vault?</span><i>+</i></summary><p>Annual members do. It's the top 50 hooks across every breakdown, with views and outlier scores, and it grows as the library grows.</p></details>
+      %%SCRIPT_PACK_FAQ%%
       <details><summary><span>Is it just Instagram?</span><i>+</i></summary><p>The data comes from Instagram Reels. The hook, topic and format patterns carry to TikTok and Shorts.</p></details>
       <details><summary><span>Can I cancel?</span><i>+</i></summary><p>Anytime, from your account page. No emails, no calls. You keep access until the end of the period you paid for.</p></details>
       <details><summary><span>Is there a guarantee?</span><i>+</i></summary><p>Yes, 30 days. Read your first 4 breakdowns. If you're unhappy for any reason, you get a full refund within 30 days, on monthly or annual.</p></details>
