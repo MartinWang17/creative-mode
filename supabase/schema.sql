@@ -37,3 +37,25 @@ create table if not exists public.waitlist (
 alter table public.members enable row level security;
 alter table public.breakdowns enable row level security;
 alter table public.waitlist enable row level security;
+
+-- Member resources: free training, checklist, Hook Vault, Script Pack, future bonuses.
+-- Files and covers live in the private storage bucket "resources"; the site hands out short-lived links.
+create table if not exists public.resources (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title text not null,
+  blurb text,
+  storage_path text,
+  cover_path text,
+  link text,
+  annual_only boolean not null default false,
+  available_at timestamptz,
+  published boolean not null default false,
+  sort integer not null default 0,
+  created_at timestamptz not null default now()
+);
+alter table public.resources enable row level security;
+
+insert into storage.buckets (id, name, public)
+values ('resources', 'resources', false)
+on conflict (id) do nothing;

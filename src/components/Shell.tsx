@@ -17,6 +17,9 @@ export default function Shell({
           <Link href="/library" className="hover:text-chalk">
             Library
           </Link>
+          <Link href="/resources" className="hover:text-chalk">
+            Resources
+          </Link>
           {viewer ? (
             <>
               {viewer.isAdmin && (
