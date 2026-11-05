@@ -67,7 +67,6 @@ export default async function SurveyPage({
                   Email (optional)
                   <input type="email" name="email" defaultValue={prefill} placeholder="you@email.com" />
                 </label>
-                <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hp" aria-hidden="true" />
                 <button type="submit" className="pill label solid">
                   <span className="sq"></span>
                   <span>Send my answers</span>

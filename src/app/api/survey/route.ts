@@ -9,7 +9,6 @@ const RANGES = ["Under 1K", "1K to 10K", "10K to 50K", "50K to 100K", "100K+"];
 export async function POST(request: NextRequest) {
   const base = siteUrl(request.headers);
   const form = await request.formData();
-  if (String(form.get("website") ?? "")) return NextResponse.redirect(`${base}/survey?done=1`, 303); // bot filled the honeypot
 
   const answer = String(form.get("answer") ?? "").trim().slice(0, 4000);
   const followers = String(form.get("followers") ?? "");
