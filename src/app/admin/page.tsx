@@ -36,6 +36,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     db.from("resources").select(RESOURCE_COLS).order("sort", { ascending: true }).order("created_at", { ascending: true }),
     db.from("survey_responses").select("id, email, followers, answer, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
+  const surveyMissing = !survey;
 
   async function upload(formData: FormData) {
     "use server";
@@ -201,7 +202,12 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               </p>
             </li>
           ))}
-          {(survey ?? []).length === 0 && <li className="py-4 text-chalk/60">No answers yet.</li>}
+          {surveyMissing && (
+            <li className="py-4 text-red-300">
+              The survey table is missing in Supabase, so answers can&apos;t be saved. Run the survey SQL block in Supabase.
+            </li>
+          )}
+          {!surveyMissing && (survey ?? []).length === 0 && <li className="py-4 text-chalk/60">No answers yet.</li>}
         </ul>
       </section>
 
