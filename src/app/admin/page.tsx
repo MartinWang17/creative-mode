@@ -18,17 +18,31 @@ type Row = {
   published: boolean;
   is_free: boolean;
   published_at: string | null;
+  format: string | null;
+  difficulty: string | null;
 };
+
+const FORMAT_SUGGESTIONS = [
+  "Talking head",
+  "Talking head with pictures",
+  "B-roll with text",
+  "Skits",
+  "Timer challenge",
+  "Storytime",
+  "Voiceover",
+  "Screen tutorial",
+];
+const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
 
 // Martin's page: upload a breakdown, publish or unpublish it, see member counts.
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string }> }) {
   const viewer = await requireAdmin();
   const { kit } = await searchParams;
   const db = createAdminClient();
-  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
+  const [{ data: taggedBreakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
     db
       .from("breakdowns")
-      .select("slug, title, creator_handle, published, is_free, published_at")
+      .select("slug, title, creator_handle, published, is_free, published_at, format, difficulty")
       .order("created_at", { ascending: false }),
     db.from("members").select("*", { count: "exact", head: true }).in("status", ["active", "trialing", "past_due"]),
     db.from("members").select("*", { count: "exact", head: true }),
@@ -37,6 +51,16 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     db.from("survey_responses").select("id, email, followers, answer, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
   const surveyMissing = !survey;
+  // If the format/difficulty columns aren't added yet, still list breakdowns (without tags).
+  const tagsMissing = !taggedBreakdowns;
+  const breakdowns = tagsMissing
+    ? (
+        await db
+          .from("breakdowns")
+          .select("slug, title, creator_handle, published, is_free, published_at")
+          .order("created_at", { ascending: false })
+      ).data?.map((b) => ({ ...b, format: null, difficulty: null }))
+    : taggedBreakdowns;
 
   async function upload(formData: FormData) {
     "use server";
@@ -45,6 +69,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const title = String(formData.get("title") ?? "").trim();
     const handle = String(formData.get("handle") ?? "").trim().replace(/^@/, "");
     const summary = String(formData.get("summary") ?? "").trim();
+    const format = String(formData.get("format") ?? "").trim();
+    const difficulty = String(formData.get("difficulty") ?? "");
     if (!(file instanceof File) || !title) return;
     const slug = (String(formData.get("slug") ?? "") || handle || title)
       .toLowerCase()
@@ -54,9 +80,31 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     await createAdminClient()
       .from("breakdowns")
       .upsert(
-        { slug, title, creator_handle: handle || null, summary: summary || null, html },
+        {
+          slug,
+          title,
+          creator_handle: handle || null,
+          summary: summary || null,
+          html,
+          ...(format ? { format } : {}),
+          ...(DIFFICULTIES.includes(difficulty) ? { difficulty } : {}),
+        },
         { onConflict: "slug" },
       );
+    revalidatePath("/admin");
+    revalidatePath("/library");
+  }
+
+  async function setTags(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const slug = String(formData.get("slug"));
+    const format = String(formData.get("format") ?? "").trim();
+    const difficulty = String(formData.get("difficulty") ?? "");
+    await createAdminClient()
+      .from("breakdowns")
+      .update({ format: format || null, difficulty: DIFFICULTIES.includes(difficulty) ? difficulty : null })
+      .eq("slug", slug);
     revalidatePath("/admin");
     revalidatePath("/library");
   }
@@ -129,6 +177,18 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         )}
       </div>
 
+      {tagsMissing && (
+        <p className="mt-6 border-2 border-oak p-4 text-sm text-chalk/80">
+          Format and difficulty tags need two new columns. Run the last two lines of supabase/schema.sql in the
+          Supabase SQL editor, then refresh.
+        </p>
+      )}
+      <datalist id="formats">
+        {FORMAT_SUGGESTIONS.map((f) => (
+          <option key={f} value={f} />
+        ))}
+      </datalist>
+
       <section className="mt-14">
         <h2 className="label text-sm">Upload a breakdown</h2>
         <form action={upload} className="mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
@@ -136,6 +196,19 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <Field name="handle" label="Creator handle" placeholder="nategaffney" />
           <Field name="slug" label="URL slug (optional)" placeholder="nategaffney" />
           <Field name="summary" label="One-line summary" placeholder="The rare breed hook behind 60% of his views" />
+          <label className="label text-[10px] text-chalk/60">
+            Main format
+            <input name="format" list="formats" placeholder="Talking head" className={inputCls} />
+          </label>
+          <label className="label text-[10px] text-chalk/60">
+            Difficulty
+            <select name="difficulty" defaultValue="" className={inputCls}>
+              <option value="">Not set</option>
+              {DIFFICULTIES.map((d) => (
+                <option key={d}>{d}</option>
+              ))}
+            </select>
+          </label>
           <label className="label text-[10px] text-chalk/60 sm:col-span-2">
             Report HTML file
             <input
@@ -169,7 +242,32 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {b.creator_handle ? ` · @${b.creator_handle}` : ""}
                   {b.published ? " · live" : " · draft"}
                   {b.is_free ? " · free" : ""}
+                  {b.format ? ` · ${b.format}` : " · no format"}
+                  {b.difficulty ? ` · ${b.difficulty}` : ""}
                 </p>
+                <form action={setTags} className="mt-2 flex flex-wrap items-center gap-2">
+                  <input type="hidden" name="slug" value={b.slug} />
+                  <input
+                    name="format"
+                    list="formats"
+                    defaultValue={b.format ?? ""}
+                    placeholder="Main format"
+                    className="border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk outline-none focus:border-birch"
+                  />
+                  <select
+                    name="difficulty"
+                    defaultValue={b.difficulty ?? ""}
+                    className="border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk outline-none focus:border-birch"
+                  >
+                    <option value="">Difficulty</option>
+                    {DIFFICULTIES.map((d) => (
+                      <option key={d}>{d}</option>
+                    ))}
+                  </select>
+                  <button type="submit" className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk hover:border-birch">
+                    Save tags
+                  </button>
+                </form>
               </div>
               <div className="flex gap-2">
                 <Toggle action={toggle} slug={b.slug} field="published" value={!b.published}>
@@ -299,6 +397,9 @@ function toLocalInput(iso: string | null) {
   const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "00";
   return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
 }
+
+const inputCls =
+  "mt-2 block w-full border-2 border-oak bg-bedrock px-3 py-2 font-sans text-base normal-case tracking-normal text-chalk outline-none focus:border-birch";
 
 function Stat({ value, label }: { value: number; label: string }) {
   return (

@@ -69,3 +69,7 @@ create table if not exists public.survey_responses (
   created_at timestamptz not null default now()
 );
 alter table public.survey_responses enable row level security;
+
+-- Library tags: the creator's main winning format, and how hard it is to copy.
+alter table public.breakdowns add column if not exists format text;
+alter table public.breakdowns add column if not exists difficulty text;
