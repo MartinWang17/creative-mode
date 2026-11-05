@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Creator Breakdowns waitlist | Creative Mode",
   description:
-    "The exact strategy Martin Wang used to grow to 200K followers after 10 months stuck at 44. Doors open Nov 24.",
+    "The exact strategy Martin Wang used to grow to 200K followers after 10 months stuck at 44. Doors open Dec 8.",
 };
 
 const NOTES: Record<string, string> = {
@@ -38,7 +38,7 @@ export default async function WaitlistPage({
       </div>
       <section className="wl-hero">
         <div className="wrap">
-          <p className="label eyebrow">Creator Breakdowns · doors open Tue Nov 24</p>
+          <p className="label eyebrow">Creator Breakdowns · doors open Tue Dec 8</p>
           <TypeHero
             segments={[
               { text: "I will share the exact strategy I used to grow to " },
@@ -72,7 +72,7 @@ export default async function WaitlistPage({
               <small>seconds</small>
             </div>
           </div>
-          <p className="when">Tuesday, November 24. 9am Eastern.</p>
+          <p className="when">Tuesday, December 8. 9am Eastern.</p>
           <form action="/api/waitlist" method="post" className="wl-form" id="waitlist">
             <input type="hidden" name="back" value="/creator-breakdowns-waitlist" />
             <input type="email" name="email" required placeholder="you@email.com" aria-label="Email" />

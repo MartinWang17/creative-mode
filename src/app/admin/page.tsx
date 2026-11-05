@@ -221,7 +221,7 @@ function stripWrapper(html: string) {
   return i > 0 && !/<!doctype|<html/i.test(html.slice(0, i)) ? html.slice(i) : html;
 }
 
-// ISO -> "2026-11-27T09:00" in Eastern time, for the datetime-local box.
+// ISO -> "2026-12-11T09:00" in Eastern time, for the datetime-local box.
 function toLocalInput(iso: string | null) {
   if (!iso) return "";
   const parts = new Intl.DateTimeFormat("en-CA", {
