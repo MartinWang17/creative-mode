@@ -1,7 +1,9 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Shell from "@/components/Shell";
 import ResourceForm from "@/components/ResourceForm";
+import { hasKit, subscribeToKit } from "@/lib/kit";
 import { requireAdmin } from "@/lib/members";
 import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
@@ -19,8 +21,9 @@ type Row = {
 };
 
 // Martin's page: upload a breakdown, publish or unpublish it, see member counts.
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string }> }) {
   const viewer = await requireAdmin();
+  const { kit } = await searchParams;
   const db = createAdminClient();
   const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }] = await Promise.all([
     db
@@ -70,6 +73,25 @@ export default async function AdminPage() {
     revalidatePath("/library");
   }
 
+  // One-off: push everyone on the waitlist table into Kit (tag launch-list + waitlist). Safe to repeat.
+  async function sendWaitlistToKit() {
+    "use server";
+    await requireAdmin();
+    const { data } = await createAdminClient().from("waitlist").select("email").order("created_at");
+    let ok = 0;
+    let failed = 0;
+    for (const row of data ?? []) {
+      try {
+        await subscribeToKit(row.email, ["waitlist"]);
+        ok++;
+      } catch (err) {
+        failed++;
+        console.error("kit sync failed", row.email, err);
+      }
+    }
+    redirect(`/admin?kit=${ok}-${failed}`);
+  }
+
   return (
     <Shell viewer={viewer}>
       <div className="pt-10">
@@ -83,9 +105,23 @@ export default async function AdminPage() {
         <Stat value={(breakdowns ?? []).filter((b) => b.published).length} label="breakdowns live" />
         <Stat value={waitlist ?? 0} label="on the waitlist" />
       </div>
-      <a href="/admin/waitlist" className="label mt-3 inline-block text-[10px] text-birch hover:text-chalk">
-        Download waitlist (CSV)
-      </a>
+      <div className="mt-3 flex flex-wrap items-center gap-5">
+        <a href="/admin/waitlist" className="label text-[10px] text-birch hover:text-chalk">
+          Download waitlist (CSV)
+        </a>
+        {hasKit() && (
+          <form action={sendWaitlistToKit}>
+            <button type="submit" className="label text-[10px] text-birch hover:text-chalk">
+              Send waitlist to Kit
+            </button>
+          </form>
+        )}
+        {kit && (
+          <p className="label text-[10px] text-chalk/60">
+            Sent to Kit: {kit.split("-")[0]} added{Number(kit.split("-")[1]) > 0 ? `, ${kit.split("-")[1]} failed` : ""}
+          </p>
+        )}
+      </div>
 
       <section className="mt-14">
         <h2 className="label text-sm">Upload a breakdown</h2>
