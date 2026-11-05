@@ -27,7 +27,7 @@ export type ResourceInput = {
   blurb?: string;
   link?: string;
   annual_only: boolean;
-  available_at?: string; // "2026-11-27T09:00", Eastern time
+  available_at?: string; // "2026-12-11T09:00", Eastern time
   storage_path?: string | null;
   cover_path?: string | null;
   sort?: number;

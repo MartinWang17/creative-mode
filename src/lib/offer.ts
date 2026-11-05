@@ -10,13 +10,13 @@ export const offer = {
     "These creators spent years refining their strategies. I spent days breaking them down so you can spend 30 minutes reading, learning and applying them.",
   breakdownsPerMonth: 4,
   currency: "usd",
-  // Cart dates, Eastern time. Doors open Tue Nov 24 and close Sun Nov 29 (per Martin on Nov 2).
+  // Cart dates, Eastern time. Doors open Tue Dec 8 and close Sun Dec 13 (per Martin on Nov 4, pushed two weeks).
   // After the close nobody can join until the next launch (waitlist only), which uses the public prices.
-  cartOpens: "2026-11-24T09:00:00-05:00",
-  cartCloses: "2026-11-29T23:59:00-05:00",
+  cartOpens: "2026-12-08T09:00:00-05:00",
+  cartCloses: "2026-12-13T23:59:00-05:00",
   // Second annual bonus, announced mid-cart. Hidden on the sales page until this moment.
   scriptPack: {
-    announcedAt: "2026-11-27T09:00:00-05:00",
+    announcedAt: "2026-12-11T09:00:00-05:00",
     name: "Script Pack",
     blurb: "10 fill-in scripts built from the formats that keep winning. Annual members only.",
     value: "$37",
