@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Free breakdown | Creative Mode",
-  description: "The creator breakdown Martin Wang used to grow 100K followers in one month. Free.",
+  description: "The creator breakdown Martin Wang used to grow 200K followers in 45 days. Free.",
 };
 
 const NOTES: Record<string, string> = {
@@ -40,8 +40,8 @@ export default async function FreeResourcePage({
           <TypeHero
             segments={[
               { text: "The breakdown I used to grow " },
-              { text: "100k followers", em: true },
-              { text: " in one month, after being stuck for a year." },
+              { text: "200k followers", em: true },
+              { text: " in 45 days, after being stuck for a year." },
             ]}
           />
           <p className="lead">
