@@ -13,20 +13,45 @@ type Row = {
   summary: string | null;
   is_free: boolean;
   published_at: string | null;
+  format?: string | null;
+  difficulty?: string | null;
 };
 
 // Every published breakdown. Free ones open for anyone; the rest need a membership.
-export default async function LibraryPage() {
+export default async function LibraryPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ format?: string }>;
+}) {
+  const { format: picked } = await searchParams;
   const viewer = await getViewer();
   let rows: Row[] = [];
   if (hasSupabase()) {
-    const { data } = await createAdminClient()
+    const db = createAdminClient();
+    const base = "slug, title, creator_handle, summary, is_free, published_at";
+    const tagged = await db
       .from("breakdowns")
-      .select("slug, title, creator_handle, summary, is_free, published_at")
+      .select(`${base}, format, difficulty`)
       .eq("published", true)
       .order("published_at", { ascending: false });
-    rows = (data ?? []) as Row[];
+    if (!tagged.error) {
+      rows = (tagged.data ?? []) as Row[];
+    } else {
+      // Tag columns not added yet: show the library without tags.
+      const { data } = await db
+        .from("breakdowns")
+        .select(base)
+        .eq("published", true)
+        .order("published_at", { ascending: false });
+      rows = (data ?? []) as Row[];
+    }
   }
+  const formats = [...new Set(rows.map((r) => r.format).filter((f): f is string => !!f))].sort();
+  const shown = picked ? rows.filter((r) => r.format === picked) : rows;
+  const chip = (active: boolean) =>
+    `label border-2 px-3 py-1.5 text-[10px] ${
+      active ? "border-birch bg-forest text-birch" : "border-oak text-chalk/70 hover:text-chalk"
+    }`;
 
   return (
     <Shell viewer={viewer}>
@@ -43,8 +68,20 @@ export default async function LibraryPage() {
           </p>
         )}
       </div>
+      {formats.length > 1 && (
+        <div className="mt-8 flex flex-wrap gap-2">
+          <Link href="/library" className={chip(!picked)}>
+            All
+          </Link>
+          {formats.map((f) => (
+            <Link key={f} href={`/library?format=${encodeURIComponent(f)}`} className={chip(picked === f)}>
+              {f}
+            </Link>
+          ))}
+        </div>
+      )}
       <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-        {rows.map((b) => {
+        {shown.map((b) => {
           const locked = !b.is_free && !viewer?.hasAccess;
           return (
             <li key={b.slug} className="border-2 border-oak p-6">
@@ -57,6 +94,18 @@ export default async function LibraryPage() {
                 </p>
               </div>
               <h2 className="font-display mt-3 text-4xl leading-none">{b.title}</h2>
+              {(b.format || b.difficulty) && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {b.format && (
+                    <span className="label bg-forest px-2 py-1 text-[10px] text-birch">{b.format}</span>
+                  )}
+                  {b.difficulty && (
+                    <span className="label border border-oak px-2 py-1 text-[10px] text-chalk/70">
+                      {b.difficulty}
+                    </span>
+                  )}
+                </div>
+              )}
               {b.summary && <p className="mt-3 text-chalk/75">{b.summary}</p>}
               <Link
                 href={locked ? "/creator-breakdown#pricing" : `/library/${b.slug}`}
@@ -67,8 +116,10 @@ export default async function LibraryPage() {
             </li>
           );
         })}
-        {rows.length === 0 && (
-          <li className="text-chalk/60">No breakdowns published yet.</li>
+        {shown.length === 0 && (
+          <li className="text-chalk/60">
+            {picked ? "No breakdowns with that format yet." : "No breakdowns published yet."}
+          </li>
         )}
       </ul>
     </Shell>
