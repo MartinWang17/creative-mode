@@ -25,7 +25,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   const viewer = await requireAdmin();
   const { kit } = await searchParams;
   const db = createAdminClient();
-  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }] = await Promise.all([
+  const [{ data: breakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
     db
       .from("breakdowns")
       .select("slug, title, creator_handle, published, is_free, published_at")
@@ -34,6 +34,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     db.from("members").select("*", { count: "exact", head: true }),
     db.from("waitlist").select("*", { count: "exact", head: true }),
     db.from("resources").select(RESOURCE_COLS).order("sort", { ascending: true }).order("created_at", { ascending: true }),
+    db.from("survey_responses").select("id, email, followers, answer, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
 
   async function upload(formData: FormData) {
@@ -99,15 +100,19 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Dashboard</h1>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <Stat value={active ?? 0} label="active members" />
         <Stat value={total ?? 0} label="people who ever bought" />
         <Stat value={(breakdowns ?? []).filter((b) => b.published).length} label="breakdowns live" />
         <Stat value={waitlist ?? 0} label="on the waitlist" />
+        <Stat value={(survey ?? []).length} label="survey answers" />
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-5">
         <a href="/admin/waitlist" className="label text-[10px] text-birch hover:text-chalk">
           Download waitlist (CSV)
+        </a>
+        <a href="/admin/survey" className="label text-[10px] text-birch hover:text-chalk">
+          Download survey answers (CSV)
         </a>
         {hasKit() && (
           <form action={sendWaitlistToKit}>
@@ -176,6 +181,27 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             </li>
           ))}
           {(breakdowns ?? []).length === 0 && <li className="py-4 text-chalk/60">Nothing uploaded yet.</li>}
+        </ul>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Survey answers</h2>
+        <p className="mt-2 text-sm text-chalk/60">
+          Link for emails: https://www.joincreativemode.com/survey?email=&#123;&#123; subscriber.email_address &#125;&#125;
+        </p>
+        <ul className="mt-4 divide-y-2 divide-oak border-y-2 border-oak">
+          {(survey ?? []).map((r) => (
+            <li key={r.id} className="py-4">
+              <p className="whitespace-pre-wrap text-chalk/85">{r.answer}</p>
+              <p className="label mt-2 text-[10px] text-chalk/50">
+                {r.email ?? "no email"}
+                {r.followers ? ` · ${r.followers}` : ""}
+                {" · "}
+                {new Date(r.created_at).toLocaleDateString("en-US", { dateStyle: "medium" })}
+              </p>
+            </li>
+          ))}
+          {(survey ?? []).length === 0 && <li className="py-4 text-chalk/60">No answers yet.</li>}
         </ul>
       </section>
 

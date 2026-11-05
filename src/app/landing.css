@@ -278,3 +278,13 @@ html:has(.cm){scroll-behavior:smooth}
   animation:spillfall var(--d) cubic-bezier(.45,0,.9,.6) infinite;animation-delay:var(--o)}
 @keyframes spillfall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:1}80%{opacity:.9}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--r))}}
 @media(prefers-reduced-motion:reduce){.cm .spill .bit{display:none}}
+
+/* Survey page */
+.cm .survey{display:grid;gap:22px;margin-top:34px;max-width:620px}
+.cm .survey label{display:grid;gap:10px;color:var(--muted)}
+.cm .survey textarea,.cm .survey select,.cm .survey input{width:100%;background:var(--bedrock);border:2px solid var(--oak);color:var(--chalk);font:inherit;font-family:var(--sans);font-size:17px;letter-spacing:0;text-transform:none;padding:14px 16px;outline:none;border-radius:0}
+.cm .survey textarea{resize:vertical;min-height:160px}
+.cm .survey select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--birch) 50%),linear-gradient(135deg,var(--birch) 50%,transparent 50%);background-position:calc(100% - 24px) 50%,calc(100% - 18px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:44px}
+.cm .survey textarea:focus,.cm .survey select:focus,.cm .survey input:focus{border-color:var(--birch)}
+.cm .survey .pill{justify-self:start;cursor:pointer}
+.cm .survey .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}

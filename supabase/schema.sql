@@ -59,3 +59,13 @@ alter table public.resources enable row level security;
 insert into storage.buckets (id, name, public)
 values ('resources', 'resources', false)
 on conflict (id) do nothing;
+
+-- Answers from the branded survey page (/survey), sent in launch emails.
+create table if not exists public.survey_responses (
+  id uuid primary key default gen_random_uuid(),
+  email text,
+  followers text,
+  answer text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.survey_responses enable row level security;
