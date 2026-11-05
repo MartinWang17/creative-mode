@@ -35,6 +35,8 @@ When you go live, repeat steps 1 and 2 with live keys and swap the two values in
 | `STRIPE_WEBHOOK_SECRET` | from Stripe |
 | `ADMIN_EMAILS` | your email address |
 | `CHECKOUT_OPEN` | `true` while testing, `false` until Dec 8 |
+| `KIT_API_KEY` | Kit → Settings → Developer → API keys → create a V4 key. Sign-ups on /free-resource and the waitlist go to Kit with the tag `launch-list` |
+| `KIT_FORM_ID` | Optional. A Kit form's id, so its incentive email delivers the free breakdown |
 | `STRIPE_AUTOMATIC_TAX` | `false` until Stripe Tax is registered |
 
 Then **Deployments → ⋯ on the latest → Redeploy** so the keys take effect.

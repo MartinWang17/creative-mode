@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { siteUrl } from "@/lib/env";
+import { hasKit, subscribeToKit } from "@/lib/kit";
 import { createAdminClient } from "@/lib/supabase/server";
 
 // The waitlist forms (pre-launch page, and the sales page once doors close) post here.
@@ -21,6 +22,14 @@ export async function POST(request: NextRequest) {
   if (error) {
     console.error("waitlist insert failed", error);
     return back("error");
+  }
+  // Also onto the Kit list, so launch emails reach everyone from one place.
+  if (hasKit()) {
+    try {
+      await subscribeToKit(email, ["waitlist"]);
+    } catch (err) {
+      console.error("kit subscribe failed", err);
+    }
   }
   return back("joined");
 }

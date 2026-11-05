@@ -21,6 +21,8 @@ export const offer = {
     blurb: "10 fill-in scripts built from the formats that keep winning. Annual members only.",
     value: "$37",
   },
+  // The free sample: the breakdown Martin used to grow his own account. Must be published + free in admin.
+  freeBreakdown: { slug: "nate-gaffney-breakdown", title: "Nate Gaffney breakdown" },
   plans: [
     {
       id: "annual" as PlanId,
