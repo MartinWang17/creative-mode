@@ -41,11 +41,11 @@ export default async function SurveyPage({
           ) : (
             <>
               <h1>
-                What are your <em>top two questions</em> about why some Reels blow up and others flop?
+                What are your <em>top TWO questions</em> about getting your Reels to go viral and growing a following?
               </h1>
               <p className="lead">
-                Be specific. &quot;Why do my hooks get skipped&quot; beats &quot;how do I grow&quot;. I&apos;m
-                building the next breakdowns around what you tell me.
+                I&apos;m building something tailored to your answers. Be specific. &quot;Why do my hooks get
+                skipped&quot; beats &quot;how do I grow&quot;.
               </p>
               <form action="/api/survey" method="post" className="survey" id="survey">
                 <label className="label">
