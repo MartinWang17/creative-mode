@@ -1,8 +1,12 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Shell from "@/components/Shell";
 import ResourceForm from "@/components/ResourceForm";
+import CopyField from "@/components/CopyField";
+import { siteUrl } from "@/lib/env";
+import { shareKey } from "@/lib/share";
 import { hasKit, subscribeToKit } from "@/lib/kit";
 import { requireAdmin } from "@/lib/members";
 import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
@@ -35,9 +39,15 @@ const FORMAT_SUGGESTIONS = [
 const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
 
 // Martin's page: upload a breakdown, publish or unpublish it, see member counts.
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string; upload?: string; msg?: string }> }) {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string; upload?: string; msg?: string; comp?: string; cmsg?: string }> }) {
   const viewer = await requireAdmin();
-  const { kit, upload: uploadStatus, msg } = await searchParams;
+  const { kit, upload: uploadStatus, msg, comp: compStatus, cmsg } = await searchParams;
+  const base = siteUrl(await headers());
+  const { data: comps } = await createAdminClient()
+    .from("members")
+    .select("email, status, current_period_end")
+    .eq("plan", "comp")
+    .order("current_period_end", { ascending: false });
   const db = createAdminClient();
   const [{ data: taggedBreakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
     db
@@ -110,6 +120,49 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       .eq("slug", slug);
     revalidatePath("/admin");
     revalidatePath("/library");
+  }
+
+  // Free membership for a featured creator (or anyone): no Stripe, ends on its own date.
+  async function giveComp(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const email = String(formData.get("email") ?? "").trim().toLowerCase();
+    const months = Math.min(Math.max(Number(formData.get("months")) || 12, 1), 60);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      redirect("/admin?comp=error&cmsg=" + encodeURIComponent("That email doesn't look right."));
+    }
+    const db = createAdminClient();
+    const { data: existing } = await db
+      .from("members")
+      .select("status, stripe_subscription_id")
+      .eq("email", email)
+      .maybeSingle();
+    if (existing?.stripe_subscription_id && ["active", "trialing", "past_due"].includes(existing.status ?? "")) {
+      redirect("/admin?comp=error&cmsg=" + encodeURIComponent(`${email} already has a paid membership.`));
+    }
+    const end = new Date();
+    end.setMonth(end.getMonth() + months);
+    const { error } = await db
+      .from("members")
+      .upsert(
+        { email, status: "active", plan: "comp", founding: false, current_period_end: end.toISOString() },
+        { onConflict: "email" },
+      );
+    if (error) redirect("/admin?comp=error&cmsg=" + encodeURIComponent(error.message));
+    revalidatePath("/admin");
+    redirect(
+      "/admin?comp=ok&cmsg=" +
+        encodeURIComponent(`${email} has free access until ${end.toDateString()}. They log in at /login with that email.`),
+    );
+  }
+
+  async function endComp(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const email = String(formData.get("email") ?? "");
+    if (!email) return;
+    await createAdminClient().from("members").update({ status: "canceled" }).eq("email", email).eq("plan", "comp");
+    revalidatePath("/admin");
   }
 
   async function removeBreakdown(formData: FormData) {
@@ -266,6 +319,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {b.format ? ` · ${b.format}` : " · no format"}
                   {b.difficulty ? ` · ${b.difficulty}` : ""}
                 </p>
+                <div className="mt-2">
+                  <p className="label mb-1 text-[10px] text-chalk/50">Creator gift link (free view, works even as a draft)</p>
+                  <CopyField value={`${base}/library/${b.slug}?k=${shareKey(b.slug)}`} />
+                </div>
                 <form action={setTags} className="mt-2 flex flex-wrap items-center gap-2">
                   <input type="hidden" name="slug" value={b.slug} />
                   <input
@@ -314,6 +371,58 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           ))}
           {(breakdowns ?? []).length === 0 && <li className="py-4 text-chalk/60">Nothing uploaded yet.</li>}
         </ul>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Give a free membership</h2>
+        <p className="mt-2 max-w-2xl text-sm text-chalk/70">
+          For featured creators or anyone you want to gift. They get full member access with no payment, and it
+          ends on its own after the months you pick.
+        </p>
+        {compStatus && (
+          <p className={`mt-4 max-w-2xl border-2 p-4 text-sm ${compStatus === "ok" ? "border-birch text-birch" : "border-oak text-chalk"}`}>
+            {compStatus === "ok" ? "Done. " : "Didn't work. "}
+            {cmsg}
+          </p>
+        )}
+        <form action={giveComp} className="mt-4 flex max-w-2xl flex-wrap items-end gap-3">
+          <label className="label flex-1 text-[10px] text-chalk/60">
+            Email
+            <input name="email" type="email" required placeholder="creator@email.com" className={inputCls} />
+          </label>
+          <label className="label w-28 text-[10px] text-chalk/60">
+            Months
+            <input name="months" type="number" min={1} max={60} defaultValue={12} className={inputCls} />
+          </label>
+          <button type="submit" className="label border-2 border-birch bg-forest px-4 py-3 text-[10px] text-birch hover:text-chalk">
+            Give free access
+          </button>
+        </form>
+        {(comps ?? []).length > 0 && (
+          <ul className="mt-4 max-w-2xl divide-y-2 divide-oak border-y-2 border-oak text-sm">
+            {(comps ?? []).map((c) => {
+              const live = c.status === "active" && c.current_period_end && new Date(c.current_period_end) > new Date();
+              return (
+                <li key={c.email} className="flex items-center justify-between gap-3 py-2">
+                  <span>
+                    {c.email}
+                    <span className="text-chalk/50">
+                      {live ? ` · until ${new Date(c.current_period_end!).toDateString()}` : " · ended"}
+                    </span>
+                  </span>
+                  {live && (
+                    <form action={endComp}>
+                      <input type="hidden" name="email" value={c.email} />
+                      <button type="submit" className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk/70 hover:border-birch">
+                        End now
+                      </button>
+                    </form>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
 
       <section className="mt-14">

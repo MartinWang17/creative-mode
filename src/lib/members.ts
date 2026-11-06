@@ -33,8 +33,18 @@ export async function getViewer() {
     email,
     member,
     isAdmin,
-    hasAccess: isAdmin || (member?.status != null && ACTIVE.includes(member.status)),
+    hasAccess: isAdmin || hasActiveMembership(member),
   };
+}
+
+// Paid members follow Stripe's status. Free memberships Martin gives from Admin (plan "comp")
+// also end on their current_period_end date, since no Stripe subscription will cancel them.
+function hasActiveMembership(member: Member | null) {
+  if (!member?.status || !ACTIVE.includes(member.status)) return false;
+  if (member.plan === "comp" && member.current_period_end) {
+    return new Date(member.current_period_end) > new Date();
+  }
+  return true;
 }
 
 export async function requireViewer(next: string) {
