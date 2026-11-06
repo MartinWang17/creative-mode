@@ -109,6 +109,16 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     revalidatePath("/library");
   }
 
+  async function removeBreakdown(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const slug = String(formData.get("slug"));
+    if (!slug) return;
+    await createAdminClient().from("breakdowns").delete().eq("slug", slug);
+    revalidatePath("/admin");
+    revalidatePath("/library");
+  }
+
   async function toggle(formData: FormData) {
     "use server";
     await requireAdmin();
@@ -276,6 +286,18 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 <Toggle action={toggle} slug={b.slug} field="is_free" value={!b.is_free}>
                   {b.is_free ? "Make members-only" : "Make free"}
                 </Toggle>
+                <details className="relative">
+                  <summary className="label cursor-pointer list-none border-2 border-oak px-3 py-2 text-[10px] text-chalk/70 hover:border-birch">
+                    Delete
+                  </summary>
+                  <form action={removeBreakdown} className="absolute right-0 z-10 mt-2 w-56 border-2 border-oak bg-bedrock p-3">
+                    <input type="hidden" name="slug" value={b.slug} />
+                    <p className="text-xs text-chalk/80">Delete this breakdown for good? You can upload it again later.</p>
+                    <button type="submit" className="label mt-3 w-full border-2 border-birch bg-forest px-3 py-2 text-[10px] text-birch hover:text-chalk">
+                      Yes, delete it
+                    </button>
+                  </form>
+                </details>
               </div>
             </li>
           ))}
