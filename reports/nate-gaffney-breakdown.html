@@ -485,10 +485,10 @@ ol.mini{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 
   <div class="step"><div class="sn">1</div><div class="sb">
     <span class="tag">5 minutes</span>
-    <h3>Think about your traits</h3>
-    <p>The best videos in this style start with you. Look for the oddly specific things about yourself. Pair a trait people see as bad with one that's good, like The Delusional Believer. Or pair two traits that shouldn't go together, like logical and spiritual. Then relate those traits to one oddly specific group of people. That's a full video.</p>
+    <h3>Find your idea</h3>
+    <p>The best videos in this style start with you. Your idea can be a feeling you have, an oddly specific trait you've noticed in yourself or a friend, or a video or post that stuck with you. Pair a trait people see as bad with one that's good, like The Delusional Believer. Or pair two traits that shouldn't go together, like logical and spiritual. Then relate those traits to one oddly specific group of people. That's a full video.</p>
     <p>Take a few minutes to really think about this. Look at who you are, your life and your niche, and ask how they fit Nate's pattern. Your best ideas will come from you, not from an AI. Jot down whatever comes to mind. Oddly specific traits are good. Weird is good.</p>
-    <div class="field"><label for="me-dump">Your traits, your life, your niche</label><p class="muted" style="margin:0 0 6px;font-size:.9em">Already have an idea or a rough script? Paste it here too, and the AI will skip straight to helping you edit it.</p><textarea id="me-dump" rows="5" placeholder="e.g. I'm weirdly confident for no reason. I'm an introvert but I talk to strangers at the bookstore. I want other romantasy readers to find me..."></textarea></div>
+    <div class="field"><label for="me-dump">Your idea, your traits, your life</label><p class="muted" style="margin:0 0 6px;font-size:.9em">Already have an idea or a rough script? Paste it here too, and the AI will skip straight to helping you edit it.</p><textarea id="me-dump" rows="5" placeholder="e.g. I'm weirdly confident for no reason. I'm an introvert but I talk to strangers at the bookstore. I want other romantasy readers to find me..."></textarea></div>
     <div class="field"><label for="me-people">Exactly who do you want watching? Be oddly specific.</label><input id="me-people" type="text" autocomplete="off" placeholder="e.g. romantasy book girlies, not just readers"></div>
   </div></div>
 
@@ -510,7 +510,7 @@ ol.mini{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
       <a class="btn ghost" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT</a>
       <a class="btn ghost" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude</a>
     </div>
-    <p class="muted small">It's a lot of text, so the chat may show it as a file instead of a message. That's normal. First it shows you a list of traits so you can pick the ones that are true about you, even the embarrassing ones, and asks a few questions to dig deeper. Then it helps you pick your idea from your own answers. You write a rough first draft in your own words (messy is fine, or just talk it out with voice typing), and the AI edits it to match Nate's patterns until it's ready to film. That's exactly how I made my own viral scripts.</p>
+    <p class="muted small">It's a lot of text, so the chat may show it as a file instead of a message. That's normal. If you wrote down an idea, the AI turns it into a first draft in Nate's structure using your words. No idea yet? It shows you a list of traits to pick from first. Then comes the important part: read the draft out loud and rewrite it in your own words (messy is fine, or just talk it out with voice typing). The AI edits your version, helps you name your type of person, and tells you when it's ready to film. That's exactly how I made my own viral scripts.</p>
   </div></div>
 
   <div class="step"><div class="sn">3</div><div class="sb">
@@ -787,7 +787,7 @@ function prompt(){
  const v=i=>$(i).value.trim();
  const dump=v("me-dump");
  const ppl=v("me-people");
- const about=[dump?"Some notes about me:\n"+dump:"Notes about me: (none yet, find out in STEP 1)","Exactly who I want watching: "+(ppl||"(not filled in, ask me in STEP 1 Part C)")].join("\n\n");
+ const about=[dump?"Some notes about me:\n"+dump:"Notes about me: (none yet, help me find an idea in STEP 1)","Exactly who I want watching: "+(ppl||"(not filled in, ask me in STEP 1)")].join("\n\n");
  return `I'm making a short form video for Instagram. Help me make it using the strategy that took creator Nate Gaffney from 10K to 910K followers in 91 days. Please explain everything simply without using any complicated phrases or words.
 
 ABOUT ME
@@ -797,51 +797,34 @@ WHAT'S BELOW
 Under my instructions is the full breakdown of Nate's strategy, word for word transcripts of his 10 best videos, and the opening line of all 100 of his recent Reels with how well each did. Read all of it before you answer. Use his top scripts as your models: copy their structure and rhythm, not their topic.
 
 WHAT I NEED FROM YOU
-Act as my video coach. You know Nate's strategy inside out from everything below. Go in these steps, and don't skip ahead.
-
-BEFORE YOU START
-Look at ABOUT ME first. If my notes already describe a clear idea for a video, or already hold a draft, don't run the full interview. Tell me in one line the idea you see and ask if that's right. Then go straight to STEP 3 if it's only an idea, or STEP 4 if it's a draft. Only use STEP 1 and 2 if I don't have an idea yet.
+Act as my video coach. You know Nate's strategy inside out from everything below. This is how the best scripts in this style actually get made: the idea comes from me, you write a first draft in Nate's structure using my words, I rewrite it in my own words, then you edit it. Go in these steps, and don't skip ahead.
 
 ONE IDEA PER VIDEO
 The whole video is about one idea: one type of person. Only add a scene, story or detail if it shows that same idea. If something I tell you is really a different idea, say so and save it for another video instead of mixing it in.
 
-STEP 1, HELP ME SEE MY OWN TRAITS
-The best traits for these videos are things I know about myself, not things other people come to me for. For example, "introverted, but really good at reading people" is something you notice about yourself, and nobody asks you for advice on it. Help me find mine in two parts.
+STEP 1, MY IDEA
+Look at ABOUT ME. My idea can be a feeling I have, a trait I've noticed in myself or someone I know, or a video or post that stuck with me (if it's someone else's idea, we turn it into a type of person, we don't copy their words).
+- If ABOUT ME already has a clear idea or a draft, tell me in one line the idea you see and ask if that's right. If it's a draft, skip to STEP 4.
+- If ABOUT ME is empty or too vague, help me find one. Show me a list of about 30 strong, relatable trait words in two groups: seen as "bad" (like introverted, overthinker, delusional, stubborn, people pleaser, restless, sarcastic, obsessive) and seen as good or a valuable skill (like empathetic, a pattern spotter, driven, a believer, a deep thinker, good at reading people, calm in a crisis, logical, spiritual). Ask me to pick every word that's true of me, even the embarrassing ones. Then ask me ONE question: which two of these seem like they shouldn't exist in the same person, and when did that show up in a real moment?
+If ABOUT ME doesn't say who I want watching, ask once, and push me to be oddly specific ("romantasy book girlies", not "readers"). Use that person to pick scenes they'll recognize, but never name them or describe them in the script. Nate never says who his video is for.
 
-Part A, pick from a list. Most people can't come up with traits from nothing, but they recognize themselves right away. Show me a list of about 30 strong, relatable trait words in two groups:
-- Seen as "bad": things like introverted, overthinker, delusional, stubborn, people pleaser, impatient, sarcastic, chaotic, too sensitive, a loner, a daydreamer, obsessive
-- Seen as good or a valuable skill: things like empathetic, a pattern spotter, driven, a believer, a deep thinker, good at reading people, calm in a crisis, self-aware, loyal, creative, disciplined, spiritual, logical
-Use my notes in ABOUT ME to add words that might fit me. Ask me to pick every word that's true of me, even the embarrassing ones, and to add any that are missing.
-
-Part B, dig deeper. Then ask me up to 3 short questions about the words I picked, ONE at a time, waiting for each answer. Ask about me and how I see myself, not about what other people ask me for. Good questions:
-- Which two of these seem like they shouldn't exist in the same person?
-- Which "bad" trait secretly helps you? How?
-- What's something you're quietly good at that nobody has ever really noticed?
-- What do you do, or tell yourself, that you'd be a little embarrassed to admit? (Like blaming people treating you badly on your own empathy.)
-- When did one of these traits show up in a really specific moment?
-If an answer is vague, ask one follow-up for the specific, weird version.
-
-Part C, my exact audience. If ABOUT ME doesn't already say it, ask me exactly who I want watching. Push me to be oddly specific: "romantasy book girlies" instead of "readers", "moms of toddlers who work night shifts" instead of "moms". If my answer is broad, ask one follow-up to narrow it down. Use this person to pick traits and scenes they'll recognize, but never name them or describe them in the script. Nate never says who his video is for. The hook stays about people in general, and the viewer recognizes themselves.
-
-Then sum up my traits and my exact audience in 2 or 3 lines and ask if that sounds right.
-
-STEP 2, FIND MY IDEA
-The idea has to come from me, not you. From my answers, pull out 3 to 5 trait pairs I actually described, using my own details. Name each one like "The Delusional Believer" or "The Logical Spiritualist". Ask me which one feels most like me, or if I'd rather name my own.
-WORDS MATTER: Describe every trait with the strongest, most relatable word you can, one that makes people feel something and instantly picture a person they know. "Introverted" beats "quiet". "Delusional" beats "very confident". If one of my words is weak, suggest a stronger one and tell me why.
-
-STEP 3, MY FIRST DRAFT
-Ask me to write a rough version of the script in my own words. Messy is fine. I can also use voice typing and just talk it out. Before I write, give me this short list of the parts Nate's best videos have:
-- A hook about people in general (like "There's a rare breed of person out there who is both [trait] and [trait]"), not about my audience
+STEP 2, YOUR FIRST DRAFT
+Write a first draft from my idea, using as many of my own words and details as you can. Follow the shape of Nate's best scripts:
+- A hook about people in general, like "There's a rare breed of person out there who is both [trait] and [trait]"
 - A series line right after the hook, like Nate's "Welcome to Interesting People for Curious Humans" (suggest a series name if I don't have one)
-- The two traits shown in specific little scenes, not adjectives
-- The turn: "What makes this person so rare is...", then explain why the pair is rare, with little scenes my exact person would recognize (without naming them)
-- The type's name called back in the middle
+- The traits shown in specific little scenes, not adjectives. Say "they", not "you" or "I"
+- The turn: "What makes this person so rare is...", then why the pair is rare
 - Both closes together at the end: "If you know someone like this, send this to them..." and "If this is you, welcome. I think you just found your people."
-Tell me to aim for 30 to 60 seconds, and to write two hook options if I can.
-Only if I say I'm stuck, write a short first draft for me, using as many of my own words as you can. Then ask me to rewrite it in my own words before we edit, so it sounds like me.
+WORDS MATTER: use the strongest, most relatable word for each trait, one that makes people instantly picture someone. "Introverted" beats "quiet". "Delusional" beats "very confident".
+Keep it to 30 to 60 seconds. Don't add lines just to tick a box from this list. A shorter script with one clear idea beats a longer one with everything in it. Leave the type's name as [NAME] for now.
+
+STEP 3, MY REWRITE
+Tell me to read your draft out loud, then rewrite it in my own words: change anything that doesn't sound like me, add my own details, cut what feels fake. Voice typing is fine. Tell me this matters because the video only works if it sounds like me, and wait for my version.
 
 STEP 4, EDIT IT WITH ME
-When I send my draft, act like an editor, not a writer. Check it against Nate's patterns and his top scripts below. Tell me what's working so I keep it. Point out at most 3 things to fix, like a line that trips when you say it out loud, a name in the middle that doesn't match the hook, a claim about a real person I can't back up, or a line too close to one of my past videos. Don't rewrite the whole script unless I ask. If I disagree with a note, drop it and don't bring it up again. Don't add new ideas, stories or lines just to tick a box from the list in STEP 3. A shorter script with one clear idea beats a longer one with everything in it. If I only wrote one hook, give me a second option to test. Under the final version, add the text to put on screen in the first 3 seconds and a one-line caption. Tell me clearly when it's ready to film.
+When I send my version, act like an editor, not a writer. Check it against Nate's patterns and his top scripts below. Tell me what's working so I keep it. Point out at most 3 things to fix, like a line that trips when you say it out loud, a claim about a real person I can't back up, or a line too close to one of my past videos. Don't rewrite the whole script unless I ask, and don't add new ideas. If I disagree with a note, drop it and don't bring it up again.
+Then name the type: give me 3 options, each a two-word label for the person, ideally two things that shouldn't go together (like "Sneaky Smart" or "The Locked In Goofball"). Once I pick, put the name into the hook and say it once more in the middle.
+If I only wrote one hook, give me a second option to test. Under the final version, add the text to put on screen in the first 3 seconds and a one-line caption. Tell me clearly when it's ready to film.
 
 STEP 5, TEST IT
 Remind me to film both hook versions as two separate videos that are the same except for the hook, post both as Instagram Trial Reels, and keep the one that holds people past the first 3 seconds better.
@@ -851,7 +834,7 @@ Keep your answers short. No hashtags. No emojis in the scripts.
 `+window.NATE_CONTEXT+`
 
 === END OF THE BREAKDOWN ===
-Now follow WHAT I NEED FROM YOU at the top. If ABOUT ME already has a clear idea or a draft, follow BEFORE YOU START. Otherwise start with STEP 1, Part A: say hi in one short line, then show me the list of trait words.`;}
+Now follow WHAT I NEED FROM YOU at the top. Start with STEP 1: say hi in one short line, then either tell me the idea you see in ABOUT ME or, if there isn't one yet, show me the list of trait words.`;}
 const FU=[
  "Make it sound more like me. Here's a text I sent a friend recently: [paste a text you wrote]",
  "Make it shorter, under 30 seconds.",
