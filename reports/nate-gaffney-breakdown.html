@@ -475,12 +475,15 @@ ol.mini{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 <section class="col stack" id="first-reel">
   <div class="eyebrow">Your turn · Do this today</div>
   <h2>Your first Reel in 20 minutes</h2>
-  <div class="callout skipbox">
-    <p class="skipq">Did you skip straight to this part to avoid reading the breakdown? lol.</p>
-    <p>Patterns only work once you understand them. Read the full breakdown first, or you'll miss the details that let you make this your own.</p>
-    <a class="btn ghost" href="#top" target="_self" style="align-self:flex-start">Back to the start ↑</a>
-  </div>
-  <p class="lead">Once you've read it, all you need is your phone and about 20 minutes.</p>
+  <div class="callout skipbox" id="fr-lock">
+      <p class="skipq">Did you skip straight to this part to avoid reading the breakdown? lol.</p>
+      <p id="fr-msg">Patterns only work once you understand them, so this part unlocks after you've read the breakdown. Each section counts once it's been on your screen for a few seconds.</p>
+      <div class="fr-bar"><div id="fr-fill"></div></div>
+      <p class="muted small" id="fr-count"></p>
+      <a class="btn ghost" id="fr-back" href="#top" target="_self" style="align-self:flex-start">Back to the start ↑</a>
+    </div>
+    <div id="fr-body" class="fr-locked">
+<p class="lead">All you need now is your phone and about 20 minutes.</p>
   <p>Nate's top videos run 60 to 90 seconds, but you don't need that to start. Three of his top 20 were under 35 seconds, including a <a href="https://www.instagram.com/reel/Dba2oQpufAb/" target="_blank" rel="noopener">31-second one that hit 25.2x</a>. So we're starting short.</p>
 
   <div class="step"><div class="sn">1</div><div class="sb">
@@ -540,6 +543,7 @@ ol.mini{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
     <p><b>Got two hook options?</b> Film both as separate videos that are the same except for the hook, and post them as Instagram Trial Reels. Those only show to people who don't follow you yet. Keep the one that holds people longer past the first 3 seconds.</p>
     <p>If it flopped, don't change the whole format. Change the pair of traits and post again. Nate posted 46 videos in July before his first big one landed lol.</p>
   </div></div>
+</div>
 </section>
 
 
@@ -803,7 +807,8 @@ ONE IDEA PER VIDEO
 The whole video is about one idea: one type of person. Only add a scene, story or detail if it shows that same idea. If something I tell you is really a different idea, say so and save it for another video instead of mixing it in.
 
 STEP 1, MY IDEA
-Look at ABOUT ME. My idea can be a feeling I have, a trait I've noticed in myself or someone I know, or a video or post that stuck with me (if it's someone else's idea, we turn it into a type of person, we don't copy their words).
+First, check I've read the breakdown: ask me to explain Nate's pattern in one or two sentences, in my own words. If my answer shows I skipped it, kindly tell me which part to go back and read, and wait. If I roughly get it, say so in one line and keep going.
+Then look at ABOUT ME. My idea can be a feeling I have, a trait I've noticed in myself or someone I know, or a video or post that stuck with me (if it's someone else's idea, we turn it into a type of person, we don't copy their words).
 - If ABOUT ME already has a clear idea or a draft, tell me in one line the idea you see and ask if that's right. If it's a draft, skip to STEP 4.
 - If ABOUT ME is empty or too vague, help me find one. Show me a list of about 30 strong, relatable trait words in two groups: seen as "bad" (like introverted, overthinker, delusional, stubborn, people pleaser, restless, sarcastic, obsessive) and seen as good or a valuable skill (like empathetic, a pattern spotter, driven, a believer, a deep thinker, good at reading people, calm in a crisis, logical, spiritual). Ask me to pick every word that's true of me, even the embarrassing ones. Then ask me ONE question: which two of these seem like they shouldn't exist in the same person, and when did that show up in a real moment?
 If ABOUT ME doesn't say who I want watching, ask once, and push me to be oddly specific ("romantasy book girlies", not "readers"). Use that person to pick scenes they'll recognize, but never name them or describe them in the script. Nate never says who his video is for.
@@ -834,7 +839,7 @@ Keep your answers short. No hashtags. No emojis in the scripts.
 `+window.NATE_CONTEXT+`
 
 === END OF THE BREAKDOWN ===
-Now follow WHAT I NEED FROM YOU at the top. Start with STEP 1: say hi in one short line, then either tell me the idea you see in ABOUT ME or, if there isn't one yet, show me the list of trait words.`;}
+Now follow WHAT I NEED FROM YOU at the top. Start with STEP 1: say hi in one short line, then ask me to explain Nate's pattern in my own words.`;}
 const FU=[
  "Make it sound more like me. Here's a text I sent a friend recently: [paste a text you wrote]",
  "Make it shorter, under 30 seconds.",
@@ -851,3 +856,17 @@ if(box)FU.forEach(t=>{const d=document.createElement("div");d.className="hook";c
 })();
 
 </script>
+<style>.fr-locked{display:none!important}.fr-bar{height:8px;border:1px solid var(--wood,#6E4B2F);border-radius:99px;overflow:hidden;max-width:420px}#fr-fill{height:100%;width:0;background:var(--gold,#D6BC8E);transition:width .4s}</style><script>(function(){
+var KEY="nate:read";var unlocked=false;try{unlocked=localStorage.getItem(KEY)==="1"}catch(e){}
+var fr=document.getElementById("first-reel");if(!fr)return;
+var hs=[].slice.call(document.querySelectorAll("h2")).filter(function(h){return h.compareDocumentPosition(fr)&Node.DOCUMENT_POSITION_FOLLOWING;});
+var need=hs.length,seen=new Map(),done=new Set(),vis=new Set();
+var body=document.getElementById("fr-body"),fill=document.getElementById("fr-fill"),cnt=document.getElementById("fr-count"),msg=document.getElementById("fr-msg"),back=document.getElementById("fr-back"),bar=fill&&fill.parentNode;
+function render(){var n=done.size;if(fill)fill.style.width=Math.round(100*n/need)+"%";if(cnt)cnt.textContent=n+" of "+need+" sections read";}
+function open(){unlocked=true;try{localStorage.setItem(KEY,"1")}catch(e){}body.classList.remove("fr-locked");var q=document.querySelector("#fr-lock .skipq");if(q)q.textContent="Nice, you read the whole breakdown.";if(msg)msg.textContent="Now you know the pattern, so let's make your first Reel.";[bar,cnt,back].forEach(function(e){if(e)e.style.display="none"});}
+if(unlocked||!need){open();return;}
+render();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)vis.add(e.target);else vis.delete(e.target);});},{threshold:0});
+hs.forEach(function(h){io.observe(h)});
+var t=setInterval(function(){vis.forEach(function(h){var v=(seen.get(h)||0)+500;seen.set(h,v);if(v>=2500)done.add(h);});render();if(done.size>=need){clearInterval(t);io.disconnect();open();}},500);
+})();</script>
