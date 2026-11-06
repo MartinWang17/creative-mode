@@ -35,9 +35,9 @@ const FORMAT_SUGGESTIONS = [
 const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
 
 // Martin's page: upload a breakdown, publish or unpublish it, see member counts.
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string }> }) {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string; upload?: string; msg?: string }> }) {
   const viewer = await requireAdmin();
-  const { kit } = await searchParams;
+  const { kit, upload: uploadStatus, msg } = await searchParams;
   const db = createAdminClient();
   const [{ data: taggedBreakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
     db
@@ -71,28 +71,31 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const summary = String(formData.get("summary") ?? "").trim();
     const format = String(formData.get("format") ?? "").trim();
     const difficulty = String(formData.get("difficulty") ?? "");
-    if (!(file instanceof File) || !title) return;
+    if (!(file instanceof File) || file.size === 0 || !title) {
+      redirect("/admin?upload=error&msg=" + encodeURIComponent("Add a title and pick the HTML file, then try again."));
+    }
     const slug = (String(formData.get("slug") ?? "") || handle || title)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
     const html = stripWrapper(await file.text());
-    await createAdminClient()
-      .from("breakdowns")
-      .upsert(
-        {
-          slug,
-          title,
-          creator_handle: handle || null,
-          summary: summary || null,
-          html,
-          ...(format ? { format } : {}),
-          ...(DIFFICULTIES.includes(difficulty) ? { difficulty } : {}),
-        },
-        { onConflict: "slug" },
-      );
+    const db = createAdminClient();
+    const base = { slug, title, creator_handle: handle || null, summary: summary || null, html };
+    const tags = {
+      ...(format ? { format } : {}),
+      ...(DIFFICULTIES.includes(difficulty) ? { difficulty } : {}),
+    };
+    let { error } = await db.from("breakdowns").upsert({ ...base, ...tags }, { onConflict: "slug" });
+    let note = "";
+    if (error && Object.keys(tags).length > 0 && /format|difficulty/i.test(error.message)) {
+      // The tag columns haven't been added yet: save the breakdown without tags.
+      ({ error } = await db.from("breakdowns").upsert(base, { onConflict: "slug" }));
+      if (!error) note = " Tags weren't saved because the format and difficulty columns are missing (see the note above).";
+    }
     revalidatePath("/admin");
     revalidatePath("/library");
+    if (error) redirect("/admin?upload=error&msg=" + encodeURIComponent(error.message));
+    redirect("/admin?upload=ok&msg=" + encodeURIComponent(`Uploaded "${title}" to /library/${slug}.${note}`));
   }
 
   async function setTags(formData: FormData) {
@@ -201,6 +204,14 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
       <section className="mt-14">
         <h2 className="label text-sm">Upload a breakdown</h2>
+        {uploadStatus && (
+          <p
+            className={`mt-4 max-w-2xl border-2 p-4 text-sm ${uploadStatus === "ok" ? "border-birch text-birch" : "border-oak text-chalk"}`}
+          >
+            {uploadStatus === "ok" ? "Done. " : "Upload failed. "}
+            {msg}
+          </p>
+        )}
         <form action={upload} className="mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
           <Field name="title" label="Title" placeholder="Nate Gaffney Breakdown" required />
           <Field name="handle" label="Creator handle" placeholder="nategaffney" />
