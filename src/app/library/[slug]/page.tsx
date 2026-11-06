@@ -4,6 +4,7 @@ import Shell from "@/components/Shell";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
+import { cartClosed, doorsOpen } from "@/lib/offer";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,45 @@ export default async function BreakdownPage({ params }: { params: Promise<{ slug
         title={b.title}
         className="mt-6 h-[85dvh] w-full border-2 border-oak bg-bedrock"
       />
+      {b.is_free && !viewer?.hasAccess && <EndBlock />}
     </Shell>
+  );
+}
+
+// Shown under free breakdowns for people who aren't members yet. Changes with the launch dates.
+function EndBlock() {
+  const now = new Date();
+  const teasing = now >= new Date("2026-11-28T00:00:00-05:00");
+  let heading: string;
+  let body: string;
+  let cta: { href: string; label: string };
+  if (doorsOpen(now)) {
+    heading = "Doors are open";
+    body =
+      "Join Creator Breakdown and get a new breakdown like this every week. The founding price is locked in for life, but only until doors close Sunday, December 13th.";
+    cta = { href: "/creator-breakdown", label: "Join now" };
+  } else if (cartClosed(now)) {
+    heading = "Doors are closed";
+    body = "Creator Breakdown is closed until the next launch. Join the waitlist and you'll be the first to know when it opens again.";
+    cta = { href: "/creator-breakdowns-waitlist", label: "Join the waitlist" };
+  } else {
+    heading = "You're on the list";
+    body =
+      "Doors open Tuesday, December 8th, and members get a new breakdown like this every week." +
+      (teasing ? " Watch your inbox on December 2nd for my free video series." : "");
+    cta = { href: "/creator-breakdown", label: "See what's inside" };
+  }
+  return (
+    <section className="mt-8 border-2 border-oak bg-forest p-8 sm:p-10">
+      <p className="label text-xs text-birch">Creator Breakdown</p>
+      <h2 className="font-display mt-3 text-4xl sm:text-5xl text-chalk">{heading}</h2>
+      <p className="mt-4 max-w-2xl text-chalk/85">{body}</p>
+      <Link
+        href={cta.href}
+        className="label mt-6 inline-block border-2 border-birch px-5 py-3 text-xs text-birch hover:bg-bedrock"
+      >
+        {cta.label} →
+      </Link>
+    </section>
   );
 }
