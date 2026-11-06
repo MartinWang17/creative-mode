@@ -2,11 +2,12 @@ import { NextResponse, type NextRequest } from "next/server";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
+import { validShareKey } from "@/lib/share";
 
 // Serves a breakdown's HTML for the iframe on /library/[slug].
 // The sandbox header gives it its own throwaway origin, so the report's
 // scripts run but can't touch the member's login cookies.
-export async function GET(_request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!hasSupabase()) return new NextResponse("Not found", { status: 404 });
 
@@ -18,7 +19,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
   if (!breakdown) return new NextResponse("Not found", { status: 404 });
 
   const viewer = await getViewer();
+  const shared = validShareKey(slug, request.nextUrl.searchParams.get("k"));
   const allowed =
+    shared ||
     viewer?.isAdmin || (breakdown.published && (breakdown.is_free || viewer?.hasAccess));
   if (!allowed) return new NextResponse("Members only", { status: 403 });
 

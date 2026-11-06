@@ -43,7 +43,7 @@ export default function TermsPage() {
         Breakdowns and the site design belong to Creative Mode. You&apos;re free to use what you learn
         on your own accounts. Creators featured are credited by their public handle, and they are not
         affiliated with or endorsed by Creative Mode. If you&apos;re a featured creator and want
-        something changed, email us and we&apos;ll respond quickly.
+        your breakdown updated or removed, email us and we&apos;ll do it within 48 hours.
       </p>
       <h2>Changes and liability</h2>
       <p>

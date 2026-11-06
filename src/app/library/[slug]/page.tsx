@@ -6,12 +6,21 @@ import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
 import { cartClosed, doorsOpen } from "@/lib/offer";
+import { validShareKey } from "@/lib/share";
 
 export const dynamic = "force-dynamic";
 
 // One breakdown. The report itself loads in a sandboxed iframe from /api/breakdowns/[slug].
-export default async function BreakdownPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BreakdownPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ k?: string }>;
+}) {
   const { slug } = await params;
+  const { k } = await searchParams;
+  const shared = validShareKey(slug, k);
   if (!hasSupabase()) notFound();
   const { data: b } = await createAdminClient()
     .from("breakdowns")
@@ -21,8 +30,8 @@ export default async function BreakdownPage({ params }: { params: Promise<{ slug
   if (!b) notFound();
 
   const viewer = await getViewer();
-  if (!b.published && !viewer?.isAdmin) notFound();
-  if (!b.is_free && !viewer?.isAdmin) {
+  if (!shared && !b.published && !viewer?.isAdmin) notFound();
+  if (!shared && !b.is_free && !viewer?.isAdmin) {
     if (!viewer) redirect(`/login?next=${encodeURIComponent(`/library/${slug}`)}`);
     if (!viewer.hasAccess) redirect("/creator-breakdown#pricing");
   }
@@ -44,8 +53,8 @@ export default async function BreakdownPage({ params }: { params: Promise<{ slug
           </a>
         )}
       </div>
-      <BreakdownFrame src={`/api/breakdowns/${slug}`} title={b.title} />
-      {b.is_free && !viewer?.hasAccess && (
+      <BreakdownFrame src={`/api/breakdowns/${slug}${shared ? `?k=${encodeURIComponent(k!)}` : ""}`} title={b.title} />
+      {b.is_free && !shared && !viewer?.hasAccess && (
         <div className="mx-auto max-w-6xl px-6">
           <EndBlock />
         </div>
