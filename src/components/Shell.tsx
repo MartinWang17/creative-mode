@@ -5,9 +5,12 @@ import Wordmark from "@/components/Wordmark";
 export default function Shell({
   children,
   viewer,
+  wide = false,
 }: {
   children: React.ReactNode;
   viewer?: { email: string; isAdmin: boolean } | null;
+  // Full-width main area with no side padding (used by the breakdown viewer).
+  wide?: boolean;
 }) {
   return (
     <div className="flex min-h-dvh flex-col">
@@ -38,7 +41,7 @@ export default function Shell({
           )}
         </nav>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-6 pb-20">{children}</main>
+      <main className={wide ? "w-full flex-1 pb-20" : "mx-auto w-full max-w-6xl flex-1 px-6 pb-20"}>{children}</main>
       <footer className="border-t-2 border-oak">
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 px-6 py-8 text-sm text-chalk/50">
           <span>

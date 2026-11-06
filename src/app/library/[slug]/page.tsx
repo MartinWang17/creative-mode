@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Shell from "@/components/Shell";
+import BreakdownFrame from "@/components/BreakdownFrame";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
@@ -27,8 +28,8 @@ export default async function BreakdownPage({ params }: { params: Promise<{ slug
   }
 
   return (
-    <Shell viewer={viewer}>
-      <div className="flex items-center justify-between gap-4 pt-4">
+    <Shell viewer={viewer} wide>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pb-3">
         <Link href="/library" className="label text-xs text-chalk/60 hover:text-chalk">
           ← Library
         </Link>
@@ -43,12 +44,12 @@ export default async function BreakdownPage({ params }: { params: Promise<{ slug
           </a>
         )}
       </div>
-      <iframe
-        src={`/api/breakdowns/${slug}`}
-        title={b.title}
-        className="mt-6 h-[85dvh] w-full border-2 border-oak bg-bedrock"
-      />
-      {b.is_free && !viewer?.hasAccess && <EndBlock />}
+      <BreakdownFrame src={`/api/breakdowns/${slug}`} title={b.title} />
+      {b.is_free && !viewer?.hasAccess && (
+        <div className="mx-auto max-w-6xl px-6">
+          <EndBlock />
+        </div>
+      )}
     </Shell>
   );
 }
