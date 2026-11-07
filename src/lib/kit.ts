@@ -17,37 +17,62 @@ async function kit<T>(path: string, init?: RequestInit): Promise<T> {
     },
     cache: "no-store",
   });
-  if (!res.ok) throw new Error(`Kit ${init?.method ?? "GET"} ${path} -> ${res.status} ${await res.text()}`);
-  return (await res.json()) as T;
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Kit ${init?.method ?? "GET"} ${path.split("?")[0]} -> ${res.status} ${text.slice(0, 300)}`);
+  return (text ? JSON.parse(text) : {}) as T;
 }
 
-const tagIds = new Map<string, number>();
+type Tag = { id: number; name: string };
 
-async function tagId(name: string) {
-  const cached = tagIds.get(name);
-  if (cached) return cached;
+// Looks a tag up by name (ignoring case and spaces at the ends) and creates it if it's missing.
+// No cache: a stale id from an earlier request is exactly the kind of bug we can't see.
+export async function tagId(name: string) {
+  const want = name.trim().toLowerCase();
   let cursor: string | null = null;
   do {
-    const page: { tags: { id: number; name: string }[]; pagination?: { has_next_page: boolean; end_cursor: string } } =
-      await kit(`/tags?per_page=500${cursor ? `&after=${cursor}` : ""}`);
-    for (const t of page.tags) tagIds.set(t.name, t.id);
+    const page: { tags?: Tag[]; pagination?: { has_next_page: boolean; end_cursor: string } } = await kit(
+      `/tags?per_page=1000${cursor ? `&after=${encodeURIComponent(cursor)}` : ""}`,
+    );
+    const hit = (page.tags ?? []).find((t) => t.name.trim().toLowerCase() === want);
+    if (hit) return hit.id;
     cursor = page.pagination?.has_next_page ? page.pagination.end_cursor : null;
   } while (cursor);
-  if (!tagIds.get(name)) {
-    const made: { tag: { id: number; name: string } } = await kit("/tags", { method: "POST", body: JSON.stringify({ name }) });
-    tagIds.set(made.tag.name, made.tag.id);
-  }
-  return tagIds.get(name)!;
+  const made: { tag?: Tag } = await kit("/tags", { method: "POST", body: JSON.stringify({ name: name.trim() }) });
+  if (!made.tag?.id) throw new Error(`Kit tag "${name}" could not be created`);
+  return made.tag.id;
 }
 
+export type KitStep = { step: string; ok: boolean; detail?: string };
+
 // Creates (or finds) the subscriber, adds them to the delivery form if one is set, and tags them.
-export async function subscribeToKit(email: string, extraTags: string[] = []) {
+// Every step runs on its own, so one failure (say, a bad form id) can't stop the tags.
+// Returns what happened; throws only if the subscriber itself couldn't be created.
+export async function subscribeToKit(email: string, extraTags: string[] = []): Promise<KitStep[]> {
+  const steps: KitStep[] = [];
   await kit("/subscribers", { method: "POST", body: JSON.stringify({ email_address: email }) });
+  steps.push({ step: "subscriber", ok: true });
+
   const form = process.env.KIT_FORM_ID;
-  if (form) await kit(`/forms/${form}/subscribers`, { method: "POST", body: JSON.stringify({ email_address: email }) });
-  const tags = [process.env.KIT_TAG || "launch-list", ...extraTags];
-  for (const t of tags) {
-    const id = await tagId(t);
-    await kit(`/tags/${id}/subscribers`, { method: "POST", body: JSON.stringify({ email_address: email }) });
+  if (form) {
+    try {
+      await kit(`/forms/${form}/subscribers`, { method: "POST", body: JSON.stringify({ email_address: email }) });
+      steps.push({ step: `form ${form}`, ok: true });
+    } catch (err) {
+      steps.push({ step: `form ${form}`, ok: false, detail: String(err) });
+    }
   }
+
+  const tags = [...new Set([process.env.KIT_TAG || "launch-list", ...extraTags])];
+  for (const t of tags) {
+    try {
+      const id = await tagId(t);
+      await kit(`/tags/${id}/subscribers`, { method: "POST", body: JSON.stringify({ email_address: email }) });
+      steps.push({ step: `tag ${t} (#${id})`, ok: true });
+    } catch (err) {
+      steps.push({ step: `tag ${t}`, ok: false, detail: String(err) });
+    }
+  }
+  const failed = steps.filter((s) => !s.ok);
+  if (failed.length) console.error("kit subscribe: some steps failed", email, JSON.stringify(failed));
+  return steps;
 }
