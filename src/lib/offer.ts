@@ -22,7 +22,7 @@ export const offer = {
     value: "$37",
   },
   // The free sample: the breakdown Martin used to grow his own account. Must be published + free in admin.
-  freeBreakdown: { slug: "nate-gaffney-breakdown", title: "Nate Gaffney breakdown" },
+  freeBreakdown: { slug: "nategaffney", title: "Nate Gaffney breakdown" },
   plans: [
     {
       id: "annual" as PlanId,
