@@ -7,7 +7,7 @@ import ResourceForm from "@/components/ResourceForm";
 import CopyField from "@/components/CopyField";
 import { siteUrl } from "@/lib/env";
 import { shareKey } from "@/lib/share";
-import { hasKit, subscribeToKit } from "@/lib/kit";
+import { hasKit, subscribeToKit, tagCount } from "@/lib/kit";
 import { requireAdmin } from "@/lib/members";
 import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
@@ -59,6 +59,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     db.from("waitlist").select("*", { count: "exact", head: true }),
     db.from("resources").select(RESOURCE_COLS).order("sort", { ascending: true }).order("created_at", { ascending: true }),
     db.from("survey_responses").select("id, email, followers, answer, created_at").order("created_at", { ascending: false }).limit(200),
+  ]);
+  const [kitLaunch, kitFree, kitFormats] = await Promise.all([
+    tagCount(process.env.KIT_TAG || "launch-list"),
+    tagCount("free-resource"),
+    tagCount("formats"),
   ]);
   const surveyMissing = !survey;
   // If the format/difficulty columns aren't added yet, still list breakdowns (without tags).
@@ -219,7 +224,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <Stat value={active ?? 0} label="active members" />
         <Stat value={total ?? 0} label="people who ever bought" />
         <Stat value={(breakdowns ?? []).filter((b) => b.published).length} label="breakdowns live" />
-        <Stat value={waitlist ?? 0} label="on the waitlist" />
+        <Stat value={kitLaunch ?? "?"} label="on the launch list in Kit (every free sign-up)" />
+        <Stat value={kitFree ?? "?"} label="free breakdown sign-ups (Kit tag free-resource)" />
+        <Stat value={kitFormats ?? "?"} label="formats sign-ups (Kit tag formats)" />
+        <Stat value={waitlist ?? 0} label="waitlist page sign-ups (site table, not the free resources)" />
         <Stat value={(survey ?? []).length} label="survey answers" />
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-5">
@@ -543,7 +551,7 @@ function toLocalInput(iso: string | null) {
 const inputCls =
   "mt-2 block w-full border-2 border-oak bg-bedrock px-3 py-2 font-sans text-base normal-case tracking-normal text-chalk outline-none focus:border-birch";
 
-function Stat({ value, label }: { value: number; label: string }) {
+function Stat({ value, label }: { value: number | string; label: string }) {
   return (
     <div className="bg-forest p-6">
       <p className="font-display text-6xl leading-none text-birch">{value}</p>

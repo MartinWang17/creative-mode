@@ -26,7 +26,7 @@ type Tag = { id: number; name: string };
 
 // Looks a tag up by name (ignoring case and spaces at the ends) and creates it if it's missing.
 // No cache: a stale id from an earlier request is exactly the kind of bug we can't see.
-export async function tagId(name: string) {
+export async function tagId(name: string, create = true): Promise<number | null> {
   const want = name.trim().toLowerCase();
   let cursor: string | null = null;
   do {
@@ -37,6 +37,7 @@ export async function tagId(name: string) {
     if (hit) return hit.id;
     cursor = page.pagination?.has_next_page ? page.pagination.end_cursor : null;
   } while (cursor);
+  if (!create) return null;
   const made: { tag?: Tag } = await kit("/tags", { method: "POST", body: JSON.stringify({ name: name.trim() }) });
   if (!made.tag?.id) throw new Error(`Kit tag "${name}" could not be created`);
   return made.tag.id;
@@ -65,7 +66,7 @@ export async function subscribeToKit(email: string, extraTags: string[] = []): P
   const tags = [...new Set([process.env.KIT_TAG || "launch-list", ...extraTags])];
   for (const t of tags) {
     try {
-      const id = await tagId(t);
+      const id = (await tagId(t))!;
       await kit(`/tags/${id}/subscribers`, { method: "POST", body: JSON.stringify({ email_address: email }) });
       steps.push({ step: `tag ${t} (#${id})`, ok: true });
     } catch (err) {
@@ -75,4 +76,20 @@ export async function subscribeToKit(email: string, extraTags: string[] = []): P
   const failed = steps.filter((s) => !s.ok);
   if (failed.length) console.error("kit subscribe: some steps failed", email, JSON.stringify(failed));
   return steps;
+}
+
+// How many subscribers carry a tag (null if Kit isn't set up, the tag doesn't exist yet, or Kit errors).
+export async function tagCount(name: string): Promise<number | null> {
+  if (!hasKit()) return null;
+  try {
+    const id = await tagId(name, false);
+    if (!id) return 0;
+    const res: { pagination?: { total_count?: number } } = await kit(
+      `/tags/${id}/subscribers?include_total_count=true&per_page=1`,
+    );
+    return res.pagination?.total_count ?? null;
+  } catch (err) {
+    console.error("kit tag count failed", name, err);
+    return null;
+  }
 }
