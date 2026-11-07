@@ -6,7 +6,7 @@ export type Format = {
   id: string;
   category: string;
   number: number;
-  instagram: string;
+  instagram: string | null;
   hook: string;
   music: string;
   caption: string;

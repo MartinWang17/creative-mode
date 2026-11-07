@@ -11,8 +11,8 @@ import formats from "@/data/formats.json";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "100 viral formats | Creative Mode",
-  description: "100 proven Reel formats, each with a text hook, how to make it, and the original example. Free.",
+  title: "Viral Reel formats | Creative Mode",
+  description: "Proven Reel formats, each with a text hook, how to make it, and the original example. Free.",
 };
 
 const NOTES: Record<string, string> = {
@@ -33,10 +33,10 @@ export default async function FormatsPage({ searchParams }: { searchParams: Prom
       </div>
       <section className={unlocked ? "wl-hero fm-hero-short" : "wl-hero"}>
         <div className="wrap">
-          <p className="label eyebrow">Free resource · 100 viral formats</p>
+          <p className="label eyebrow">Free resource · {formats.length} viral formats</p>
           <TypeHero
             segments={[
-              { text: "100 Reel formats that " },
+              { text: `${formats.length} Reel formats that ` },
               { text: "already went viral", em: true },
               { text: ". Pick one, make it yours." },
             ]}
