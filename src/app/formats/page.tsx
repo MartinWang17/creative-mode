@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description: "Proven Reel formats, each with a text hook, how to make it, and the original example. Free.",
 };
 
+// Only rendered on the server after sign-up, so the link never ships in the pre-signup page or the JS bundle.
+const DRIVE_URL = "https://drive.google.com/drive/folders/19WVcapx-Yh0vEPNYQsEfmUiaB8KGDlK_?usp=sharing";
+
 const NOTES: Record<string, string> = {
   invalid: "That email doesn't look right. Try again?",
   error: "Something went wrong. Try again in a minute.",
@@ -76,6 +79,14 @@ export default async function FormatsPage({ searchParams }: { searchParams: Prom
       {unlocked && (
         <section className="fm" id="library">
           <div className="wrap">
+            <div className="fm-drive">
+              <a className="pill label solid" href={DRIVE_URL} target="_blank" rel="noopener noreferrer">
+                <span className="sq"></span>
+                <span>Get the whole library in Google Drive</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <p className="muted">Every format with its example video, in one folder.</p>
+            </div>
             <FormatsLibrary formats={formats as Format[]} />
           </div>
         </section>
