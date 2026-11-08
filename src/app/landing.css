@@ -320,3 +320,7 @@ html:has(.cm){scroll-behavior:smooth}
 @media (max-width:700px){.cm .fm-grid{grid-template-columns:1fr}.cm .fm-bar{position:static}.cm .fm-bar input{flex:1 1 100%}}
 .cm .fm-drive{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-bottom:8px}
 .cm .fm-drive p{margin:0;color:var(--muted)}
+.cm .inline-survey{margin-top:28px;max-width:680px}
+.cm .inline-survey .iq{font-family:var(--display);font-size:clamp(26px,3vw,38px);line-height:1.05;margin:12px 0 0}
+.cm .inline-survey .iq em{color:var(--birch);font-style:normal}
+.cm .inline-survey .survey{margin-top:24px}

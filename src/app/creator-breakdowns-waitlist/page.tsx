@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import LandingFx from "@/components/LandingFx";
 import TypeHero from "@/components/TypeHero";
+import InlineSurvey from "@/components/InlineSurvey";
 import { doorsOpen, offer } from "@/lib/offer";
 
 // Pre-launch page: the home button points here until the cart opens. Martin's copy, a countdown
@@ -24,10 +25,11 @@ const NOTES: Record<string, string> = {
 export default async function WaitlistPage({
   searchParams,
 }: {
-  searchParams: Promise<{ waitlist?: string }>;
+  searchParams: Promise<{ waitlist?: string; survey?: string }>;
 }) {
   if (doorsOpen()) redirect("/creator-breakdown");
-  const { waitlist } = await searchParams;
+  const { waitlist, survey } = await searchParams;
+  const joined = waitlist === "joined" || Boolean(survey);
   const note = waitlist && NOTES[waitlist] ? NOTES[waitlist] : null;
   return (
     <div className="cm">
@@ -73,20 +75,24 @@ export default async function WaitlistPage({
             </div>
           </div>
           <p className="when">Tuesday, December 8. 9am Eastern.</p>
-          <form action="/api/waitlist" method="post" className="wl-form" id="waitlist">
-            <input type="hidden" name="back" value="/creator-breakdowns-waitlist" />
-            <input type="email" name="email" required placeholder="you@email.com" aria-label="Email" />
-            <button type="submit" className="pill label solid">
-              <span className="sq"></span>
-              <span>Join the waitlist</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </form>
-          {note ? (
+          {!joined && (
+                      <form action="/api/waitlist" method="post" className="wl-form" id="waitlist">
+              <input type="hidden" name="back" value="/creator-breakdowns-waitlist" />
+              <input type="email" name="email" required placeholder="you@email.com" aria-label="Email" />
+              <button type="submit" className="pill label solid">
+                <span className="sq"></span>
+                <span>Join the waitlist</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </form>
+          )}
+          {joined ? null : note ? (
             <p className="wl-note">{note}</p>
           ) : (
             <p className="wl-note muted">Drop your email and I&apos;ll send you the link the moment doors open.</p>
           )}
+          {joined && <InlineSurvey back="/creator-breakdowns-waitlist" done={survey === "done"} />}
+          {survey === "error" && <p className="wl-note">Something went wrong saving your answer. Try again in a minute.</p>}
         </div>
       </section>
       <footer>
