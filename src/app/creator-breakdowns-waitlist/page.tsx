@@ -40,45 +40,76 @@ export default async function WaitlistPage({
       </div>
       <section className="wl-hero">
         <div className="wrap">
-          <p className="label eyebrow">Creator Breakdowns · doors open Tue Dec 8</p>
-          <TypeHero
-            segments={[
-              { text: "I will share the exact strategy I used to grow to " },
-              { text: "200k followers", em: true },
-              { text: " after being stuck at a plateau at 44 followers for 10 months." },
-            ]}
-          />
-          <p className="lead">
-            (It&apos;s not a course, I bought over $5,000 worth of courses and I was still stuck. No one
-            shares this because it&apos;s hard to package it, but I&apos;m going to reveal everything that
-            worked for me, and I&apos;ll help you achieve the same results if you put in the work)
-          </p>
-          <p className="label eyebrow" style={{ marginTop: 44 }}>
-            Doors open in
-          </p>
-          <div className="count" id="count" aria-label="Time until doors open">
-            <div>
-              <b data-u="d">0</b>
-              <small>days</small>
-            </div>
-            <div>
-              <b data-u="h">0</b>
-              <small>hours</small>
-            </div>
-            <div>
-              <b data-u="m">0</b>
-              <small>minutes</small>
-            </div>
-            <div>
-              <b data-u="s">0</b>
-              <small>seconds</small>
-            </div>
-          </div>
-          <p className="when">Tuesday, December 8. 9am Eastern.</p>
           {!joined && (
-                      <form action="/api/waitlist" method="post" className="wl-form" id="waitlist">
-              <input type="hidden" name="back" value="/creator-breakdowns-waitlist" />
-              <input type="email" name="email" required placeholder="you@email.com" aria-label="Email" />
+            <>
+              <p className="label eyebrow">
+                Creator Breakdowns · doors open Tue Dec 8
+              </p>
+              <TypeHero
+                segments={[
+                  {
+                    text: "I will share the exact strategy I used to grow to ",
+                  },
+                  { text: "200k followers", em: true },
+                  {
+                    text: " after being stuck at a plateau at 44 followers for 10 months.",
+                  },
+                ]}
+              />
+              <p className="lead">
+                (It&apos;s not a course, I bought over $5,000 worth of courses
+                and I was still stuck. No one shares this because it&apos;s hard
+                to package it, but I&apos;m going to reveal everything that
+                worked for me, and I&apos;ll help you achieve the same results
+                if you put in the work)
+              </p>
+              <p className="label eyebrow" style={{ marginTop: 44 }}>
+                Doors open in
+              </p>
+              <div
+                className="count"
+                id="count"
+                aria-label="Time until doors open"
+              >
+                <div>
+                  <b data-u="d">0</b>
+                  <small>days</small>
+                </div>
+                <div>
+                  <b data-u="h">0</b>
+                  <small>hours</small>
+                </div>
+                <div>
+                  <b data-u="m">0</b>
+                  <small>minutes</small>
+                </div>
+                <div>
+                  <b data-u="s">0</b>
+                  <small>seconds</small>
+                </div>
+              </div>
+              <p className="when">Tuesday, December 8. 9am Eastern.</p>
+            </>
+          )}
+          {!joined && (
+            <form
+              action="/api/waitlist"
+              method="post"
+              className="wl-form"
+              id="waitlist"
+            >
+              <input
+                type="hidden"
+                name="back"
+                value="/creator-breakdowns-waitlist"
+              />
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@email.com"
+                aria-label="Email"
+              />
               <button type="submit" className="pill label solid">
                 <span className="sq"></span>
                 <span>Join the waitlist</span>
@@ -89,18 +120,34 @@ export default async function WaitlistPage({
           {joined ? null : note ? (
             <p className="wl-note">{note}</p>
           ) : (
-            <p className="wl-note muted">Drop your email and I&apos;ll send you the link the moment doors open.</p>
+            <p className="wl-note muted">
+              Drop your email and I&apos;ll send you the link the moment doors
+              open.
+            </p>
           )}
-          {joined && <InlineSurvey back="/creator-breakdowns-waitlist" done={survey === "done"} />}
-          {survey === "error" && <p className="wl-note">Something went wrong saving your answer. Try again in a minute.</p>}
+          {joined && (
+            <InlineSurvey
+              back="/creator-breakdowns-waitlist"
+              done={survey === "done"}
+            />
+          )}
+          {survey === "error" && (
+            <p className="wl-note">
+              Something went wrong saving your answer. Try again in a minute.
+            </p>
+          )}
         </div>
       </section>
       <footer>
         <div className="wrap">
           <span>© 2026 Creative Mode</span>
-          <span>Creators featured are not affiliated with or endorsed by Creative Mode.</span>
+          <span>
+            Creators featured are not affiliated with or endorsed by Creative
+            Mode.
+          </span>
           <span className="legal">
-            <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/refunds">Refunds</a>
+            <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> ·{" "}
+            <a href="/refunds">Refunds</a>
           </span>
         </div>
       </footer>
