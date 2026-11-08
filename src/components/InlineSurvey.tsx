@@ -9,7 +9,7 @@ export default async function InlineSurvey({ back, done }: { back: string; done:
   if (done) {
     return (
       <div className="inline-survey" id="survey">
-        <p className="when">Got it. Thank you.</p>
+        <h1>Got it. Thank you.</h1>
         <p className="wl-note muted">I read every one of these. Your answers decide what I break down next.</p>
       </div>
     );
@@ -17,7 +17,9 @@ export default async function InlineSurvey({ back, done }: { back: string; done:
   const email = (await cookies()).get(SIGNUP_EMAIL_COOKIE)?.value ?? "";
   return (
     <div className="inline-survey" id="survey">
-      <p className="when">You&apos;re on the list!</p>
+      <p className="label eyebrow">Creator Breakdowns · doors open Tue Dec 8</p>
+      <h1>ONE LAST THING</h1>
+      <p className="when">You&apos;re on the list! But...</p>
       <p className="iq">
         I&apos;m building something <em>FOR you</em>, so let me know your top 2 questions about getting your Reels to go
         viral and growing a following.
