@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { siteUrl } from "@/lib/env";
 import { hasKit, subscribeToKit } from "@/lib/kit";
 import { createAdminClient } from "@/lib/supabase/server";
+import { SIGNUP_EMAIL_COOKIE } from "@/components/InlineSurvey";
 
 // The waitlist forms (pre-launch page, and the sales page once doors close) post here.
 const PAGES = ["/creator-breakdowns-waitlist", "/creator-breakdown"];
@@ -31,5 +32,7 @@ export async function POST(request: NextRequest) {
       console.error("kit subscribe failed", err);
     }
   }
-  return back("joined");
+  const res = back("joined");
+  res.cookies.set(SIGNUP_EMAIL_COOKIE, email, { maxAge: 60 * 60 * 24 * 30, path: "/", sameSite: "lax", httpOnly: true, secure: true });
+  return res;
 }
