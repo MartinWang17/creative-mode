@@ -104,31 +104,11 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Straight up</p>
     <h2 class="big">What this is. What this isn't.</h2>
-    <div class="isnt">
-      <div class="card yes">
-        <p class="label eyebrow">What it is</p>
-        <h3>The exact strategy behind my own growth.</h3>
-        <p>The same breakdown process I used to grow my brand past 160,000 followers and generate over $150,000, done for you every week.</p>
-        <ul>
-          <li><i></i>Four full creator breakdowns a month, each from a different niche, with the numbers behind every claim</li>
-          <li><i></i>Every Reel quoted links to the Reel itself, so you can check my work</li>
-          <li><i></i>An "apply it" page in each one: hook templates, the topic formula and the script structure</li>
-          <li><i></i>The full library of past breakdowns, growing every month</li>
-          <li><i></i>A vote on who gets broken down at the end of the month</li>
-        </ul>
-      </div>
-      <div class="card no">
-        <p class="label">What it's not</p>
-        <h3>A course. A hack. A promise.</h3>
-        <p>You read, you apply, you post. The reps are still yours to do.</p>
-        <ul>
-          <li><i></i>A generic course on "how to grow on Instagram". Those lessons are already in the creators' content</li>
-          <li><i></i>Editing lessons. It won't teach you how to use Claude to edit your videos lol</li>
-          <li><i></i>A guarantee of results. Nobody can promise you views</li>
-          <li><i></i>A shortcut around posting consistently</li>
-          <li><i></i>A pitch to copy anyone. You take the pattern, not the person</li>
-        </ul>
-      </div>
+    <div class="notis">
+      <div class="ni"><p class="n">This is NOT teaching you about branding.</p><p class="y">This IS teaching you how to take any viral format or concept that's working for someone else and make it go viral for you. That's how you get lots of attention for your brand.</p></div>
+      <div class="ni"><p class="n">This is NOT a course teaching you how to write hooks and storytelling.</p><p class="y">This IS giving you the step by step process behind how to make each viral concept your own, and the underlying psychology of why it went viral.</p></div>
+      <div class="ni"><p class="n">This is NOT promising you money.</p><p class="y">This IS showing you exactly how I've been able to go viral 8 out of 11 times on a new account and grow 200k followers in 45 days.</p></div>
+      <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 200k followers in 45 days.</p></div>
     </div>
   </div>
 </section>
