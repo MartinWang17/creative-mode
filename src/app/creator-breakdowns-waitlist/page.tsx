@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Creator Breakdowns waitlist | Creative Mode",
   description:
-    "The exact strategy Martin Wang used to grow to 200K followers after 10 months stuck at 44. Doors open Dec 8.",
+    "The exact strategy Martin Wang used to grow 200K followers in 45 days after plateauing for 6 months. Doors open Dec 8.",
 };
 
 const NOTES: Record<string, string> = {
@@ -48,11 +48,11 @@ export default async function WaitlistPage({
               <TypeHero
                 segments={[
                   {
-                    text: "I will share the exact strategy I used to grow to ",
+                    text: "I will share the exact strategy I used to grow ",
                   },
-                  { text: "200k followers", em: true },
+                  { text: "200k followers in 45 days", em: true },
                   {
-                    text: " after being stuck at a plateau at 44 followers for 10 months.",
+                    text: " after plateauing for 6 months.",
                   },
                 ]}
               />
