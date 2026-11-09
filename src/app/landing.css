@@ -329,3 +329,19 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .inline-survey .iq{font-family:var(--display);font-size:clamp(26px,3vw,38px);line-height:1.05;margin:12px 0 0}
 .cm .inline-survey .iq em{color:var(--birch);font-style:normal}
 .cm .inline-survey .survey{margin-top:24px}
+
+/* Story section under the hero (Martin's FINAL copy, Nov 5) */
+.cm .story .story-copy{max-width:760px;margin-top:18px}
+.cm .story .big-line{font-family:var(--display);font-size:clamp(28px,3.4vw,46px);line-height:1;margin:0 0 18px;color:var(--chalk)}
+.cm .story .big-line em{color:var(--birch);font-style:normal}
+.cm .story p{color:var(--muted);font-size:18px;margin:14px 0 0}
+.cm .story p b{color:var(--chalk);font-weight:500}
+.cm .story .pull{margin-top:26px;padding:20px 22px;background:var(--forest);color:var(--birch);border-radius:14px;font-size:19px}
+/* SWAP method */
+.cm .steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:36px}
+.cm .s4{border:1px solid var(--line);border-radius:16px;padding:22px}
+.cm .s4 .k{display:inline-grid;place-items:center;width:46px;height:46px;background:var(--forest);color:var(--birch);font-family:var(--display);font-size:30px;border-radius:10px}
+.cm .s4 h3{font-family:var(--display);font-size:28px;line-height:1;margin:16px 0 0;font-weight:400}
+.cm .s4 p{color:var(--muted);margin:10px 0 0;font-size:16px}
+@media(max-width:960px){.cm .steps4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cm .steps4{grid-template-columns:1fr}}

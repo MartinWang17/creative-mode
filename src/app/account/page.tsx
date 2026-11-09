@@ -6,7 +6,7 @@ import { foundingPricing, offer } from "@/lib/offer";
 export const dynamic = "force-dynamic";
 
 const UPGRADE_NOTES: Record<string, string> = {
-  done: "You're on annual now, at the founding price. The Hook Vault is yours.",
+  done: "You're on annual now, at the founding price. The annual bonuses are yours.",
   error: "The upgrade didn't go through. Check your card under Manage billing, then try again.",
   none: "Nothing to upgrade on this account.",
 };
@@ -50,7 +50,7 @@ export default async function AccountPage({
             <p className="label text-xs text-birch">Upgrade to annual</p>
             <p className="mt-3 text-chalk/85">
               Switch to {annualPrice}/year{foundingPricing() ? ", the founding price, locked for life" : ""}, and get
-              the Hook Vault. You pay for the year today, minus credit for the rest of this month.
+              the annual bonuses (The 50 Hooks and The Trial Reels Playbook). You pay for the year today, minus credit for the rest of this month.
             </p>
             <form action="/api/upgrade" method="post" className="mt-5">
               <button
