@@ -32,7 +32,7 @@ export const offer = {
       founding: { cents: 19700, label: "$197" },
       public: { cents: 26700, label: "$267" },
       bonus:
-        "Hook Vault: the top 50 hooks across every breakdown, with views and outlier scores. Annual members only.",
+        "The 50 Hooks Behind Millions of Views and The Trial Reels Playbook. Annual members only.",
       featured: true,
     },
     {
@@ -49,7 +49,7 @@ export const offer = {
   // Shown on the Terms, Privacy and Refund pages and in the footer.
   contactEmail: "martin@joincreativemode.com",
   guarantee:
-    "Read your first 4 breakdowns. If you're unhappy for any reason, you get a full refund within 30 days.",
+    "The I-Gotchu Guarantee: read 4 breakdowns and try it. If for any reason you don't like it, ask for a refund within 30 days and we'll handle it for you.",
 };
 
 // CHECKOUT_OPEN=true in Vercel opens checkout early (for testing in Stripe test mode).
