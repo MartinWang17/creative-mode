@@ -22,9 +22,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
           <!--closed--><a class="pill solid plain" href="#waitlist" data-scroll><span class="sq"></span><span>Join the waitlist</span><span aria-hidden="true">→</span></a>
           <span class="ends">Until the next launch</span><!--/closed-->
         </div>
-        <!--open--><div class="doors" role="note"><span class="label">Doors close</span><b>Sun Dec 13 · 11:59pm ET</b><span class="sub">After that, nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/open-->
-        <!--closed--><div class="doors shut" role="note"><span class="label">Doors are closed</span><b>Closed Dec 13</b><span class="sub">Nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/closed-->
       </div>
+      <div class="side">
       <aside class="cred" aria-label="Who's behind this">
         <div class="who"><span class="label eyebrow">Built by Martin Wang</span><a href="https://www.instagram.com/martinwang.mp4/" target="_blank" rel="noreferrer">@martinwang.mp4</a></div>
         <div class="st">
@@ -34,6 +33,9 @@ export const breakdownsHtml = `<div class="wrap topbar">
         </div>
         <p class="q">Everything I know about growing on Instagram came from breaking down other creators, not from a course. This is that process, done for you every week.</p>
       </aside>
+        <!--open--><div class="doors" role="note"><span class="label">Doors close</span><b>Sun Dec 13 · 11:59pm ET</b><span class="sub">After that, nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/open-->
+        <!--closed--><div class="doors shut" role="note"><span class="label">Doors are closed</span><b>Closed Dec 13</b><span class="sub">Nobody can join until the next launch. And I don't know when that is yet lol.</span></div><!--/closed-->
+      </div>
     </div>
   </div>
 </section>
@@ -42,12 +44,16 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Why this exists</p>
     <div class="story-copy">
+      <div class="say">
       <p class="big-line">I spent $5,000 on courses learning hooks, storytelling and filming. I was still stuck at 2,000 views.</p>
       <p class="big-line">Those skills make you <em>competitive.</em> They don't make you go <em>viral.</em></p>
+      </div>
+      <div class="tell">
       <p>What does? Noticing the patterns audiences are resonating with right now, and breaking them down.</p>
       <p>Nate Gaffney never talks about the news. He found a pattern: videos describing a &ldquo;rare breed&rdquo; of person his viewers identify with. That one pattern helped him grow past 900k followers, and it works in any niche.</p>
       <p>Once I started spotting patterns like that, I gained <b>200k followers in 45 days.</b></p>
       <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -76,7 +82,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <p class="lead">I broke down one creator in a completely different niche from mine, pulled out the pattern behind his best Reels, and ran it on my account. The before was taken on <b style="color:var(--chalk);font-weight:500">September 20</b>. The after on <b style="color:var(--chalk);font-weight:500">October 27</b>.</p>
     <div class="ba">
       <figure class="shot before"><img src="/landing/before.jpg" alt="Martin Wang's Instagram profile at 50K followers" width="760" height="446"><figcaption class="tag label">Before · Sept 20 · 50K</figcaption></figure>
-      <figure class="shot after"><img src="/landing/after.jpg" alt="Martin Wang's Instagram profile at 167K followers" width="760" height="305"><figcaption class="tag label">After · Oct 27 · 167K</figcaption></figure>
+      <figure class="shot after"><img src="/landing/after.jpg" alt="Martin Wang's Instagram profile at 167K followers" width="760" height="301"><figcaption class="tag label">After · Oct 27 · 167K</figcaption></figure>
     </div>
     <div class="stats">
       <div class="stat"><b>+117K</b><small>followers gained</small></div>
@@ -146,16 +152,16 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <h2 class="big">This is what a breakdown looks like.</h2>
     <p class="lead">Ten pages from the Nate Gaffney breakdown, the one I used to grow my own account. The numbers, the charts, and the subtle things he does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read the whole thing free right now.</p>
     <div class="pages">
-      <figure class="page"><img src="/landing/nate-story.jpg" alt="1 · The story (page from the Nate Gaffney breakdown)" width="760" height="525"><figcaption class="label">1 · The story</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-stat.jpg" alt="2 · The surprising stat (page from the Nate Gaffney breakdown)" width="760" height="442"><figcaption class="label">2 · The surprising stat</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-scale.jpg" alt="3 · All 100 Reels, flop to 42.8x (page from the Nate Gaffney breakdown)" width="760" height="493"><figcaption class="label">3 · All 100 Reels, flop to 42.8x</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-hook.jpg" alt="4 · The hook (page from the Nate Gaffney breakdown)" width="760" height="625"><figcaption class="label">4 · The hook</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp1.jpg" alt="5 · Subtle pattern 1: virtue + mischief (page from the Nate Gaffney breakdown)" width="760" height="878"><figcaption class="label">5 · Subtle pattern 1: virtue + mischief</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp2.jpg" alt="6 · Subtle pattern 2: the job-title comparison (page from the Nate Gaffney breakdown)" width="760" height="456"><figcaption class="label">6 · Subtle pattern 2: the job-title comparison</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp3.jpg" alt="7 · Subtle pattern 3: same trait, new partner, 32x (page from the Nate Gaffney breakdown)" width="760" height="366"><figcaption class="label">7 · Subtle pattern 3: same trait, new partner, 32x</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp4.jpg" alt="8 · Subtle pattern 4: he re-shoots winners (page from the Nate Gaffney breakdown)" width="760" height="353"><figcaption class="label">8 · Subtle pattern 4: he re-shoots winners</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-pillars.jpg" alt="9 · Where the views come from (page from the Nate Gaffney breakdown)" width="760" height="780"><figcaption class="label">9 · Where the views come from</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-funnel.jpg" alt="10 · Strangers at the top, creators at the bottom (page from the Nate Gaffney breakdown)" width="760" height="637"><figcaption class="label">10 · Strangers at the top, creators at the bottom</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-story.jpg" alt="1 · The story (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-stat.jpg" alt="2 · The surprising stat (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-scale.jpg" alt="3 · All 100 Reels, flop to 42.8x (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · All 100 Reels, flop to 42.8x</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-hook.jpg" alt="4 · The hook (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-sp1.jpg" alt="5 · Subtle pattern 1: virtue + mischief (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1: virtue + mischief</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-sp2.jpg" alt="6 · Subtle pattern 2: the job-title comparison (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 2: the job-title comparison</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-sp3.jpg" alt="7 · Subtle pattern 3: same trait, new partner, 32x (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 3: same trait, new partner, 32x</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-sp4.jpg" alt="8 · Subtle pattern 4: he re-shoots winners (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 4: he re-shoots winners</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-pillars.jpg" alt="9 · Where the views come from (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
+      <figure class="page"><img src="/landing/nate-funnel.jpg" alt="10 · Strangers at the top, creators at the bottom (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · Strangers at the top, creators at the bottom</figcaption></figure>
     </div>
     <p class="note">The full breakdown also covers the exact video that split his account in two, his best format in one line, the AI Script Button, and all 100 Reels in a sortable table.</p>
     <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read the Nate breakdown free</span><span aria-hidden="true">→</span></a>
