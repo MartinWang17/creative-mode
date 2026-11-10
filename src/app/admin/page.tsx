@@ -11,6 +11,7 @@ import { hasKit, subscribeToKit, tagCount } from "@/lib/kit";
 import { requireAdmin } from "@/lib/members";
 import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
+import { SIZES } from "@/lib/tags";
 import { deleteResource, toggleResource } from "./resources/actions";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,8 @@ type Row = {
   published_at: string | null;
   format: string | null;
   difficulty: string | null;
+  size?: string | null;
+  growth?: string | null;
 };
 
 const FORMAT_SUGGESTIONS = [
@@ -49,11 +52,12 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     .eq("plan", "comp")
     .order("current_period_end", { ascending: false });
   const db = createAdminClient();
-  const [{ data: taggedBreakdowns }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
+  const [{ data: taggedBreakdowns }, { data: sizeRows }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
     db
       .from("breakdowns")
       .select("slug, title, creator_handle, published, is_free, published_at, format, difficulty")
       .order("created_at", { ascending: false }),
+    db.from("breakdowns").select("slug, size, growth"),
     db.from("members").select("*", { count: "exact", head: true }).in("status", ["active", "trialing", "past_due"]),
     db.from("members").select("*", { count: "exact", head: true }),
     db.from("waitlist").select("*", { count: "exact", head: true }),
@@ -76,6 +80,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           .order("created_at", { ascending: false })
       ).data?.map((b) => ({ ...b, format: null, difficulty: null }))
     : taggedBreakdowns;
+  // Size + growth line need two more columns; until they exist, sizeRows is null and the fields stay hidden.
+  const sizeMissing = !sizeRows;
+  const sizeBySlug = new Map((sizeRows ?? []).map((r) => [r.slug as string, r as { size: string | null; growth: string | null }]));
 
   async function upload(formData: FormData) {
     "use server";
@@ -86,6 +93,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const summary = String(formData.get("summary") ?? "").trim();
     const format = String(formData.get("format") ?? "").trim();
     const difficulty = String(formData.get("difficulty") ?? "");
+    const size = String(formData.get("size") ?? "");
+    const growth = String(formData.get("growth") ?? "").trim();
     if (!(file instanceof File) || file.size === 0 || !title) {
       redirect("/admin?upload=error&msg=" + encodeURIComponent("Add a title and pick the HTML file, then try again."));
     }
@@ -100,8 +109,16 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       ...(format ? { format } : {}),
       ...(DIFFICULTIES.includes(difficulty) ? { difficulty } : {}),
     };
-    let { error } = await db.from("breakdowns").upsert({ ...base, ...tags }, { onConflict: "slug" });
+    const extra = {
+      ...(SIZES.includes(size) ? { size } : {}),
+      ...(growth ? { growth } : {}),
+    };
+    let { error } = await db.from("breakdowns").upsert({ ...base, ...tags, ...extra }, { onConflict: "slug" });
     let note = "";
+    if (error && Object.keys(extra).length > 0 && /size|growth/i.test(error.message)) {
+      ({ error } = await db.from("breakdowns").upsert({ ...base, ...tags }, { onConflict: "slug" }));
+      if (!error) note = " The size tag and growth line weren't saved because their columns are missing (see the note above).";
+    }
     if (error && Object.keys(tags).length > 0 && /format|difficulty/i.test(error.message)) {
       // The tag columns haven't been added yet: save the breakdown without tags.
       ({ error } = await db.from("breakdowns").upsert(base, { onConflict: "slug" }));
@@ -119,10 +136,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const slug = String(formData.get("slug"));
     const format = String(formData.get("format") ?? "").trim();
     const difficulty = String(formData.get("difficulty") ?? "");
-    await createAdminClient()
-      .from("breakdowns")
-      .update({ format: format || null, difficulty: DIFFICULTIES.includes(difficulty) ? difficulty : null })
-      .eq("slug", slug);
+    const size = String(formData.get("size") ?? "");
+    const growth = String(formData.get("growth") ?? "").trim();
+    const tags = { format: format || null, difficulty: DIFFICULTIES.includes(difficulty) ? difficulty : null };
+    const db = createAdminClient();
+    const withExtra = formData.has("size")
+      ? { ...tags, size: SIZES.includes(size) ? size : null, growth: growth || null }
+      : tags;
+    const { error } = await db.from("breakdowns").update(withExtra).eq("slug", slug);
+    if (error && withExtra !== tags) await db.from("breakdowns").update(tags).eq("slug", slug);
     revalidatePath("/admin");
     revalidatePath("/library");
   }
@@ -257,6 +279,12 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           Supabase SQL editor, then refresh.
         </p>
       )}
+      {sizeMissing && (
+        <p className="mt-6 border-2 border-oak p-4 text-sm text-chalk/80">
+          The &ldquo;where they started&rdquo; tag and the growth line need two new columns. Run the last two lines of
+          supabase/schema.sql in the Supabase SQL editor, then refresh.
+        </p>
+      )}
       <datalist id="formats">
         {FORMAT_SUGGESTIONS.map((f) => (
           <option key={f} value={f} />
@@ -291,6 +319,16 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               ))}
             </select>
           </label>
+          <label className="label text-[10px] text-chalk/60">
+            Where they started
+            <select name="size" defaultValue="" className={inputCls}>
+              <option value="">Not set</option>
+              {SIZES.map((z) => (
+                <option key={z}>{z}</option>
+              ))}
+            </select>
+          </label>
+          <Field name="growth" label="Growth line" placeholder="Went from 10K to 910K in 3 months" />
           <label className="label text-[10px] text-chalk/60 sm:col-span-2">
             Report HTML file
             <input
@@ -326,6 +364,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {b.is_free ? " · free" : ""}
                   {b.format ? ` · ${b.format}` : " · no format"}
                   {b.difficulty ? ` · ${b.difficulty}` : ""}
+                  {sizeBySlug.get(b.slug)?.size ? ` · ${sizeBySlug.get(b.slug)!.size}` : ""}
                 </p>
                 <div className="mt-2">
                   <p className="label mb-1 text-[10px] text-chalk/50">Creator gift link (free view, works even as a draft)</p>
@@ -350,6 +389,26 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                       <option key={d}>{d}</option>
                     ))}
                   </select>
+                  {!sizeMissing && (
+                    <>
+                      <select
+                        name="size"
+                        defaultValue={sizeBySlug.get(b.slug)?.size ?? ""}
+                        className="border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk outline-none focus:border-birch"
+                      >
+                        <option value="">Where they started</option>
+                        {SIZES.map((z) => (
+                          <option key={z}>{z}</option>
+                        ))}
+                      </select>
+                      <input
+                        name="growth"
+                        defaultValue={sizeBySlug.get(b.slug)?.growth ?? ""}
+                        placeholder="Went from 10K to 910K in 3 months"
+                        className="w-72 max-w-full border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk outline-none focus:border-birch"
+                      />
+                    </>
+                  )}
                   <button type="submit" className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk hover:border-birch">
                     Save tags
                   </button>

@@ -29,6 +29,10 @@ export default async function BreakdownPage({
     .maybeSingle();
   if (!b) notFound();
 
+  // "Went from X to Y in Z months" line; skipped quietly if the column isn't in Supabase yet.
+  const { data: extra } = await createAdminClient().from("breakdowns").select("growth").eq("slug", slug).maybeSingle();
+  const growth = (extra as { growth?: string | null } | null)?.growth ?? null;
+
   const viewer = await getViewer();
   if (!shared && !b.published && !viewer?.isAdmin) notFound();
   if (!shared && !b.is_free && !viewer?.isAdmin) {
@@ -53,6 +57,9 @@ export default async function BreakdownPage({
           </a>
         )}
       </div>
+      {growth && (
+        <p className="mx-auto max-w-6xl px-6 pb-3 font-display text-2xl leading-none text-birch sm:text-3xl">{growth}</p>
+      )}
       <BreakdownFrame src={`/api/breakdowns/${slug}${shared ? `?k=${encodeURIComponent(k!)}` : ""}`} title={b.title} />
       {b.is_free && !shared && !viewer?.hasAccess && (
         <div className="mx-auto max-w-6xl px-6">

@@ -42,6 +42,15 @@ export const breakdownsHtml = `<div class="wrap topbar">
 
 <section class="band story">
   <div class="wrap">
+    <div class="pains">
+      <p class="label eyebrow">Sound familiar?</p>
+      <div class="pain-list">
+        <p>You&rsquo;re stuck at <em>200 views.</em></p>
+        <p>You&rsquo;re posting every day and <em>nothing works.</em></p>
+        <p>You don&rsquo;t know <em>what to post.</em></p>
+      </div>
+      <p class="pain-note">Those came up again and again when 140 of my followers told me their top questions. I&rsquo;ve been there too.</p>
+    </div>
     <p class="label eyebrow">Why this exists</p>
     <div class="story-copy">
       <div class="say">
@@ -133,6 +142,16 @@ export const breakdownsHtml = `<div class="wrap topbar">
     </div>
   </div>
 </section>
+<section class="band flopped">
+  <div class="wrap">
+    <p class="label eyebrow">But I already tried that</p>
+    <h2 class="big">Tried copying viral videos and they flopped?</h2>
+    <div class="flop-copy">
+      <p class="big-line">That&rsquo;s because you copied the <em>WHAT</em> without the <em>WHY.</em></p>
+      <p class="pull">Better hooks make it easier to catch fish. But if you&rsquo;re fishing in an empty lake, it doesn&rsquo;t matter how good your hook is. You have to know where the fish are. That&rsquo;s exactly what Creator Breakdowns solves.</p>
+    </div>
+  </div>
+</section>
 <section class="band">
   <div class="wrap">
     <p class="label eyebrow">Straight up</p>
@@ -142,6 +161,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="ni"><p class="n">This is NOT a course teaching you how to write hooks and storytelling.</p><p class="y">This IS giving you the step by step process behind how to make each viral concept your own, and the underlying psychology of why it went viral.</p></div>
       <div class="ni"><p class="n">This is NOT promising you money.</p><p class="y">This IS showing you exactly how I've been able to go viral 8 out of 11 times on a new account and grow 200k followers in 45 days.</p></div>
       <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 200k followers in 45 days.</p></div>
+      <div class="ni"><p class="n">This is NOT about monetization, brand deals or editing.</p><p class="y">This IS about the part that comes before all of that: knowing what to post so people actually watch, share and follow.</p></div>
     </div>
   </div>
 </section>

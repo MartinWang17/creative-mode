@@ -73,3 +73,8 @@ alter table public.survey_responses enable row level security;
 -- Library tags: the creator's main winning format, and how hard it is to copy.
 alter table public.breakdowns add column if not exists format text;
 alter table public.breakdowns add column if not exists difficulty text;
+
+-- Library: where the creator started (Blew up from under 10K / 10K to 100K / Already 100K+),
+-- and a one-line "went from X to Y in Z months" shown at the top of each breakdown.
+alter table public.breakdowns add column if not exists size text;
+alter table public.breakdowns add column if not exists growth text;
