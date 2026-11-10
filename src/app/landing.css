@@ -345,3 +345,6 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .s4 p{color:var(--muted);margin:10px 0 0;font-size:16px}
 @media(max-width:960px){.cm .steps4{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.cm .steps4{grid-template-columns:1fr}}
+
+.cm .plan .newyear{margin:16px 0 0;padding:14px 16px;border-left:3px solid var(--birch);background:rgba(214,188,142,.07);color:var(--chalk);font-size:15px;line-height:1.5}
+.cm .plan .newyear b{color:var(--birch);font-weight:500}
