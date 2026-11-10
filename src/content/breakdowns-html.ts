@@ -250,6 +250,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p class="was">$267/year next launch</p>
         <p class="lock">Founding price, locked for life</p>
         <p class="bonus">Includes both annual-only bonuses: The 50 Hooks Behind Millions of Views and The Trial Reels Playbook.%%SCRIPT_PACK_CARD%%</p>
+        <p class="newyear"><b>Start 2027 with a system.</b> It took me a full year of showing up, most of it stuck at 44 followers, before my account finally took off. The best gift you can give yourself is a year of turning what's working into your own Reels. One year, one price, one year of consistency.</p>
         %%PLAN_ANNUAL%%
       </div>
       <div class="plan">
