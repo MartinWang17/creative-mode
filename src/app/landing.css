@@ -232,6 +232,18 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .wl-form input:focus{border-color:var(--birch)}
 .cm .wl-form .pill{cursor:pointer}
 .cm .wl-note{margin-top:16px;color:var(--birch)}
+/* Free-breakdown squeeze page: copy and form on the left, a look inside on the right */
+.cm .topbar span.home{font-family:var(--display);font-size:30px;line-height:1}
+.cm .topbar span.home .c{color:var(--chalk);text-shadow:2px 2px 0 var(--forest)}
+.cm .topbar span.home .m{color:var(--birch);text-shadow:2px 2px 0 var(--oak)}
+.cm .wl-hero.sq{padding-block:28px 72px}
+.cm .wl-hero.sq .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px 56px;align-items:center}
+.cm .wl-hero.sq .sq-copy{min-width:0}
+.cm .wl-hero.sq h1{font-size:clamp(34px,4.4vw,62px);max-width:none}
+.cm .wl-hero.sq .lead{margin-top:20px}
+.cm .wl-hero.sq .sq-peek{border-color:var(--birch);box-shadow:10px 10px 0 var(--forest)}
+.cm .wl-hero.sq .sq-peek .tag{border-color:var(--birch);background:var(--forest);color:var(--birch)}
+@media(max-width:900px){.cm .wl-hero.sq{min-height:0;padding-block:12px 56px}.cm .wl-hero.sq .wrap{grid-template-columns:1fr}.cm .wl-hero.sq .sq-peek{margin-right:10px}}
 .cm .deadline .after{margin-top:26px;color:rgba(242,239,231,.75);max-width:52ch}
 .cm .fit{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;margin-top:40px}
 .cm .fit ul{list-style:none;margin:16px 0 0;padding:0}
