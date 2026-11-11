@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { hasSupabase, siteUrl } from "@/lib/env";
 import { hasKit, subscribeToKit } from "@/lib/kit";
 import { createAdminClient } from "@/lib/supabase/server";
+import { SIGNUP_EMAIL_COOKIE } from "@/components/InlineSurvey";
 
 // The free-resource page posts here. Adds the email to Kit; if Kit isn't set up or fails,
 // keeps the email in the waitlist table so nothing is lost, and the page still hands over the link.
@@ -40,5 +41,8 @@ export async function POST(request: NextRequest) {
     saved = !error;
     if (error) console.error("waitlist fallback failed", error);
   }
-  return back(saved ? "done" : "error");
+  const res = back(saved ? "done" : "error");
+  // So feedback on the free breakdown can be matched to the person (private, Admin only).
+  if (saved) res.cookies.set(SIGNUP_EMAIL_COOKIE, email, { maxAge: 60 * 60 * 24 * 30, path: "/", sameSite: "lax", httpOnly: true, secure: true });
+  return res;
 }
