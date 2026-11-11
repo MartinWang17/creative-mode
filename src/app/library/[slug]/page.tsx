@@ -61,9 +61,13 @@ export default async function BreakdownPage({
       {growth && (
         <p className="mx-auto max-w-6xl px-6 pb-3 font-display text-2xl leading-none text-birch sm:text-3xl">{growth}</p>
       )}
-      <BreakdownFrame src={`/api/breakdowns/${slug}${shared ? `?k=${encodeURIComponent(k!)}` : ""}`} title={b.title} />
+      <BreakdownFrame
+        src={`/api/breakdowns/${slug}${shared ? `?k=${encodeURIComponent(k!)}` : ""}`}
+        title={b.title}
+        endTarget={b.is_free && !shared ? "after-breakdown" : undefined}
+      />
       {b.is_free && !shared && (
-        <div className="mx-auto max-w-6xl px-6">
+        <div id="after-breakdown" className="mx-auto max-w-6xl scroll-mt-24 px-6">
           <FeedbackBox slug={slug} />
         </div>
       )}
