@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Shell from "@/components/Shell";
 import BreakdownFrame from "@/components/BreakdownFrame";
+import FeedbackBox from "@/components/FeedbackBox";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
@@ -61,6 +62,11 @@ export default async function BreakdownPage({
         <p className="mx-auto max-w-6xl px-6 pb-3 font-display text-2xl leading-none text-birch sm:text-3xl">{growth}</p>
       )}
       <BreakdownFrame src={`/api/breakdowns/${slug}${shared ? `?k=${encodeURIComponent(k!)}` : ""}`} title={b.title} />
+      {b.is_free && !shared && (
+        <div className="mx-auto max-w-6xl px-6">
+          <FeedbackBox slug={slug} />
+        </div>
+      )}
       {b.is_free && !shared && !viewer?.hasAccess && (
         <div className="mx-auto max-w-6xl px-6">
           <EndBlock />

@@ -52,7 +52,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     .eq("plan", "comp")
     .order("current_period_end", { ascending: false });
   const db = createAdminClient();
-  const [{ data: taggedBreakdowns }, { data: sizeRows }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }] = await Promise.all([
+  const [{ data: taggedBreakdowns }, { data: sizeRows }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }, { data: feedback }] = await Promise.all([
     db
       .from("breakdowns")
       .select("slug, title, creator_handle, published, is_free, published_at, format, difficulty")
@@ -63,7 +63,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     db.from("waitlist").select("*", { count: "exact", head: true }),
     db.from("resources").select(RESOURCE_COLS).order("sort", { ascending: true }).order("created_at", { ascending: true }),
     db.from("survey_responses").select("id, email, followers, answer, created_at").order("created_at", { ascending: false }).limit(200),
+    db.from("breakdown_feedback").select("id, slug, rating, answer, email, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
+  const feedbackMissing = !feedback;
+  const ratingEmoji: Record<string, string> = { meh: "😕", good: "🙂", love: "🤩" };
   const [kitLaunch, kitFree, kitFormats] = await Promise.all([
     tagCount(process.env.KIT_TAG || "launch-list"),
     tagCount("free-resource"),
@@ -490,6 +493,38 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             })}
           </ul>
         )}
+      </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Breakdown feedback (private)</h2>
+        <p className="mt-2 text-sm text-chalk/60">
+          From the box under free breakdowns. Only you see this.{" "}
+          {(["love", "good", "meh"] as const).map((k) => `${ratingEmoji[k]} ${(feedback ?? []).filter((f) => f.rating === k).length}`).join("  ·  ")}{" "}
+          ·{" "}
+          <a href="/admin/feedback" className="text-birch underline">
+            Download CSV
+          </a>
+        </p>
+        <ul className="mt-4 divide-y-2 divide-oak border-y-2 border-oak">
+          {(feedback ?? []).map((f) => (
+            <li key={f.id} className="py-4">
+              <p className="text-chalk/85">
+                <span className="mr-2 text-xl">{f.rating ? ratingEmoji[f.rating] ?? "" : ""}</span>
+                <span className="whitespace-pre-wrap">{f.answer ?? ""}</span>
+              </p>
+              <p className="label mt-2 text-[10px] text-chalk/50">
+                {f.slug} · {f.email ?? "no email"} · {new Date(f.created_at).toLocaleDateString("en-US", { dateStyle: "medium" })}
+              </p>
+            </li>
+          ))}
+          {feedbackMissing && (
+            <li className="py-4 text-red-300">
+              The feedback table is missing in Supabase, so answers can&apos;t be saved yet. Run the breakdown_feedback
+              block at the end of supabase/schema.sql in the Supabase SQL editor.
+            </li>
+          )}
+          {!feedbackMissing && (feedback ?? []).length === 0 && <li className="py-4 text-chalk/60">No feedback yet.</li>}
+        </ul>
       </section>
 
       <section className="mt-14">

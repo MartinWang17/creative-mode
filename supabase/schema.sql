@@ -78,3 +78,14 @@ alter table public.breakdowns add column if not exists difficulty text;
 -- and a one-line "went from X to Y in Z months" shown at the top of each breakdown.
 alter table public.breakdowns add column if not exists size text;
 alter table public.breakdowns add column if not exists growth text;
+
+-- Private feedback from the box under free breakdowns. Only Admin reads it (never shown publicly).
+create table if not exists public.breakdown_feedback (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null,
+  rating text,
+  answer text,
+  email text,
+  created_at timestamptz not null default now()
+);
+alter table public.breakdown_feedback enable row level security;
