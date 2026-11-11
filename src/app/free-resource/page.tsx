@@ -37,7 +37,7 @@ export default async function FreeResourcePage({
       <section className={`wl-hero sq${done ? " got" : ""}`}>
         <div className="wrap">
           <div className="sq-copy" id="signup">
-            <p className="label eyebrow">Free resource · Creator Breakdown</p>
+            <p className="label eyebrow">Free resource · Creator Breakdowns</p>
             {done ? (
               <>
                 <h1>
@@ -91,8 +91,9 @@ export default async function FreeResourcePage({
                   <p className="wl-note">{note}</p>
                 ) : (
                   <p className="wl-note muted">
-                    Free. You&apos;ll also join the early list for Creator Breakdown, so you hear first when it
-                    opens. Unsubscribe anytime.
+                    Free. You&apos;ll also join the early list for Creator Breakdowns: a weekly series launching in
+                    December where I break down a creator who&apos;s blowing up and show you how to use their pattern in
+                    your own niche. Unsubscribe anytime.
                   </p>
                 )}
               </>

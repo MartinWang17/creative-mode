@@ -29,7 +29,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <div class="st">
           <div><b>200K</b><small>followers in 45 days, after a 6-month plateau</small></div>
           <div><b>8 / 11</b><small>Reels went viral on a brand-new account</small></div>
-          <div><b>500M+</b><small>views across my videos</small></div>
+          <div><b>200M</b><small>views on my own videos, 500M+ across my own videos and the clients I&rsquo;ve helped</small></div>
         </div>
         <p class="q">Everything I know about growing on Instagram came from breaking down other creators, not from a course. This is that process, done for you every week.</p>
       </aside>
