@@ -25,7 +25,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     viewer?.isAdmin || (breakdown.published && (breakdown.is_free || viewer?.hasAccess));
   if (!allowed) return new NextResponse("Members only", { status: 403 });
 
-  return new NextResponse(wrap(breakdown.html, breakdown.title), {
+  return new NextResponse(withEndSignal(wrap(breakdown.html, breakdown.title)), {
     headers: {
       "content-type": "text/html; charset=utf-8",
       "content-security-policy": "sandbox allow-scripts allow-popups allow-popups-to-escape-sandbox",
@@ -33,6 +33,14 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       "x-robots-tag": "noindex",
     },
   });
+}
+
+// The report scrolls inside its own frame, so readers never reach the page below it (the feedback box,
+// the "doors open" block). This tells the page once the reader reaches the end, so it can bring those up.
+// Added when serving, so no breakdown file needs re-uploading.
+const END_SIGNAL = `<script>(function(){var sent=false;function check(){if(sent)return;var d=document.documentElement;if(window.innerHeight+window.scrollY>=d.scrollHeight-60){sent=true;parent.postMessage({type:"cm-breakdown-end"},"*");}}addEventListener("scroll",check,{passive:true});})();</script>`;
+function withEndSignal(html: string) {
+  return /<\/body>/i.test(html) ? html.replace(/<\/body>(?![\s\S]*<\/body>)/i, `${END_SIGNAL}</body>`) : html + END_SIGNAL;
 }
 
 // Reports are saved as page fragments; give them a full document around them.
