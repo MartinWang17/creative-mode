@@ -21,8 +21,11 @@ export const offer = {
     blurb: "10 fill-in scripts built from the formats that keep winning. Annual members only.",
     value: "$37",
   },
-  // The free sample: the breakdown Martin used to grow his own account. Must be published + free in admin.
-  freeBreakdown: { slug: "nategaffney", title: "Nate Gaffney breakdown" },
+  // The free sample. Must be uploaded with this slug, published and marked free in Admin.
+  freeBreakdown: { slug: "lanaisaa", title: "Lana Isa breakdown" },
+  // Breakdowns taken down for good (Nov 12: Nate Gaffney asked not to be featured). Their links send
+  // people to the free sample instead, and they're never served, listed or shared, even if still in the database.
+  retiredBreakdowns: ["nategaffney"] as string[],
   plans: [
     {
       id: "annual" as PlanId,

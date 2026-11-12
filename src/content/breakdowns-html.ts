@@ -59,7 +59,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       </div>
       <div class="tell">
       <p>What does? Noticing the patterns audiences are resonating with right now, and breaking them down.</p>
-      <p>Nate Gaffney never talks about the news. He found a pattern: videos describing a &ldquo;rare breed&rdquo; of person his viewers identify with. That one pattern helped him grow past 900k followers, and it works in any niche.</p>
+      <p>Lana Isa doesn&rsquo;t even talk in her biggest videos. She found a pattern: one sentence on the first frame that labels her before anyone else can (&ldquo;single, childfree, lives alone, no friends&rdquo;). That one pattern drove 72% of her views and took her to 253K followers in 68 posts, and it works in any niche.</p>
       <p>Once I started spotting patterns like that, I gained <b>200k followers in 45 days.</b></p>
       <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
       </div>
@@ -87,8 +87,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
 <section class="band proof">
   <div class="wrap">
     <p class="label eyebrow">Proof</p>
-    <h2 class="big">One creator's strategy, applied to my own account.</h2>
-    <p class="lead">I broke down one creator in a completely different niche from mine, pulled out the pattern behind his best Reels, and ran it on my account. The before was taken on <b style="color:var(--chalk);font-weight:500">September 20</b>. The after on <b style="color:var(--chalk);font-weight:500">October 27</b>.</p>
+    <h2 class="big">Patterns from other niches, applied to my own account.</h2>
+    <p class="lead">I broke down creators in completely different niches from mine, pulled out the patterns behind their best Reels, and put my own story into them. The before was taken on <b style="color:var(--chalk);font-weight:500">September 20</b>. The after on <b style="color:var(--chalk);font-weight:500">October 27</b>.</p>
     <div class="ba">
       <figure class="shot before"><img src="/landing/before.jpg" alt="Martin Wang's Instagram profile at 50K followers" width="760" height="446"><figcaption class="tag label">Before · Sept 20 · 50K</figcaption></figure>
       <figure class="shot after"><img src="/landing/after.jpg" alt="Martin Wang's Instagram profile at 167K followers" width="760" height="301"><figcaption class="tag label">After · Oct 27 · 167K</figcaption></figure>
@@ -96,7 +96,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <div class="stats">
       <div class="stat"><b>+117K</b><small>followers gained</small></div>
       <div class="stat"><b>3.3x</b><small>the account size</small></div>
-      <div class="stat"><b>1</b><small>creator's strategy, from a different niche</small></div>
+      <div class="stat"><b>0</b><small>courses. Just patterns from other niches</small></div>
     </div>
   </div>
 </section>
@@ -110,8 +110,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="ncard">
         <p class="label eyebrow">What happened to me</p>
         <div class="from"><span>His niche</span><i>→</i><span class="to">Mine</span></div>
-        <h3>I broke down @nategaffney. He's in a completely different niche from me.</h3>
-        <p>I took his hook pattern, the one that made 60% of his views, brought it into my own account and my own topics, and it blew up. 50K to 167K followers in a few weeks. That's the before and after above.</p>
+        <h3>I broke down creators in completely different niches from mine.</h3>
+        <p>I found the patterns behind their biggest videos, brought them into my own account and my own topics, and it blew up. 50K to 167K followers in a few weeks. That's the before and after above.</p>
         <p class="res">Strategy from another niche. Applied to mine. Blew up.</p>
       </div>
       <div class="ncard">
@@ -170,21 +170,21 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Peek inside</p>
     <h2 class="big">This is what a breakdown looks like.</h2>
-    <p class="lead">Ten pages from the Nate Gaffney breakdown, the one I used to grow my own account. The numbers, the charts, and the subtle things he does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read the whole thing free right now.</p>
+    <p class="lead">Ten pages from the Lana Isa breakdown, the free sample. The numbers, the charts, and the subtle things she does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read the whole thing free right now.</p>
     <div class="pages">
-      <figure class="page"><img src="/landing/nate-story.jpg" alt="1 · The story (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-stat.jpg" alt="2 · The surprising stat (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-scale.jpg" alt="3 · All 100 Reels, flop to 42.8x (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · All 100 Reels, flop to 42.8x</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-hook.jpg" alt="4 · The hook (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp1.jpg" alt="5 · Subtle pattern 1: virtue + mischief (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1: virtue + mischief</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp2.jpg" alt="6 · Subtle pattern 2: the job-title comparison (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 2: the job-title comparison</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp3.jpg" alt="7 · Subtle pattern 3: same trait, new partner, 32x (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 3: same trait, new partner, 32x</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-sp4.jpg" alt="8 · Subtle pattern 4: he re-shoots winners (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 4: he re-shoots winners</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-pillars.jpg" alt="9 · Where the views come from (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
-      <figure class="page"><img src="/landing/nate-funnel.jpg" alt="10 · Strangers at the top, creators at the bottom (page from the Nate Gaffney breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · Strangers at the top, creators at the bottom</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-story.jpg" alt="1 · The story (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-stat.jpg" alt="2 · The surprising stat (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-turn.jpg" alt="3 · The turn: she stopped doing what worked (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · The turn: she stopped doing what worked</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-hook.jpg" alt="4 · The hook: four labels (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook: four labels</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-nofriends.jpg" alt="5 · Subtle pattern 1: &ldquo;no friends&rdquo; (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1: &ldquo;no friends&rdquo;</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-friday.jpg" alt="6 · Subtle pattern 3: a normal Friday beat every holiday (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 3: a normal Friday beat every holiday</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-clock.jpg" alt="7 · Subtle pattern 4: the clock keeps people watching (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 4: the clock keeps people watching</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-label.jpg" alt="8 · Subtle pattern 5: change the label, change the views (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 5: change the label, change the views</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-pillars.jpg" alt="9 · Where the views come from (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
+      <figure class="page"><img src="/landing/lana-scale.jpg" alt="10 · All 62 Reels, flop to 24.3x (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · All 62 Reels, flop to 24.3x</figcaption></figure>
     </div>
-    <p class="note">The full breakdown also covers the exact video that split his account in two, his best format in one line, the AI Script Button, and all 100 Reels in a sortable table.</p>
-    <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read the Nate breakdown free</span><span aria-hidden="true">→</span></a>
+    <p class="note">The full breakdown also covers her best format in one line, the same first shot behind 16 of her top Reels, how to apply it to your niche, the AI Script Button, and all 62 Reels in a sortable table.</p>
+    <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read the Lana breakdown free</span><span aria-hidden="true">→</span></a>
   </div>
 </section>
 

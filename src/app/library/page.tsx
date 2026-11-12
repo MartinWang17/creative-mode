@@ -4,6 +4,7 @@ import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
+import { offer } from "@/lib/offer";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +58,7 @@ export default async function LibraryPage({
       rows = (data ?? []) as Row[];
     }
   }
+  rows = rows.filter((r) => !offer.retiredBreakdowns.includes(r.slug));
   const formats = [...new Set(rows.map((r) => r.format).filter((f): f is string => !!f))].sort();
   const sizes = SIZES.filter((z) => rows.some((r) => r.size === z));
   const shown = rows.filter((r) => (!picked || r.format === picked) && (!pickedSize || r.size === pickedSize));

@@ -3,13 +3,14 @@ import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
 import { validShareKey } from "@/lib/share";
+import { offer } from "@/lib/offer";
 
 // Serves a breakdown's HTML for the iframe on /library/[slug].
 // The sandbox header gives it its own throwaway origin, so the report's
 // scripts run but can't touch the member's login cookies.
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  if (!hasSupabase()) return new NextResponse("Not found", { status: 404 });
+  if (!hasSupabase() || offer.retiredBreakdowns.includes(slug)) return new NextResponse("Not found", { status: 404 });
 
   const { data: breakdown } = await createAdminClient()
     .from("breakdowns")
