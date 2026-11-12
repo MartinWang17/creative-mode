@@ -5,6 +5,7 @@ import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
 import { offer } from "@/lib/offer";
+import LibraryGrid from "@/components/LibraryGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -116,52 +117,11 @@ export default async function LibraryPage({
           ))}
         </div>
       )}
-      <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-        {shown.map((b) => {
-          const locked = !b.is_free && !viewer?.hasAccess;
-          return (
-            <li key={b.slug} className="border-2 border-oak p-6 sm:p-8">
-              <div className="flex items-center justify-between gap-4">
-                <p className="label text-xs text-birch">
-                  {b.creator_handle ? `@${b.creator_handle}` : "Breakdown"}
-                </p>
-                <p className="label text-xs text-chalk/50">
-                  {locked ? "Members" : b.is_free ? "Free" : ""}
-                </p>
-              </div>
-              <h2 className="font-display mt-3 text-4xl leading-none sm:text-5xl">{b.title}</h2>
-              {b.growth && <p className="mt-3 text-base text-birch">{b.growth}</p>}
-              {(b.format || b.difficulty || b.size) && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {b.format && (
-                    <span className="label bg-forest px-2 py-1 text-xs text-birch">{b.format}</span>
-                  )}
-                  {b.difficulty && (
-                    <span className="label border border-oak px-2 py-1 text-xs text-chalk/70">
-                      {b.difficulty}
-                    </span>
-                  )}
-                  {b.size && (
-                    <span className="label border border-birch px-2 py-1 text-xs text-birch">{b.size}</span>
-                  )}
-                </div>
-              )}
-              {b.summary && <p className="mt-3 text-chalk/75">{b.summary}</p>}
-              <Link
-                href={locked ? "/creator-breakdown#pricing" : `/library/${b.slug}`}
-                className="label mt-6 inline-block text-sm text-chalk underline-offset-4 hover:underline"
-              >
-                {locked ? "Unlock →" : "Read →"}
-              </Link>
-            </li>
-          );
-        })}
-        {shown.length === 0 && (
-          <li className="text-chalk/60">
-            {picked || pickedSize ? "No breakdowns match that yet." : "No breakdowns published yet."}
-          </li>
-        )}
-      </ul>
+      <LibraryGrid
+        rows={shown}
+        hasAccess={!!viewer?.hasAccess}
+        empty={picked || pickedSize ? "No breakdowns match that yet." : "No breakdowns published yet."}
+      />
     </Shell>
   );
 }
