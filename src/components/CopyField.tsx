@@ -20,9 +20,9 @@ export default function CopyField({ value }: { value: string }) {
         readOnly
         value={value}
         onFocus={(e) => e.currentTarget.select()}
-        className="min-w-0 flex-1 border-2 border-oak bg-bedrock px-2 py-1 text-xs text-chalk/80 outline-none"
+        className="min-w-0 flex-1 border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk/80 outline-none"
       />
-      <button type="button" onClick={copy} className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk hover:border-birch">
+      <button type="button" onClick={copy} className="label border-2 border-oak px-3 py-1 text-xs text-chalk hover:border-birch">
         {done ? "Copied" : "Copy"}
       </button>
     </span>

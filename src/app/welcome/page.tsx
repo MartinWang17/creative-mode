@@ -20,7 +20,7 @@ export default async function WelcomePage({ searchParams }: { searchParams: Sear
   return (
     <Shell>
       <div className="mx-auto max-w-2xl pt-16">
-        <p className="label text-xs text-birch">You&apos;re in</p>
+        <p className="label text-sm text-birch">You&apos;re in</p>
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Welcome in 🎉</h1>
         <div className="mt-8 space-y-4 text-lg text-chalk/85">
           <p>Quick thing before you start.</p>
@@ -62,7 +62,7 @@ export default async function WelcomePage({ searchParams }: { searchParams: Sear
         </ol>
         <Link
           href="/login"
-          className="label mt-8 inline-block rounded-full border-2 border-chalk px-6 py-4 text-xs text-chalk hover:bg-chalk hover:text-bedrock"
+          className="label mt-8 inline-block rounded-full border-2 border-chalk px-6 py-4 text-sm text-chalk hover:bg-chalk hover:text-bedrock"
         >
           Log in to start
         </Link>

@@ -76,15 +76,15 @@ export default function ResourceForm({ existing, onDone }: { existing?: Existing
         defaultValue={existing?.link ?? ""}
         wide
       />
-      <label className="label text-[10px] text-chalk/60">
+      <label className="label text-xs text-chalk/60">
         File (PDF, zip, Notion export…)
         <input type="file" name="file" className={fileCls} />
       </label>
-      <label className="label text-[10px] text-chalk/60">
+      <label className="label text-xs text-chalk/60">
         Cover image (4:3 looks best)
         <input type="file" name="cover" accept="image/*" className={fileCls} />
       </label>
-      <label className="label text-[10px] text-chalk/60">
+      <label className="label text-xs text-chalk/60">
         Available from (Eastern time, blank = right away)
         <input
           type="datetime-local"
@@ -93,11 +93,11 @@ export default function ResourceForm({ existing, onDone }: { existing?: Existing
           className={inputCls}
         />
       </label>
-      <label className="label text-[10px] text-chalk/60">
+      <label className="label text-xs text-chalk/60">
         Order (lower first)
         <input type="number" name="sort" defaultValue={existing?.sort ?? 0} className={inputCls} />
       </label>
-      <label className="label flex items-center gap-3 text-[10px] text-chalk/80 sm:col-span-2">
+      <label className="label flex items-center gap-3 text-xs text-chalk/80 sm:col-span-2">
         <input type="checkbox" name="annual_only" defaultChecked={existing?.annual_only ?? false} className="h-4 w-4 accent-birch" />
         Annual members only
       </label>
@@ -105,7 +105,7 @@ export default function ResourceForm({ existing, onDone }: { existing?: Existing
       <button
         type="submit"
         disabled={!!busy}
-        className="label rounded-full border-2 border-chalk px-6 py-4 text-xs text-chalk hover:bg-chalk hover:text-bedrock disabled:opacity-50 sm:col-span-2"
+        className="label rounded-full border-2 border-chalk px-6 py-4 text-sm text-chalk hover:bg-chalk hover:text-bedrock disabled:opacity-50 sm:col-span-2"
       >
         {busy ?? (existing?.id ? "Save changes" : "Add as draft")}
       </button>
@@ -127,7 +127,7 @@ function Field(props: {
   wide?: boolean;
 }) {
   return (
-    <label className={`label text-[10px] text-chalk/60 ${props.wide ? "sm:col-span-2" : ""}`}>
+    <label className={`label text-xs text-chalk/60 ${props.wide ? "sm:col-span-2" : ""}`}>
       {props.label}
       <input
         name={props.name}

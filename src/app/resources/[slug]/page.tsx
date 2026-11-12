@@ -24,12 +24,12 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
   return (
     <Shell viewer={viewer}>
       <div className="pt-4">
-        <Link href="/resources" className="label text-xs text-chalk/60 hover:text-chalk">
+        <Link href="/resources" className="label text-sm text-chalk/60 hover:text-chalk">
           ← Resources
         </Link>
       </div>
       <div className="mt-8 max-w-3xl">
-        <p className="label text-xs text-birch">{r.annual_only ? "Annual members" : "All members"}</p>
+        <p className="label text-sm text-birch">{r.annual_only ? "Annual members" : "All members"}</p>
         <h1 className="font-display mt-3 text-5xl leading-none sm:text-6xl">{r.title}</h1>
         {r.blurb && <p className="mt-4 text-chalk/75">{r.blurb}</p>}
       </div>
@@ -51,7 +51,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
         {r.storage_path && !video && (
           <a
             href={`/api/resources/${r.slug}`}
-            className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-xs text-bedrock hover:bg-chalk"
+            className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-sm text-bedrock hover:bg-chalk"
           >
             Download{fileName ? ` ${fileName.replace(/^[\w-]+-\d+-/, "")}` : ""}
           </a>
@@ -61,7 +61,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
             href={r.link}
             target="_blank"
             rel="noreferrer"
-            className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-xs text-bedrock hover:bg-chalk"
+            className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-sm text-bedrock hover:bg-chalk"
           >
             Open →
           </a>

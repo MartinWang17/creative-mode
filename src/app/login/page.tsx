@@ -31,7 +31,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
   return (
     <Shell>
       <div className="mx-auto max-w-md pt-16">
-        <p className="label text-xs text-birch">Members</p>
+        <p className="label text-sm text-birch">Members</p>
         <h1 className="font-display mt-3 text-6xl">Log in</h1>
         {sent ? (
           <p className="mt-6 text-chalk/80">
@@ -41,7 +41,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
         ) : (
           <form action={sendLink} className="mt-8 flex flex-col gap-4">
             <input type="hidden" name="next" value={next} />
-            <label className="label text-[10px] text-chalk/60" htmlFor="email">
+            <label className="label text-xs text-chalk/60" htmlFor="email">
               Email you bought with
             </label>
             <input
@@ -55,7 +55,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
             />
             <button
               type="submit"
-              className="label rounded-full border-2 border-chalk px-6 py-4 text-xs text-chalk hover:bg-chalk hover:text-bedrock"
+              className="label rounded-full border-2 border-chalk px-6 py-4 text-sm text-chalk hover:bg-chalk hover:text-bedrock"
             >
               Email me a login link
             </button>
@@ -64,7 +64,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Search
                 {error === "link"
                   ? "That link has expired. Request a new one."
                   : "Couldn't send the link. Check the email and try again."}
-                {why && <span className="mt-1 block text-xs text-chalk/50">Reason: {why}</span>}
+                {why && <span className="mt-1 block text-sm text-chalk/50">Reason: {why}</span>}
               </p>
             )}
             {!hasSupabase() && (

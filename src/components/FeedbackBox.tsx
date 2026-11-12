@@ -37,7 +37,7 @@ export default function FeedbackBox({ slug }: { slug: string }) {
 
   return (
     <section className="mt-8 border-2 border-oak p-6 sm:p-8" aria-labelledby="fb-h">
-      <p className="label text-[10px] text-birch">Quick feedback · optional</p>
+      <p className="label text-xs text-birch">Quick feedback · optional</p>
       <h2 id="fb-h" className="font-display mt-3 text-3xl leading-none sm:text-4xl">
         How useful was this?
       </h2>
@@ -56,11 +56,11 @@ export default function FeedbackBox({ slug }: { slug: string }) {
             <span className="text-2xl leading-none" aria-hidden="true">
               {r.emoji}
             </span>
-            <span className="label text-[10px]">{r.label}</span>
+            <span className="label text-xs">{r.label}</span>
           </button>
         ))}
       </div>
-      <label className="label mt-6 block text-[10px] text-chalk/60" htmlFor="fb-answer">
+      <label className="label mt-6 block text-xs text-chalk/60" htmlFor="fb-answer">
         What would make this better, or what should I break down next?
       </label>
       <textarea
@@ -77,7 +77,7 @@ export default function FeedbackBox({ slug }: { slug: string }) {
           type="button"
           onClick={send}
           disabled={state === "sending" || (!rating && !answer.trim())}
-          className="label rounded-full border-2 border-chalk px-6 py-3 text-xs text-chalk hover:bg-chalk hover:text-bedrock disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-chalk"
+          className="label rounded-full border-2 border-chalk px-6 py-3 text-sm text-chalk hover:bg-chalk hover:text-bedrock disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-chalk"
         >
           {state === "sending" ? "Sending…" : "Send"}
         </button>

@@ -17,7 +17,7 @@ export default async function ResourcesPage() {
   return (
     <Shell viewer={viewer}>
       <div className="pt-10">
-        <p className="label text-xs text-birch">Resources</p>
+        <p className="label text-sm text-birch">Resources</p>
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Your bonuses</h1>
         <p className="mt-4 max-w-xl text-chalk/75">
           {viewer?.hasAccess
@@ -56,14 +56,14 @@ export default async function ResourcesPage() {
               )}
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-center justify-between gap-4">
-                  <p className="label text-[10px] text-birch">{r.annual_only ? "Annual members" : "All members"}</p>
-                  <p className="label text-[10px] text-chalk/50">
+                  <p className="label text-xs text-birch">{r.annual_only ? "Annual members" : "All members"}</p>
+                  <p className="label text-xs text-chalk/50">
                     {scheduled ? `Unlocks ${releaseLabel(r.available_at)} ET` : !r.published ? "Draft" : open ? "" : "Locked"}
                   </p>
                 </div>
                 <h2 className="font-display mt-3 text-4xl leading-none">{r.title}</h2>
                 {r.blurb && <p className="mt-3 text-chalk/75">{r.blurb}</p>}
-                <Link href={href} className="label mt-auto inline-block pt-6 text-xs text-chalk underline-offset-4 hover:underline">
+                <Link href={href} className="label mt-auto inline-block pt-6 text-sm text-chalk underline-offset-4 hover:underline">
                   {open ? "Open →" : viewer?.hasAccess ? "Upgrade to annual →" : "Unlock →"}
                 </Link>
               </div>

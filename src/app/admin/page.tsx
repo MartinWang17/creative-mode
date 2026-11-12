@@ -241,7 +241,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   return (
     <Shell viewer={viewer}>
       <div className="pt-10">
-        <p className="label text-xs text-birch">Admin</p>
+        <p className="label text-sm text-birch">Admin</p>
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Dashboard</h1>
       </div>
 
@@ -256,21 +256,21 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <Stat value={(survey ?? []).length} label="survey answers" />
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-5">
-        <a href="/admin/waitlist" className="label text-[10px] text-birch hover:text-chalk">
+        <a href="/admin/waitlist" className="label text-xs text-birch hover:text-chalk">
           Download waitlist (CSV)
         </a>
-        <a href="/admin/survey" className="label text-[10px] text-birch hover:text-chalk">
+        <a href="/admin/survey" className="label text-xs text-birch hover:text-chalk">
           Download survey answers (CSV)
         </a>
         {hasKit() && (
           <form action={sendWaitlistToKit}>
-            <button type="submit" className="label text-[10px] text-birch hover:text-chalk">
+            <button type="submit" className="label text-xs text-birch hover:text-chalk">
               Send waitlist to Kit
             </button>
           </form>
         )}
         {kit && (
-          <p className="label text-[10px] text-chalk/60">
+          <p className="label text-xs text-chalk/60">
             Sent to Kit: {kit.split("-")[0]} added{Number(kit.split("-")[1]) > 0 ? `, ${kit.split("-")[1]} failed` : ""}
           </p>
         )}
@@ -309,11 +309,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <Field name="handle" label="Creator handle" placeholder="lanaisaa" />
           <Field name="slug" label="URL slug (optional)" placeholder="lanaisaa" />
           <Field name="summary" label="One-line summary" placeholder="The one-sentence hook behind 72% of her views" />
-          <label className="label text-[10px] text-chalk/60">
+          <label className="label text-xs text-chalk/60">
             Main format
             <input name="format" list="formats" placeholder="Talking head" className={inputCls} />
           </label>
-          <label className="label text-[10px] text-chalk/60">
+          <label className="label text-xs text-chalk/60">
             Difficulty
             <select name="difficulty" defaultValue="" className={inputCls}>
               <option value="">Not set</option>
@@ -322,7 +322,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               ))}
             </select>
           </label>
-          <label className="label text-[10px] text-chalk/60">
+          <label className="label text-xs text-chalk/60">
             Where they started
             <select name="size" defaultValue="" className={inputCls}>
               <option value="">Not set</option>
@@ -332,7 +332,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             </select>
           </label>
           <Field name="growth" label="Growth line" placeholder="Went from 0 to 253K in 68 posts" />
-          <label className="label text-[10px] text-chalk/60 sm:col-span-2">
+          <label className="label text-xs text-chalk/60 sm:col-span-2">
             Report HTML file
             <input
               type="file"
@@ -344,7 +344,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           </label>
           <button
             type="submit"
-            className="label rounded-full border-2 border-chalk px-6 py-4 text-xs text-chalk hover:bg-chalk hover:text-bedrock sm:col-span-2"
+            className="label rounded-full border-2 border-chalk px-6 py-4 text-sm text-chalk hover:bg-chalk hover:text-bedrock sm:col-span-2"
           >
             Upload as draft
           </button>
@@ -360,7 +360,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 <Link href={`/library/${b.slug}`} className="font-display text-3xl hover:text-birch">
                   {b.title}
                 </Link>
-                <p className="label mt-1 text-[10px] text-chalk/50">
+                <p className="label mt-1 text-xs text-chalk/50">
                   /library/{b.slug}
                   {b.creator_handle ? ` · @${b.creator_handle}` : ""}
                   {b.published ? " · live" : " · draft"}
@@ -370,7 +370,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {sizeBySlug.get(b.slug)?.size ? ` · ${sizeBySlug.get(b.slug)!.size}` : ""}
                 </p>
                 <div className="mt-2">
-                  <p className="label mb-1 text-[10px] text-chalk/50">Creator gift link (free view, works even as a draft)</p>
+                  <p className="label mb-1 text-xs text-chalk/50">Creator gift link (free view, works even as a draft)</p>
                   <CopyField value={`${base}/library/${b.slug}?k=${shareKey(b.slug)}`} />
                 </div>
                 <form action={setTags} className="mt-2 flex flex-wrap items-center gap-2">
@@ -412,7 +412,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                       />
                     </>
                   )}
-                  <button type="submit" className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk hover:border-birch">
+                  <button type="submit" className="label border-2 border-oak px-3 py-1 text-xs text-chalk hover:border-birch">
                     Save tags
                   </button>
                 </form>
@@ -425,13 +425,13 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {b.is_free ? "Make members-only" : "Make free"}
                 </Toggle>
                 <details className="relative">
-                  <summary className="label cursor-pointer list-none border-2 border-oak px-3 py-2 text-[10px] text-chalk/70 hover:border-birch">
+                  <summary className="label cursor-pointer list-none border-2 border-oak px-3 py-2 text-xs text-chalk/70 hover:border-birch">
                     Delete
                   </summary>
                   <form action={removeBreakdown} className="absolute right-0 z-10 mt-2 w-56 border-2 border-oak bg-bedrock p-3">
                     <input type="hidden" name="slug" value={b.slug} />
-                    <p className="text-xs text-chalk/80">Delete this breakdown for good? You can upload it again later.</p>
-                    <button type="submit" className="label mt-3 w-full border-2 border-birch bg-forest px-3 py-2 text-[10px] text-birch hover:text-chalk">
+                    <p className="text-sm text-chalk/80">Delete this breakdown for good? You can upload it again later.</p>
+                    <button type="submit" className="label mt-3 w-full border-2 border-birch bg-forest px-3 py-2 text-xs text-birch hover:text-chalk">
                       Yes, delete it
                     </button>
                   </form>
@@ -456,15 +456,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           </p>
         )}
         <form action={giveComp} className="mt-4 flex max-w-2xl flex-wrap items-end gap-3">
-          <label className="label flex-1 text-[10px] text-chalk/60">
+          <label className="label flex-1 text-xs text-chalk/60">
             Email
             <input name="email" type="email" required placeholder="creator@email.com" className={inputCls} />
           </label>
-          <label className="label w-28 text-[10px] text-chalk/60">
+          <label className="label w-28 text-xs text-chalk/60">
             Months
             <input name="months" type="number" min={1} max={60} defaultValue={12} className={inputCls} />
           </label>
-          <button type="submit" className="label border-2 border-birch bg-forest px-4 py-3 text-[10px] text-birch hover:text-chalk">
+          <button type="submit" className="label border-2 border-birch bg-forest px-4 py-3 text-xs text-birch hover:text-chalk">
             Give free access
           </button>
         </form>
@@ -483,7 +483,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   {live && (
                     <form action={endComp}>
                       <input type="hidden" name="email" value={c.email} />
-                      <button type="submit" className="label border-2 border-oak px-3 py-1 text-[10px] text-chalk/70 hover:border-birch">
+                      <button type="submit" className="label border-2 border-oak px-3 py-1 text-xs text-chalk/70 hover:border-birch">
                         End now
                       </button>
                     </form>
@@ -512,7 +512,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 <span className="mr-2 text-xl">{f.rating ? ratingEmoji[f.rating] ?? "" : ""}</span>
                 <span className="whitespace-pre-wrap">{f.answer ?? ""}</span>
               </p>
-              <p className="label mt-2 text-[10px] text-chalk/50">
+              <p className="label mt-2 text-xs text-chalk/50">
                 {f.slug} · {f.email ?? "no email"} · {new Date(f.created_at).toLocaleDateString("en-US", { dateStyle: "medium" })}
               </p>
             </li>
@@ -536,7 +536,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           {(survey ?? []).map((r) => (
             <li key={r.id} className="py-4">
               <p className="whitespace-pre-wrap text-chalk/85">{r.answer}</p>
-              <p className="label mt-2 text-[10px] text-chalk/50">
+              <p className="label mt-2 text-xs text-chalk/50">
                 {r.email ?? "no email"}
                 {r.followers ? ` · ${r.followers}` : ""}
                 {" · "}
@@ -574,7 +574,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   <Link href={`/resources/${r.slug}`} className="font-display text-3xl hover:text-birch">
                     {r.title}
                   </Link>
-                  <p className="label mt-1 text-[10px] text-chalk/50">
+                  <p className="label mt-1 text-xs text-chalk/50">
                     /resources/{r.slug}
                     {r.published ? " · live" : " · draft"}
                     {r.annual_only ? " · annual only" : " · all members"}
@@ -594,7 +594,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                 </div>
               </div>
               <details className="mt-3">
-                <summary className="label cursor-pointer text-[10px] text-chalk/60 hover:text-chalk">Edit</summary>
+                <summary className="label cursor-pointer text-xs text-chalk/60 hover:text-chalk">Edit</summary>
                 <div className="mt-4">
                   <ResourceForm
                     existing={{
@@ -610,7 +610,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   />
                   <form action={deleteResource} className="mt-4">
                     <input type="hidden" name="id" value={r.id} />
-                    <button type="submit" className="label text-[10px] text-red-300 hover:text-red-200">
+                    <button type="submit" className="label text-xs text-red-300 hover:text-red-200">
                       Delete this resource and its files
                     </button>
                   </form>
@@ -656,7 +656,7 @@ function Stat({ value, label }: { value: number | string; label: string }) {
 
 function Field(props: { name: string; label: string; placeholder?: string; required?: boolean }) {
   return (
-    <label className="label text-[10px] text-chalk/60">
+    <label className="label text-xs text-chalk/60">
       {props.label}
       <input
         name={props.name}
@@ -689,7 +689,7 @@ function Toggle({
       {id && <input type="hidden" name="id" value={id} />}
       <input type="hidden" name="field" value={field} />
       <input type="hidden" name="value" value={String(value)} />
-      <button type="submit" className="label border-2 border-oak px-3 py-2 text-[10px] text-chalk hover:border-birch">
+      <button type="submit" className="label border-2 border-oak px-3 py-2 text-xs text-chalk hover:border-birch">
         {children}
       </button>
     </form>
