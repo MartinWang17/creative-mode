@@ -45,7 +45,7 @@ export default async function BreakdownPage({
   return (
     <Shell viewer={viewer} wide>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pb-3">
-        <Link href="/library" className="label text-xs text-chalk/60 hover:text-chalk">
+        <Link href="/library" className="label text-sm text-chalk/60 hover:text-chalk">
           ← Library
         </Link>
         {b.creator_handle && (
@@ -53,7 +53,7 @@ export default async function BreakdownPage({
             href={`https://www.instagram.com/${b.creator_handle}/`}
             target="_blank"
             rel="noreferrer"
-            className="label text-[10px] text-birch"
+            className="label text-xs text-birch"
           >
             @{b.creator_handle}
           </a>
@@ -106,12 +106,12 @@ function EndBlock() {
   }
   return (
     <section className="mt-8 border-2 border-oak bg-forest p-8 sm:p-10">
-      <p className="label text-xs text-birch">Creator Breakdown</p>
+      <p className="label text-sm text-birch">Creator Breakdown</p>
       <h2 className="font-display mt-3 text-4xl sm:text-5xl text-chalk">{heading}</h2>
       <p className="mt-4 max-w-2xl text-chalk/85">{body}</p>
       <Link
         href={cta.href}
-        className="label mt-6 inline-block border-2 border-birch px-5 py-3 text-xs text-birch hover:bg-bedrock"
+        className="label mt-6 inline-block border-2 border-birch px-5 py-3 text-sm text-birch hover:bg-bedrock"
       >
         {cta.label} →
       </Link>

@@ -16,6 +16,13 @@
 html {
   background: var(--color-bedrock);
 }
+/* Member pages (library, account, admin...) size everything in rem, so this one number scales text,
+   spacing and boxes together. The landing pages use px and are not affected. */
+@media (min-width: 640px) {
+  html {
+    font-size: 112.5%;
+  }
+}
 
 body {
   background: var(--color-bedrock);
@@ -35,5 +42,5 @@ body {
 .label {
   font-family: var(--font-pixel);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
 }

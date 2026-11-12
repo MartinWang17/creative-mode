@@ -16,7 +16,7 @@ export default function Shell({
     <div className="flex min-h-dvh flex-col">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 py-6">
         <Wordmark />
-        <nav className="label flex items-center gap-5 text-[10px] text-chalk/70 sm:text-xs">
+        <nav className="label flex flex-wrap items-center justify-end gap-x-4 gap-y-2 whitespace-nowrap text-[11px] text-chalk/70 sm:gap-x-6 sm:text-sm">
           <Link href="/library" className="hover:text-chalk">
             Library
           </Link>

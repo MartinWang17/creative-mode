@@ -32,7 +32,7 @@ export default async function AccountPage({
   return (
     <Shell viewer={viewer}>
       <div className="mx-auto max-w-xl pt-10">
-        <p className="label text-xs text-birch">Account</p>
+        <p className="label text-sm text-birch">Account</p>
         <h1 className="font-display mt-3 text-6xl">{viewer.email}</h1>
 
         <dl className="mt-10 divide-y-2 divide-oak border-y-2 border-oak">
@@ -47,7 +47,7 @@ export default async function AccountPage({
 
         {canUpgrade && (
           <div className="mt-8 border-2 border-birch p-6">
-            <p className="label text-xs text-birch">Upgrade to annual</p>
+            <p className="label text-sm text-birch">Upgrade to annual</p>
             <p className="mt-3 text-chalk/85">
               Switch to {annualPrice}/year{foundingPricing() ? ", the founding price, locked for life" : ""}, and get
               the annual bonuses (The 50 Hooks and The Trial Reels Playbook). You pay for the year today, minus credit for the rest of this month.
@@ -55,7 +55,7 @@ export default async function AccountPage({
             <form action="/api/upgrade" method="post" className="mt-5">
               <button
                 type="submit"
-                className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-xs text-bedrock hover:bg-chalk"
+                className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-sm text-bedrock hover:bg-chalk"
               >
                 Upgrade to annual · {annualPrice}/yr
               </button>
@@ -68,7 +68,7 @@ export default async function AccountPage({
             <form action="/api/portal" method="post">
               <button
                 type="submit"
-                className="label rounded-full border-2 border-chalk px-6 py-4 text-xs text-chalk hover:bg-chalk hover:text-bedrock"
+                className="label rounded-full border-2 border-chalk px-6 py-4 text-sm text-chalk hover:bg-chalk hover:text-bedrock"
               >
                 Manage billing
               </button>
@@ -76,13 +76,13 @@ export default async function AccountPage({
           ) : (
             <Link
               href="/creator-breakdown#pricing"
-              className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-xs text-bedrock hover:bg-chalk"
+              className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-sm text-bedrock hover:bg-chalk"
             >
               Become a member
             </Link>
           )}
           <form action="/auth/signout" method="post">
-            <button type="submit" className="label px-4 py-4 text-xs text-chalk/60 hover:text-chalk">
+            <button type="submit" className="label px-4 py-4 text-sm text-chalk/60 hover:text-chalk">
               Log out
             </button>
           </form>
@@ -96,7 +96,7 @@ export default async function AccountPage({
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1 py-4 sm:flex-row sm:gap-8">
-      <dt className="label w-32 shrink-0 text-[10px] text-chalk/60">{label}</dt>
+      <dt className="label w-32 shrink-0 text-xs text-chalk/60">{label}</dt>
       <dd className="text-chalk/85">{children}</dd>
     </div>
   );

@@ -71,14 +71,14 @@ export default async function LibraryPage({
     return qs ? `/library?${qs}` : "/library";
   };
   const chip = (active: boolean) =>
-    `label border-2 px-3 py-1.5 text-[10px] ${
+    `label border-2 px-3 py-1.5 text-xs ${
       active ? "border-birch bg-forest text-birch" : "border-oak text-chalk/70 hover:text-chalk"
     }`;
 
   return (
     <Shell viewer={viewer}>
       <div className="pt-10">
-        <p className="label text-xs text-birch">Library</p>
+        <p className="label text-sm text-birch">Library</p>
         <h1 className="font-display mt-3 text-6xl sm:text-7xl">Creator breakdowns</h1>
         {!viewer?.hasAccess && (
           <p className="mt-4 max-w-xl text-chalk/75">
@@ -92,7 +92,7 @@ export default async function LibraryPage({
       </div>
       {formats.length > 1 && (
         <div className="mt-8 flex flex-wrap items-center gap-2">
-          <span className="label mr-1 text-[10px] text-chalk/50">Format</span>
+          <span className="label mr-1 text-xs text-chalk/50">Format</span>
           <Link href={href(undefined, pickedSize)} className={chip(!picked)}>
             All
           </Link>
@@ -105,7 +105,7 @@ export default async function LibraryPage({
       )}
       {sizes.length > 1 && (
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="label mr-1 text-[10px] text-chalk/50">Where they started</span>
+          <span className="label mr-1 text-xs text-chalk/50">Where they started</span>
           <Link href={href(picked, undefined)} className={chip(!pickedSize)}>
             All
           </Link>
@@ -120,36 +120,36 @@ export default async function LibraryPage({
         {shown.map((b) => {
           const locked = !b.is_free && !viewer?.hasAccess;
           return (
-            <li key={b.slug} className="border-2 border-oak p-6">
+            <li key={b.slug} className="border-2 border-oak p-6 sm:p-8">
               <div className="flex items-center justify-between gap-4">
-                <p className="label text-[10px] text-birch">
+                <p className="label text-xs text-birch">
                   {b.creator_handle ? `@${b.creator_handle}` : "Breakdown"}
                 </p>
-                <p className="label text-[10px] text-chalk/50">
+                <p className="label text-xs text-chalk/50">
                   {locked ? "Members" : b.is_free ? "Free" : ""}
                 </p>
               </div>
-              <h2 className="font-display mt-3 text-4xl leading-none">{b.title}</h2>
-              {b.growth && <p className="mt-2 text-sm text-birch">{b.growth}</p>}
+              <h2 className="font-display mt-3 text-4xl leading-none sm:text-5xl">{b.title}</h2>
+              {b.growth && <p className="mt-3 text-base text-birch">{b.growth}</p>}
               {(b.format || b.difficulty || b.size) && (
                 <div className="mt-3 flex flex-wrap gap-2">
                   {b.format && (
-                    <span className="label bg-forest px-2 py-1 text-[10px] text-birch">{b.format}</span>
+                    <span className="label bg-forest px-2 py-1 text-xs text-birch">{b.format}</span>
                   )}
                   {b.difficulty && (
-                    <span className="label border border-oak px-2 py-1 text-[10px] text-chalk/70">
+                    <span className="label border border-oak px-2 py-1 text-xs text-chalk/70">
                       {b.difficulty}
                     </span>
                   )}
                   {b.size && (
-                    <span className="label border border-birch px-2 py-1 text-[10px] text-birch">{b.size}</span>
+                    <span className="label border border-birch px-2 py-1 text-xs text-birch">{b.size}</span>
                   )}
                 </div>
               )}
               {b.summary && <p className="mt-3 text-chalk/75">{b.summary}</p>}
               <Link
                 href={locked ? "/creator-breakdown#pricing" : `/library/${b.slug}`}
-                className="label mt-6 inline-block text-xs text-chalk underline-offset-4 hover:underline"
+                className="label mt-6 inline-block text-sm text-chalk underline-offset-4 hover:underline"
               >
                 {locked ? "Unlock →" : "Read →"}
               </Link>

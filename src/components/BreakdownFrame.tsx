@@ -39,7 +39,7 @@ export default function BreakdownFrame({ src, title, endTarget }: { src: string;
       <button
         type="button"
         onClick={goFull}
-        className="label absolute right-4 top-4 hidden border-2 border-oak bg-bedrock/90 px-3 py-2 text-[10px] text-chalk/80 hover:text-chalk sm:block"
+        className="label absolute right-4 top-4 hidden border-2 border-oak bg-bedrock/90 px-3 py-2 text-xs text-chalk/80 hover:text-chalk sm:block"
       >
         Full screen ⤢
       </button>
