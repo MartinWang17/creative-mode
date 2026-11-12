@@ -6,7 +6,7 @@ import FeedbackBox from "@/components/FeedbackBox";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
-import { cartClosed, doorsOpen } from "@/lib/offer";
+import { cartClosed, doorsOpen, offer } from "@/lib/offer";
 import { validShareKey } from "@/lib/share";
 
 export const dynamic = "force-dynamic";
@@ -21,6 +21,7 @@ export default async function BreakdownPage({
 }) {
   const { slug } = await params;
   const { k } = await searchParams;
+  if (offer.retiredBreakdowns.includes(slug)) redirect(`/library/${offer.freeBreakdown.slug}`);
   const shared = validShareKey(slug, k);
   if (!hasSupabase()) notFound();
   const { data: b } = await createAdminClient()

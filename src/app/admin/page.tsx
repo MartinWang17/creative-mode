@@ -305,10 +305,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           </p>
         )}
         <form action={upload} className="mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
-          <Field name="title" label="Title" placeholder="Nate Gaffney Breakdown" required />
-          <Field name="handle" label="Creator handle" placeholder="nategaffney" />
-          <Field name="slug" label="URL slug (optional)" placeholder="nategaffney" />
-          <Field name="summary" label="One-line summary" placeholder="The rare breed hook behind 60% of his views" />
+          <Field name="title" label="Title" placeholder="Lana Isa Breakdown" required />
+          <Field name="handle" label="Creator handle" placeholder="lanaisaa" />
+          <Field name="slug" label="URL slug (optional)" placeholder="lanaisaa" />
+          <Field name="summary" label="One-line summary" placeholder="The one-sentence hook behind 72% of her views" />
           <label className="label text-[10px] text-chalk/60">
             Main format
             <input name="format" list="formats" placeholder="Talking head" className={inputCls} />
@@ -331,7 +331,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               ))}
             </select>
           </label>
-          <Field name="growth" label="Growth line" placeholder="Went from 10K to 910K in 3 months" />
+          <Field name="growth" label="Growth line" placeholder="Went from 0 to 253K in 68 posts" />
           <label className="label text-[10px] text-chalk/60 sm:col-span-2">
             Report HTML file
             <input
@@ -407,7 +407,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                       <input
                         name="growth"
                         defaultValue={sizeBySlug.get(b.slug)?.growth ?? ""}
-                        placeholder="Went from 10K to 910K in 3 months"
+                        placeholder="Went from 0 to 253K in 68 posts"
                         className="w-72 max-w-full border-2 border-oak bg-bedrock px-2 py-1 text-sm text-chalk outline-none focus:border-birch"
                       />
                     </>
