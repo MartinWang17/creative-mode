@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Free breakdown | Creative Mode",
-  description: "The full Lana Isa breakdown: how she hit 253K followers in 68 posts, and how to use her pattern in your own niche. Free.",
+  description: "The creator breakdown Martin Wang used to grow 200k followers in 45 days, after plateauing for 6 months. Free.",
 };
 
 const NOTES: Record<string, string> = {
@@ -60,15 +60,15 @@ export default async function FreeResourcePage({
               <>
                 <TypeHero
                   segments={[
-                    { text: "How one creator hit " },
-                    { text: "253K followers in 68 posts", em: true },
-                    { text: ", and how to use her pattern in your niche." },
+                    { text: "The breakdown I used to grow " },
+                    { text: "200k followers", em: true },
+                    { text: " in 45 days, after plateauing for 6 months." },
                   ]}
                 />
                 <p className="lead">
-                  It&apos;s the full {offer.freeBreakdown.title}: the one sentence pattern behind 72% of her views, her
-                  best format in one line, and a step by step to turn it into your own Reel. Drop your email and
-                  it&apos;s yours.
+                  It&apos;s a full creator breakdown: the one hook pattern behind most of their views, the formats that
+                  keep winning, and exactly how I adapted it for my own account. Drop your email and it&apos;s
+                  yours.
                 </p>
                 <form action="/api/subscribe" method="post" className="wl-form">
                   <input type="hidden" name="source" value="free-resource" />
@@ -103,8 +103,8 @@ export default async function FreeResourcePage({
             <figcaption className="label tag">Inside the breakdown</figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/landing/lana-story.jpg"
-              alt="The first page of the Lana Isa breakdown: how she grew to 253K followers in 68 posts"
+              src="/landing/free-sample.jpg"
+              alt="A page from the free breakdown: the stat cards and the creator's best format in one line"
               width={1140}
               height={855}
             />
