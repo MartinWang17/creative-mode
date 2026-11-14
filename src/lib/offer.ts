@@ -71,6 +71,12 @@ export function doorsOpen(now = new Date()) {
   return now >= new Date(offer.cartOpens) && !cartClosed(now);
 }
 
+// Where "become a member" links go. Before doors open the price stays off the site's links,
+// so they go to the waitlist; from Dec 8 they go to the pricing on the sales page.
+export function joinHref(now = new Date()) {
+  return now < new Date(offer.cartOpens) ? "/creator-breakdowns-waitlist" : "/creator-breakdown#pricing";
+}
+
 export function scriptPackAnnounced(now = new Date()) {
   return now >= new Date(offer.scriptPack.announcedAt);
 }
