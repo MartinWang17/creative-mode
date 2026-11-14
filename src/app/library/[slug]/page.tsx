@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Shell from "@/components/Shell";
@@ -10,6 +11,12 @@ import { cartClosed, doorsOpen, offer } from "@/lib/offer";
 import { validShareKey } from "@/lib/share";
 
 export const dynamic = "force-dynamic";
+
+// Creator gift links (?k=) are private: keep them out of search engines.
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ k?: string }> }): Promise<Metadata> {
+  const { k } = await searchParams;
+  return k ? { robots: { index: false, follow: false } } : {};
+}
 
 // One breakdown. The report itself loads in a sandboxed iframe from /api/breakdowns/[slug].
 export default async function BreakdownPage({
