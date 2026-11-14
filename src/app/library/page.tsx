@@ -4,7 +4,7 @@ import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
-import { offer } from "@/lib/offer";
+import { joinHref, offer } from "@/lib/offer";
 import LibraryGrid from "@/components/LibraryGrid";
 
 export const dynamic = "force-dynamic";
@@ -84,7 +84,7 @@ export default async function LibraryPage({
         {!viewer?.hasAccess && (
           <p className="mt-4 max-w-xl text-chalk/75">
             Free breakdowns are open to everyone.{" "}
-            <Link href="/creator-breakdown#pricing" className="text-birch underline">
+            <Link href={joinHref()} className="text-birch underline">
               Become a member
             </Link>{" "}
             to unlock the rest.

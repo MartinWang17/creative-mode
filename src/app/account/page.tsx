@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Shell from "@/components/Shell";
 import { requireViewer } from "@/lib/members";
-import { foundingPricing, offer } from "@/lib/offer";
+import { foundingPricing, joinHref, offer } from "@/lib/offer";
 
 export const dynamic = "force-dynamic";
 
@@ -75,7 +75,7 @@ export default async function AccountPage({
             </form>
           ) : (
             <Link
-              href="/creator-breakdown#pricing"
+              href={joinHref()}
               className="label rounded-full border-2 border-birch bg-birch px-6 py-4 text-sm text-bedrock hover:bg-chalk"
             >
               Become a member

@@ -1,3 +1,4 @@
+import { joinHref } from "@/lib/offer";
 import Link from "next/link";
 import Shell from "@/components/Shell";
 import { hasSupabase } from "@/lib/env";
@@ -26,7 +27,7 @@ export default async function ResourcesPage() {
           {!viewer?.hasAccess && (
             <>
               {" "}
-              <Link href="/creator-breakdown#pricing" className="text-birch underline">
+              <Link href={joinHref()} className="text-birch underline">
                 Become a member
               </Link>
               .
@@ -43,7 +44,7 @@ export default async function ResourcesPage() {
             ? `/resources/${r.slug}`
             : viewer?.hasAccess
               ? "/account"
-              : "/creator-breakdown#pricing";
+              : joinHref();
           return (
             <li key={r.id} className="flex flex-col border-2 border-oak">
               {covers[i] ? (
