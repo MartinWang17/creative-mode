@@ -1,3 +1,4 @@
+import { joinHref } from "@/lib/offer";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Shell from "@/components/Shell";
@@ -15,7 +16,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
   const viewer = await getViewer();
   if (!r || !visible(r, viewer)) notFound();
   if (!viewer) redirect(`/login?next=${encodeURIComponent(`/resources/${slug}`)}`);
-  if (!canOpen(r, viewer)) redirect(viewer.hasAccess ? "/account" : "/creator-breakdown#pricing");
+  if (!canOpen(r, viewer)) redirect(viewer.hasAccess ? "/account" : joinHref());
 
   const embed = embedUrl(r.link);
   const video = isVideoFile(r.storage_path) ? await signedUrl(r.storage_path, 60 * 60 * 3) : null;

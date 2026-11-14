@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { joinHref } from "@/lib/offer";
 
 export type LibraryRow = {
   slug: string;
@@ -27,7 +28,7 @@ export default function LibraryGrid({
       {rows.map((b, i) => {
         const locked = !b.is_free && !hasAccess;
         const featured = i === 0;
-        const href = locked ? "/creator-breakdown#pricing" : `/library/${b.slug}`;
+        const href = locked ? joinHref() : `/library/${b.slug}`;
         const tags = (b.format || b.difficulty || b.size) && (
           <div className="mt-4 flex flex-wrap gap-2">
             {b.format && <span className="label bg-forest px-2 py-1 text-xs text-birch">{b.format}</span>}

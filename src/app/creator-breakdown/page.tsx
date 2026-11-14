@@ -7,11 +7,17 @@ import { cartClosed, offer, scriptPackAnnounced } from "@/lib/offer";
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Creator Breakdowns | Creative Mode",
-  description:
-    "Every week Martin Wang takes one fast-growing creator apart and hands you their strategy. A different niche, style and strategy every week.",
-};
+const description =
+  "Every week Martin Wang takes one fast-growing creator apart and hands you their strategy. A different niche, style and strategy every week.";
+
+// Kept out of search results until doors open, so the price isn't found before launch.
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Creator Breakdowns | Creative Mode",
+    description,
+    ...(new Date() < new Date(offer.cartOpens) ? { robots: { index: false, follow: false } } : {}),
+  };
+}
 
 const WL_NOTES: Record<string, string> = {
   joined: "You're on the list. You'll hear first when doors open again.",

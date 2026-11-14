@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useMemo, useState, type ReactNode } from "react";
+import { offer } from "@/lib/offer";
 
 export type Format = {
   id: string;
@@ -52,6 +53,8 @@ function rich(text: string): ReactNode[] {
   return out;
 }
 
+const DOORS_OPEN = new Date(offer.cartOpens).getTime();
+
 function Bridge() {
   return (
     <div className="fm-bridge">
@@ -59,10 +62,13 @@ function Bridge() {
         <b>These are the what.</b> Creator Breakdown shows you why they work and how to make them your own. Doors open
         Dec 8, and you&apos;re on the list.
       </p>
-      <a className="pill label" href="/creator-breakdown">
-        <span>See what&apos;s inside</span>
-        <span aria-hidden="true">→</span>
-      </a>
+      {/* No link to the sales page (and its price) before doors open. */}
+      {Date.now() >= DOORS_OPEN && (
+        <a className="pill label" href="/creator-breakdown">
+          <span>See what&apos;s inside</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
     </div>
   );
 }

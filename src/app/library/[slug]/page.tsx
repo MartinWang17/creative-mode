@@ -7,7 +7,7 @@ import FeedbackBox from "@/components/FeedbackBox";
 import { hasSupabase } from "@/lib/env";
 import { getViewer } from "@/lib/members";
 import { createAdminClient } from "@/lib/supabase/server";
-import { cartClosed, doorsOpen, offer } from "@/lib/offer";
+import { cartClosed, doorsOpen, joinHref, offer } from "@/lib/offer";
 import { validShareKey } from "@/lib/share";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +46,7 @@ export default async function BreakdownPage({
   if (!shared && !b.published && !viewer?.isAdmin) notFound();
   if (!shared && !b.is_free && !viewer?.isAdmin) {
     if (!viewer) redirect(`/login?next=${encodeURIComponent(`/library/${slug}`)}`);
-    if (!viewer.hasAccess) redirect("/creator-breakdown#pricing");
+    if (!viewer.hasAccess) redirect(joinHref());
   }
 
   return (
@@ -94,7 +94,7 @@ function EndBlock() {
   const teasing = now >= new Date("2026-11-28T00:00:00-05:00");
   let heading: string;
   let body: string;
-  let cta: { href: string; label: string };
+  let cta: { href: string; label: string } | null;
   if (doorsOpen(now)) {
     heading = "Doors are open";
     body =
@@ -109,19 +109,20 @@ function EndBlock() {
     body =
       "Doors open Tuesday, December 8th, and members get a new breakdown like this every week." +
       (teasing ? " Watch your inbox on December 2nd for my free video series." : "");
-    cta = { href: "/creator-breakdown", label: "See what's inside" };
+    // Readers here are already on the list; no link to the sales page (and its price) before doors open.
+    cta = null;
   }
   return (
     <section className="mt-8 border-2 border-oak bg-forest p-8 sm:p-10">
       <p className="label text-sm text-birch">Creator Breakdown</p>
       <h2 className="font-display mt-3 text-4xl sm:text-5xl text-chalk">{heading}</h2>
       <p className="mt-4 max-w-2xl text-chalk/85">{body}</p>
-      <Link
+      {cta && <Link
         href={cta.href}
         className="label mt-6 inline-block border-2 border-birch px-5 py-3 text-sm text-birch hover:bg-bedrock"
       >
         {cta.label} →
-      </Link>
+      </Link>}
     </section>
   );
 }
