@@ -57,11 +57,11 @@ export const offer = {
     "The I-Gotchu Guarantee: read 4 breakdowns and try it. If for any reason you don't like it, ask for a refund within 30 days and we'll handle it for you.",
 };
 
-// CHECKOUT_OPEN=true in Vercel opens checkout early (for testing in Stripe test mode).
-// Once doors close, checkout stays shut either way.
-export function checkoutOpen(now = new Date()) {
+// CHECKOUT_OPEN=true in Vercel opens checkout early, but only for admins (Martin testing in Stripe
+// test mode). Everyone else waits for Dec 8. Once doors close, checkout stays shut either way.
+export function checkoutOpen(now = new Date(), isAdmin = false) {
   if (cartClosed(now)) return false;
-  if (process.env.CHECKOUT_OPEN === "true") return true;
+  if (isAdmin && process.env.CHECKOUT_OPEN === "true") return true;
   return now >= new Date(offer.cartOpens);
 }
 

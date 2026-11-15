@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { checkoutOpen, foundingPricing, type PlanId } from "@/lib/offer";
 import { hasStripe, siteUrl } from "@/lib/env";
 import { getPriceId, getStripe } from "@/lib/stripe";
+import { getViewer } from "@/lib/members";
 
 // The pricing buttons post here; we send the buyer to Stripe's hosted checkout.
 export async function POST(request: NextRequest) {
@@ -11,7 +12,8 @@ export async function POST(request: NextRequest) {
   if (plan !== "annual" && plan !== "monthly") {
     return NextResponse.redirect(`${base}/creator-breakdown#pricing`, 303);
   }
-  if (!hasStripe() || !checkoutOpen()) {
+  const viewer = await getViewer();
+  if (!hasStripe() || !checkoutOpen(new Date(), !!viewer?.isAdmin)) {
     return NextResponse.redirect(`${base}/creator-breakdown#pricing`, 303);
   }
 
