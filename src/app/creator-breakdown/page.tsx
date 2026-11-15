@@ -3,6 +3,7 @@ import LandingFx from "@/components/LandingFx";
 import { planButtonHtml } from "@/components/PlanButton";
 import { breakdownsHtml } from "@/content/breakdowns-html";
 import { cartClosed, offer, scriptPackAnnounced } from "@/lib/offer";
+import { getViewer } from "@/lib/members";
 
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
 export const dynamic = "force-dynamic";
@@ -34,13 +35,14 @@ export default async function CreatorBreakdownPage({
 }) {
   const { waitlist } = await searchParams;
   const closed = cartClosed();
+  const isAdmin = !!(await getViewer())?.isAdmin;
   const sp = offer.scriptPack;
   const pack = scriptPackAnnounced();
   const note = waitlist && WL_NOTES[waitlist] ? `<p class="wl-note">${WL_NOTES[waitlist]}</p>` : "";
   const html = breakdownsHtml
     .replace(closed ? /<!--open-->[\s\S]*?<!--\/open-->/g : /<!--closed-->[\s\S]*?<!--\/closed-->/g, "")
-    .replace("%%PLAN_ANNUAL%%", planButtonHtml("annual", true))
-    .replace("%%PLAN_MONTHLY%%", planButtonHtml("monthly", false))
+    .replace("%%PLAN_ANNUAL%%", planButtonHtml("annual", true, isAdmin))
+    .replace("%%PLAN_MONTHLY%%", planButtonHtml("monthly", false, isAdmin))
     .replace("%%WL_NOTE%%", note)
     .replace(
       "%%SCRIPT_PACK_ROW%%",

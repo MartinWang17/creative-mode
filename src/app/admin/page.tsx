@@ -51,6 +51,13 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     .select("email, status, current_period_end")
     .eq("plan", "comp")
     .order("current_period_end", { ascending: false });
+  // Everyone with a Stripe membership (not the free ones below), so Martin can see who bought.
+  const { data: paid } = await createAdminClient()
+    .from("members")
+    .select("email, plan, status, founding, current_period_end, stripe_customer_id")
+    .neq("plan", "comp")
+    .order("current_period_end", { ascending: false });
+  const testMode = (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_test_");
   const db = createAdminClient();
   const [{ data: taggedBreakdowns }, { data: sizeRows }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }, { data: feedback }] = await Promise.all([
     db
@@ -440,6 +447,29 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             </li>
           ))}
           {(breakdowns ?? []).length === 0 && <li className="py-4 text-chalk/60">Nothing uploaded yet.</li>}
+        </ul>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="label text-sm">Paid members (from Stripe)</h2>
+        <p className="mt-2 max-w-2xl text-sm text-chalk/60">
+          Everyone who has gone through checkout. Status comes from Stripe.
+          {testMode ? " The site is on Stripe test keys, so these are sandbox purchases: no real money moved." : ""}
+        </p>
+        <ul className="mt-4 divide-y-2 divide-oak border-y-2 border-oak">
+          {(paid ?? []).map((m) => (
+            <li key={m.email} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <span>{m.email}</span>
+              <span className="label text-xs text-chalk/60">
+                {m.plan ?? "no plan"} · {m.status ?? "no status"}
+                {m.founding ? " · founding" : ""}
+                {m.current_period_end
+                  ? ` · until ${new Date(m.current_period_end).toLocaleDateString("en-US", { dateStyle: "medium" })}`
+                  : ""}
+              </span>
+            </li>
+          ))}
+          {(paid ?? []).length === 0 && <li className="py-3 text-chalk/60">Nobody yet.</li>}
         </ul>
       </section>
 
