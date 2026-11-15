@@ -55,6 +55,11 @@ export async function syncSubscription(subscriptionId: string) {
   if (!email) throw new Error(`Subscription ${sub.id} has no customer email`);
 
   const item = sub.items.data[0];
+  // A sandbox membership Martin turned into a free one (Admin) stays free: later test-mode events don't undo it.
+  if (!sub.livemode) {
+    const { data: existing } = await createAdminClient().from("members").select("plan").eq("email", email).maybeSingle();
+    if (existing?.plan === "comp") return;
+  }
   const { error } = await createAdminClient()
     .from("members")
     .upsert(

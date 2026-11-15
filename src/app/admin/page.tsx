@@ -12,6 +12,7 @@ import { requireAdmin } from "@/lib/members";
 import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
+import { offer } from "@/lib/offer";
 import { deleteResource, toggleResource } from "./resources/actions";
 
 export const dynamic = "force-dynamic";
@@ -199,6 +200,21 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     const email = String(formData.get("email") ?? "");
     if (!email) return;
     await createAdminClient().from("members").update({ status: "canceled" }).eq("email", email).eq("plan", "comp");
+    revalidatePath("/admin");
+  }
+
+  // Sandbox buyers (people who checked out on test keys before launch): turn the test membership into
+  // a free one that ends when doors close. A real purchase later replaces it.
+  async function sandboxToFree(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const email = String(formData.get("email") ?? "");
+    if (!email) return;
+    await createAdminClient()
+      .from("members")
+      .update({ plan: "comp", status: "active", current_period_end: new Date(offer.cartCloses).toISOString() })
+      .eq("email", email)
+      .neq("plan", "comp");
     revalidatePath("/admin");
   }
 
@@ -454,18 +470,30 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <h2 className="label text-sm">Paid members (from Stripe)</h2>
         <p className="mt-2 max-w-2xl text-sm text-chalk/60">
           Everyone who has gone through checkout. Status comes from Stripe.
-          {testMode ? " The site is on Stripe test keys, so these are sandbox purchases: no real money moved." : ""}
+          {testMode
+            ? " The site is on Stripe test keys, so these are sandbox purchases: no real money moved. \"Free until doors close\" turns one into a free membership that ends Dec 13 at 11:59pm ET; buying for real replaces it."
+            : ""}
         </p>
         <ul className="mt-4 divide-y-2 divide-oak border-y-2 border-oak">
           {(paid ?? []).map((m) => (
             <li key={m.email} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between">
               <span>{m.email}</span>
+              <span className="flex flex-wrap items-center gap-3">
+              {testMode && (
+                <form action={sandboxToFree}>
+                  <input type="hidden" name="email" value={m.email} />
+                  <button className="label border-2 border-oak px-3 py-1.5 text-xs text-chalk/80 hover:text-chalk">
+                    Free until doors close
+                  </button>
+                </form>
+              )}
               <span className="label text-xs text-chalk/60">
                 {m.plan ?? "no plan"} · {m.status ?? "no status"}
                 {m.founding ? " · founding" : ""}
                 {m.current_period_end
                   ? ` · until ${new Date(m.current_period_end).toLocaleDateString("en-US", { dateStyle: "medium" })}`
                   : ""}
+              </span>
               </span>
             </li>
           ))}
