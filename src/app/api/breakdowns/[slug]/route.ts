@@ -25,12 +25,15 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     shared ||
     viewer?.isAdmin || (breakdown.published && (breakdown.is_free || viewer?.hasAccess));
   if (!allowed) return new NextResponse("Members only", { status: 403 });
+  const publicCopy = breakdown.published && breakdown.is_free && !request.nextUrl.search;
 
   return new NextResponse(withEndSignal(wrap(breakdown.html, breakdown.title)), {
     headers: {
       "content-type": "text/html; charset=utf-8",
       "content-security-policy": "sandbox allow-scripts allow-popups allow-popups-to-escape-sandbox",
-      "cache-control": "private, no-store",
+      // Free published breakdowns are the same for everyone, so Vercel's CDN keeps a copy and the
+      // big file (embedded images) isn't re-sent from the server on every read. Re-uploads show within ~10 minutes.
+      "cache-control": publicCopy ? "public, max-age=0, s-maxage=600, stale-while-revalidate=86400" : "private, no-store",
       "x-robots-tag": "noindex",
     },
   });
