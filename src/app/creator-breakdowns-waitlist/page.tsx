@@ -147,7 +147,8 @@ export default async function WaitlistPage({
           </span>
           <span className="legal">
             <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> ·{" "}
-            <a href="/refunds">Refunds</a>
+            <a href="/refunds">Refunds</a> ·{" "}
+            <a href={`mailto:${offer.contactEmail}`}>{offer.contactEmail}</a>
           </span>
         </div>
       </footer>

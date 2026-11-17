@@ -389,5 +389,5 @@ export const breakdownsHtml = `<div class="wrap topbar">
   </div>
 </section>
 
-<footer><div class="wrap"><span>© 2026 Creative Mode</span><span>Creators featured are not affiliated with or endorsed by Creative Mode. Breakdowns describe what I observed in their public content.</span><span class="legal"><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/refunds">Refunds</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Creative Mode</span><span>Creators featured are not affiliated with or endorsed by Creative Mode. Breakdowns describe what I observed in their public content.</span><span class="legal"><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/refunds">Refunds</a> · <a href="mailto:martin@joincreativemode.com">martin@joincreativemode.com</a></span></div></footer>
 `;

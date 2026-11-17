@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
+import { offer } from "@/lib/offer";
 
 // Header + footer used by every member page.
 export default function Shell({
@@ -48,10 +49,11 @@ export default function Shell({
             © {new Date().getFullYear()} Creative Mode. Creators featured are not affiliated with or
             endorsed by Creative Mode.
           </span>
-          <span className="flex gap-5">
+          <span className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/terms" className="hover:text-chalk">Terms</Link>
             <Link href="/privacy" className="hover:text-chalk">Privacy</Link>
             <Link href="/refunds" className="hover:text-chalk">Refunds</Link>
+            <a href={`mailto:${offer.contactEmail}`} className="hover:text-chalk">{offer.contactEmail}</a>
           </span>
         </div>
       </footer>
