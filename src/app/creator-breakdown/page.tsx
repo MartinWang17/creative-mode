@@ -3,7 +3,7 @@ import LandingFx from "@/components/LandingFx";
 import { planButtonHtml } from "@/components/PlanButton";
 import { breakdownsHtml } from "@/content/breakdowns-html";
 import { cartClosed, offer } from "@/lib/offer";
-import { getSettings } from "@/lib/settings";
+import { getSettings, videoEmbedUrl } from "@/lib/settings";
 import { getViewer } from "@/lib/members";
 
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
@@ -50,7 +50,8 @@ export default async function CreatorBreakdownPage({
       review ? `<div class="row new hot"><span><b>First 100 annual members:</b> a Reel of yours, reviewed by me</span><span>Limited</span></div>` : "",
     )
     .replace("%%REVIEW_CARD%%", review ? `<p class="review"><b>First 100 annual members</b> get a Reel reviewed by me.</p>` : "")
-    .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin));
+    .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin))
+    .replace("%%VIDEO%%", videoHtml(settings.salesVideoUrl, isAdmin));
   return (
     <div className="cm">
       <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -71,4 +72,15 @@ function proofHtml(quotes: string[], isAdmin: boolean) {
   return `<div class="praise" aria-label="What readers of the free breakdown said"><p class="label eyebrow">From the free breakdown</p>${quotes
     .map((q) => `<blockquote>&ldquo;${esc(q.replace(/^["“]|["”]$/g, ""))}&rdquo;</blockquote>`)
     .join("")}<p class="who">Names hidden for privacy.</p></div>`;
+}
+
+// Sales video under the hero. Martin pastes a YouTube or Vimeo link in Admin; with none, admins see a placeholder.
+function videoHtml(link: string, isAdmin: boolean) {
+  const src = link ? videoEmbedUrl(link) : null;
+  if (!src) {
+    return isAdmin
+      ? `<section class="vid"><div class="wrap"><div class="vid-frame empty"><p class="label">Video slot (only you see this)</p><p>Paste a YouTube or Vimeo link in Admin and it plays here.</p></div></div></section>`
+      : "";
+  }
+  return `<section class="vid"><div class="wrap"><div class="vid-frame"><iframe src="${src}" title="Creator Breakdowns in 3 minutes" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div></div></section>`;
 }

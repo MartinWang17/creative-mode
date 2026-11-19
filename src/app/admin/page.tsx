@@ -13,7 +13,7 @@ import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
 import { offer } from "@/lib/offer";
-import { getSettings, setSetting } from "@/lib/settings";
+import { getSettings, setSetting, videoEmbedUrl } from "@/lib/settings";
 import { deleteResource, toggleResource } from "./resources/actions";
 
 export const dynamic = "force-dynamic";
@@ -217,6 +217,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     "use server";
     await requireAdmin();
     const error = await setSetting("reel_review_bonus", formData.get("on") === "true");
+    redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
+  }
+
+  async function saveVideo(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const link = String(formData.get("video") ?? "").trim();
+    if (link && !videoEmbedUrl(link)) redirect("/admin?settings=badvideo#launch");
+    const error = await setSetting("sales_video_url", link);
     redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
   }
 
@@ -501,6 +510,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             supabase/schema.sql in the Supabase SQL editor, then try again.
           </p>
         )}
+        {settingsStatus === "badvideo" && (
+          <p className="mt-3 text-sm text-birch">That link isn&apos;t a YouTube or Vimeo video. Copy the link from the video page and try again.</p>
+        )}
         {settingsStatus === "ok" && <p className="mt-3 text-sm text-birch">Saved. The sales page updates right away.</p>}
         <div className="mt-4 grid gap-6 border-y-2 border-oak py-5 sm:grid-cols-2">
           <div>
@@ -519,6 +531,21 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               </button>
             </form>
           </div>
+          <form action={saveVideo} className="sm:col-span-2">
+            <p className="font-display text-3xl">Sales video</p>
+            <p className="mt-2 text-sm text-chalk/70">
+              Paste a YouTube (public or unlisted) or Vimeo link. It plays under the headline on the sales page. Leave empty to hide it.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <input
+                name="video"
+                defaultValue={settings.salesVideoUrl}
+                placeholder="https://youtu.be/..."
+                className="min-w-0 flex-1 border-2 border-oak bg-bedrock p-3 text-sm text-chalk"
+              />
+              <button className="label border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">Save video</button>
+            </div>
+          </form>
           <form action={saveProof}>
             <p className="font-display text-3xl">Proof next to the guarantee</p>
             <p className="mt-2 text-sm text-chalk/70">

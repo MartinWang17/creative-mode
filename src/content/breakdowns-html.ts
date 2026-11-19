@@ -40,7 +40,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     </div>
   </div>
 </section>
-
+%%VIDEO%%
 <section class="band story">
   <div class="wrap">
     <div class="pains">
@@ -173,20 +173,20 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Peek inside</p>
     <h2 class="big">This is what a breakdown looks like.</h2>
-    <p class="lead">Ten pages from the Lana Isa breakdown. The numbers, the charts, and the subtle things she does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read a full breakdown free right now.</p>
+    <p class="lead">Ten pages from a real breakdown, blurred here out of respect for the creator. The numbers, the charts, and the subtle things they do that nobody else noticed. Every Reel it quotes links to the Reel, and you can read a full breakdown free right now.</p>
     <div class="pages">
-      <figure class="page"><img src="/landing/lana-story.jpg" alt="1 · The story (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-stat.jpg" alt="2 · The surprising stat (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-turn.jpg" alt="3 · The turn: she stopped doing what worked (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · The turn: she stopped doing what worked</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-hook.jpg" alt="4 · The hook: four labels (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook: four labels</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-nofriends.jpg" alt="5 · Subtle pattern 1: &ldquo;no friends&rdquo; (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1: &ldquo;no friends&rdquo;</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-friday.jpg" alt="6 · Subtle pattern 3: a normal Friday beat every holiday (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 3: a normal Friday beat every holiday</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-clock.jpg" alt="7 · Subtle pattern 4: the clock keeps people watching (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 4: the clock keeps people watching</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-label.jpg" alt="8 · Subtle pattern 5: change the label, change the views (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 5: change the label, change the views</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-pillars.jpg" alt="9 · Where the views come from (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
-      <figure class="page"><img src="/landing/lana-scale.jpg" alt="10 · All 62 Reels, flop to 24.3x (page from the Lana Isa breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · All 62 Reels, flop to 24.3x</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-01.jpg" alt="1 · The story (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-02.jpg" alt="2 · The surprising stat (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-03.jpg" alt="3 · The turn (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · The turn</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-04.jpg" alt="4 · The hook (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-05.jpg" alt="5 · Subtle pattern 1 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-06.jpg" alt="6 · Subtle pattern 2 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 2</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-07.jpg" alt="7 · Subtle pattern 3 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 3</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-08.jpg" alt="8 · Subtle pattern 4 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 4</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-09.jpg" alt="9 · Where the views come from (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
+      <figure class="page blur"><img src="/landing/peek-10.jpg" alt="10 · Every Reel, flop to outlier (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · Every Reel, flop to outlier</figcaption></figure>
     </div>
-    <p class="note">The full breakdown also covers her best format in one line, the same first shot behind 16 of her top Reels, how to apply it to your niche, the AI Script Button, and all 62 Reels in a sortable table.</p>
+    <p class="note">Every breakdown also covers the creator&rsquo;s best format in one line, how to apply it to your niche, the AI Script Button, and every Reel in a sortable table.</p>
     <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read a full breakdown free</span><span aria-hidden="true">→</span></a>
   </div>
 </section>
