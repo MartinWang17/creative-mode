@@ -443,3 +443,6 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .story .tell .win em{font-style:normal;color:var(--birch)}
 .cm .niche.three.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:900px){.cm .niche.three.two{grid-template-columns:1fr}}
+.cm .weekly.stack{display:block;margin-top:40px;padding:34px 34px 32px}
+.cm .weekly.stack .onepct{margin:0;max-width:34ch}
+.cm .weekly.stack p:not(.onepct){margin-top:18px;max-width:70ch}

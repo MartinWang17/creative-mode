@@ -120,8 +120,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p class="res"><span class="label">Same pattern in cooking</span>&ldquo;Sourdough. I have no clue how it works. Starting timer now.&rdquo;</p>
       </div>
     </div>
-    <p class="onepct">Improve your content skills <em>1% every week,</em> just by reading about the top creators&rsquo; strategies.</p>
-    <div class="weekly">
+    <div class="weekly stack">
+      <p class="onepct">Improve your content skills <em>1% every week,</em> just by reading about the top creators&rsquo; strategies.</p>
       <p><b>That's exactly what you get from Creator Breakdowns:</b> a brand-new, fresh strategy from another part of the industry, every single week, broken down to the point where you can apply it to your own account.</p>
     </div>
   </div>
