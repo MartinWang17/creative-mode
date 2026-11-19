@@ -3,6 +3,7 @@ import { checkoutOpen, foundingPricing, type PlanId } from "@/lib/offer";
 import { hasStripe, siteUrl } from "@/lib/env";
 import { getPriceId, getStripe } from "@/lib/stripe";
 import { getViewer } from "@/lib/members";
+import { getSettings } from "@/lib/settings";
 
 // The pricing buttons post here; we send the buyer to Stripe's hosted checkout.
 export async function POST(request: NextRequest) {
@@ -27,6 +28,9 @@ export async function POST(request: NextRequest) {
     billing_address_collection: tax ? "required" : "auto",
     success_url: `${base}/welcome?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/creator-breakdown#pricing`,
+    ...(plan === "annual" && (await getSettings()).reelReviewBonus
+      ? { custom_text: { submit: { message: "First 100 annual members get a Reel reviewed by Martin. You'll get the details by email after you join." } } }
+      : {}),
   });
   return NextResponse.redirect(session.url!, 303);
 }

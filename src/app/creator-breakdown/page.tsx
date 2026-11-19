@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import LandingFx from "@/components/LandingFx";
 import { planButtonHtml } from "@/components/PlanButton";
 import { breakdownsHtml } from "@/content/breakdowns-html";
-import { cartClosed, offer, scriptPackAnnounced } from "@/lib/offer";
+import { cartClosed, offer } from "@/lib/offer";
+import { getSettings } from "@/lib/settings";
 import { getViewer } from "@/lib/members";
 
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
@@ -36,29 +37,38 @@ export default async function CreatorBreakdownPage({
   const { waitlist } = await searchParams;
   const closed = cartClosed();
   const isAdmin = !!(await getViewer())?.isAdmin;
-  const sp = offer.scriptPack;
-  const pack = scriptPackAnnounced();
+  const settings = await getSettings();
   const note = waitlist && WL_NOTES[waitlist] ? `<p class="wl-note">${WL_NOTES[waitlist]}</p>` : "";
+  const review = settings.reelReviewBonus;
   const html = breakdownsHtml
     .replace(closed ? /<!--open-->[\s\S]*?<!--\/open-->/g : /<!--closed-->[\s\S]*?<!--\/closed-->/g, "")
     .replace("%%PLAN_ANNUAL%%", planButtonHtml("annual", true, isAdmin))
     .replace("%%PLAN_MONTHLY%%", planButtonHtml("monthly", false, isAdmin))
     .replace("%%WL_NOTE%%", note)
     .replace(
-      "%%SCRIPT_PACK_ROW%%",
-      pack ? `<div class="row new"><span>${sp.name}: ${sp.blurb.replace(" Annual members only.", " (annual members)")}</span><span>${sp.value}</span></div>` : "",
+      "%%REVIEW_ROW%%",
+      review ? `<div class="row new hot"><span><b>First 100 annual members:</b> a Reel of yours, reviewed by me</span><span>Limited</span></div>` : "",
     )
-    .replace("%%SCRIPT_PACK_CARD%%", pack ? ` And the ${sp.name}: ${sp.blurb.replace(" Annual members only.", "")}` : "")
-    .replace(
-      "%%SCRIPT_PACK_FAQ%%",
-      pack
-        ? `<details><summary><span>What's the ${sp.name}?</span><i>+</i></summary><p>${sp.blurb} Every annual member gets it, including everyone who joined before it was announced.</p></details>`
-        : "",
-    );
+    .replace("%%REVIEW_CARD%%", review ? `<p class="review"><b>First 100 annual members</b> get a Reel reviewed by me.</p>` : "")
+    .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin));
   return (
     <div className="cm">
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <LandingFx deadline={closed ? undefined : offer.cartCloses} />
     </div>
   );
+}
+
+// Praise next to the guarantee. Martin adds quotes in Admin (from readers of the free breakdown);
+// with none added, visitors see nothing and admins see a placeholder.
+function proofHtml(quotes: string[], isAdmin: boolean) {
+  const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  if (quotes.length === 0) {
+    return isAdmin
+      ? `<div class="praise empty"><p class="label eyebrow">Proof slot (only you see this)</p><p>Add quotes from readers of the free breakdown in Admin and they show here.</p></div>`
+      : "";
+  }
+  return `<div class="praise" aria-label="What readers of the free breakdown said"><p class="label eyebrow">From the free breakdown</p>${quotes
+    .map((q) => `<blockquote>&ldquo;${esc(q.replace(/^["“]|["”]$/g, ""))}&rdquo;</blockquote>`)
+    .join("")}<p class="who">Names hidden for privacy.</p></div>`;
 }

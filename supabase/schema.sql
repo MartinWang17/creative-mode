@@ -89,3 +89,11 @@ create table if not exists public.breakdown_feedback (
   created_at timestamptz not null default now()
 );
 alter table public.breakdown_feedback enable row level security;
+
+-- Switches Martin flips in Admin (Reel review bonus on/off, proof quotes on the sales page).
+create table if not exists public.site_settings (
+  key text primary key,
+  value jsonb,
+  updated_at timestamptz not null default now()
+);
+alter table public.site_settings enable row level security;

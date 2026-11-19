@@ -50,7 +50,7 @@ export default async function AccountPage({
             <p className="label text-sm text-birch">Upgrade to annual</p>
             <p className="mt-3 text-chalk/85">
               Switch to {annualPrice}/year{foundingPricing() ? ", the founding price, locked for life" : ""}, and get
-              the annual bonuses (The 50 Hooks and The Trial Reels Playbook). You pay for the year today, minus credit for the rest of this month.
+              the annual bonuses (the Hook Vault, the Trial Reels Playbook and the Script Pack). You pay for the year today, minus credit for the rest of this month.
             </p>
             <form action="/api/upgrade" method="post" className="mt-5">
               <button

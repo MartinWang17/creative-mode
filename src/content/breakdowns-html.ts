@@ -15,7 +15,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
         </span>
         <p class="label tagline" style="margin-top:14px">A weekly membership · 4 breakdowns a month</p>
         <h1>Turn any viral video into <em>your next Reel.</em></h1>
-        <p class="lead">I find what's working, I break down exactly why it went viral, and I give you a step by step to use it in your next Reel. So you're never copying. You're using what worked and <b>making it your own.</b></p>
+        <p class="subline">&hellip;without copying it and watching it flop.</p>
+        <p class="lead">It&rsquo;s a weekly system. I find what's working, I break down exactly why it went viral, and I give you a step by step to use it in your next Reel. So you're never copying. You're using what worked and <b>making it your own.</b></p>
         <div class="cta">
           <!--open--><a class="pill solid plain" href="#pricing" data-scroll><span class="sq"></span><span>Join now</span><span aria-hidden="true">→</span></a>
           <span class="ends">30-day guarantee</span><!--/open-->
@@ -59,7 +60,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       </div>
       <div class="tell">
       <p>What does? Noticing the patterns audiences are resonating with right now, and breaking them down.</p>
-      <p>Lana Isa doesn&rsquo;t even talk in her biggest videos. She found a pattern: one sentence on the first frame that labels her before anyone else can (&ldquo;single, childfree, lives alone, no friends&rdquo;). That one pattern drove 72% of her views and took her to 253K followers in 68 posts, and it works in any niche.</p>
+      <p>One creator I broke down doesn&rsquo;t even talk in her biggest videos. She found a pattern: one sentence on the first frame that labels her before anyone else can (&ldquo;single, childfree, lives alone, no friends&rdquo;). That one pattern drove 72% of her views and took her to 253K followers in 68 posts, and it works in any niche.</p>
       <p>Once I started spotting patterns like that, I gained <b>200k followers in 45 days.</b></p>
       <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
       </div>
@@ -117,7 +118,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="ncard">
         <p class="label eyebrow">What happened to them</p>
         <div class="from"><span>Gaming edits</span><i>→</i><span class="to">Finance</span></div>
-        <h3>@thekumarmethod blew up in finance with a strategy from video-game editing.</h3>
+        <h3>A finance creator blew up with a strategy from video-game editing.</h3>
         <p>Their videos are finance. Their editing style isn't. They took the way gaming editors cut and pace their videos and dropped it into a niche where nobody was doing it. That's what made it so unique, and that's why it worked.</p>
         <p class="res">Strategy from another niche. Applied to theirs. Blew up.</p>
       </div>
@@ -161,7 +162,9 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="ni"><p class="n">This is NOT a course teaching you how to write hooks and storytelling.</p><p class="y">This IS giving you the step by step process behind how to make each viral concept your own, and the underlying psychology of why it went viral.</p></div>
       <div class="ni"><p class="n">This is NOT promising you money.</p><p class="y">This IS showing you exactly how I've been able to go viral 8 out of 11 times on a new account and grow 200k followers in 45 days.</p></div>
       <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 200k followers in 45 days.</p></div>
-      <div class="ni"><p class="n">This is NOT about monetization, brand deals or editing.</p><p class="y">This IS about the part that comes before all of that: knowing what to post so people actually watch, share and follow.</p></div>
+      <div class="ni"><p class="n">This is NOT about editing or gear.</p><p class="y">This IS strategy: what to post and why it works. Your phone is enough.</p></div>
+      <div class="ni"><p class="n">This is NOT about brand deals or monetization.</p><p class="y">This IS about the part that comes before all of that: knowing what to post so people actually watch, share and follow.</p></div>
+      <div class="ni"><p class="n">This is NOT 1:1 coaching or a community.</p><p class="y">This IS a weekly breakdown you read on your own time, with the step by step to use it that night.</p></div>
     </div>
   </div>
 </section>
@@ -240,7 +243,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <div class="sheet">
       <div class="grp">
         <p class="label eyebrow">The core: a new creator decoded every week</p>
-        <div class="row"><span>4 creator breakdowns a month: what went viral, why it went viral, and a step by step to use it in your next Reel</span><span>$267 a year</span></div>
+        <div class="row"><span>4 creator breakdowns a month: what went viral, why it went viral, and a step by step to use it in your next Reel. Each one opens with a <b>&ldquo;Do this first&rdquo;</b> summary and a <b>&ldquo;Why people followed&rdquo;</b> line, so you know what turns views into followers</span><span>$267 a year</span></div>
         <div class="row"><span>The AI Script Button in every breakdown. You bring your idea and rough points; it helps you make them stronger using that creator's best scripts</span><span>Included</span></div>
         <div class="row"><span>The full library, tagged by difficulty and by each creator's main format, so you find the ones you can actually film</span><span>Included</span></div>
       </div>
@@ -252,14 +255,16 @@ export const breakdownsHtml = `<div class="wrap topbar">
       </div>
       <div class="grp">
         <p class="label eyebrow">Annual only · gone when doors close</p>
-        <div class="row new"><span><b>Bonus 3: The 50 Hooks Behind Millions of Views.</b> Each hook with its views and outlier score</span><span>$97</span></div>
+        <div class="row new"><span><b>Bonus 3: The Hook Vault.</b> 50 proven hooks matched to each format, each with its views and outlier score</span><span>$97</span></div>
         <div class="row new"><span><b>Bonus 4: The Trial Reels Playbook.</b> 10x a Reel before your followers ever see it: write 2 hooks, test both as Trial Reels, repost the winner</span><span>$97</span></div>
-        %%SCRIPT_PACK_ROW%%
+        <div class="row new"><span><b>Bonus 5: The Script Pack.</b> 10 fill-in scripts built from the formats that keep winning</span><span>$37</span></div>
+        %%REVIEW_ROW%%
+        <div class="row sub"><span>Annual-only bonuses</span><span>$231 of extras</span></div>
       </div>
-      <div class="total"><span>Total value on annual</span><span>$605+</span></div>
+      <div class="total"><span>Total value on annual</span><span>$642+</span></div>
       <div class="today">
-        <div><p class="label eyebrow">Founding price</p><p class="t" style="margin:8px 0 0">Today's price</p><p class="off">All of it for <em>$19.99 a month</em>. Or <em>$197 a year</em> and Bonus 3 and Bonus 4 are yours too.</p></div>
-        <p class="p" style="margin:0">$19.99<small>/month</small><span class="yr">or $197/year</span></p>
+        <div><p class="label eyebrow">Founding price</p><p class="t" style="margin:8px 0 0">Today's price</p><p class="off">All of it for <em>$197 a year</em>. That&rsquo;s <em>$16.42 a month, 2 months free</em>, and every annual-only bonus is yours. Or $19.99 a month for the core and Bonuses 1 and 2.</p></div>
+        <p class="p" style="margin:0">$197<small>/year</small><span class="yr">$16.42/mo · or $19.99 monthly</span></p>
       </div><!--/open-->
       <!--closed--><div class="today">
         <div><p class="label eyebrow">Next launch</p><p class="t" style="margin:8px 0 0">Doors are closed</p><p class="off">When doors open again it's <em>$26.99 a month</em> or <em>$267 a year</em>. The waitlist hears first.</p></div>
@@ -273,18 +278,21 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <span class="best-tag label">Best deal</span>
         <p class="label">Annual</p>
         <p class="price">$197<small>/year</small></p>
-        <p class="was">$267/year next launch</p>
-        <p class="lock">Founding price, locked for life</p>
-        <p class="bonus">Includes both annual-only bonuses: The 50 Hooks Behind Millions of Views and The Trial Reels Playbook.%%SCRIPT_PACK_CARD%%</p>
+        <p class="permo">That&rsquo;s $16.42/mo · 2 months free</p>
+        <p class="lock">$197 locked forever. $267 after Sunday.</p>
+        <p class="bonus">Includes every annual-only bonus: the Hook Vault, the Trial Reels Playbook and the Script Pack.</p>
+        %%REVIEW_CARD%%
         <p class="newyear"><b>Start 2027 with a system.</b> It took me a full year of showing up, most of it stuck at 44 followers, before my account finally took off. The best gift you can give yourself is a year of turning what's working into your own Reels. One year, one price, one year of consistency.</p>
         %%PLAN_ANNUAL%%
+        <div class="mini-guar"><span class="seal-s">30</span><p><b>I-Gotchu Guarantee.</b> Read 4 breakdowns. Don&rsquo;t like it? Full refund within 30 days.</p></div>
+        %%PROOF%%
       </div>
       <div class="plan">
         <p class="label">Monthly</p>
         <p class="price">$19.99<small>/month</small></p>
         <p class="was">$26.99/month next launch</p>
         <p class="lock">Founding price, locked for life</p>
-        <p class="bonus">Cancel anytime from your account page. Bonuses 1 and 2 included. Bonuses 3 and 4 are annual only.</p>
+        <p class="bonus">Cancel anytime from your account page. Bonuses 1 and 2 included. Bonuses 3, 4 and 5 are annual only.</p>
         %%PLAN_MONTHLY%%
       </div>
     </div><!--/open-->
@@ -359,14 +367,19 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <h2 class="big" style="margin-top:0">Questions</h2>
     <div class="faq">
+      <details><summary><span>Does it work in my niche?</span><i>+</i></summary><p>Yes. The patterns aren&rsquo;t about the topic, they&rsquo;re about structure: the hook, the format, the order, and why people stop and share. That&rsquo;s why I pick creators from different niches on purpose. My biggest growth came from patterns I found in niches nothing like mine.</p></details>
+      <details><summary><span>Can I do this faceless?</span><i>+</i></summary><p>Yes. Plenty of the patterns are on-screen text, voiceover or B-roll, and the library is tagged by format so you can filter for the ones you can actually film. Some breakdowns will lean on face-to-camera, and the step by step shows you what to keep when you swap it for your own style.</p></details>
+      <details><summary><span>I&rsquo;m under 1K. Is this for me?</span><i>+</i></summary><p>Yes, most people who&rsquo;ve read the free breakdown are. Small accounts can go viral because Reels are shown to non-followers first. Start with Your First Viral Reel in 7 Days: it walks you from one breakdown to your first Reel.</p></details>
+      <details><summary><span>I copied viral videos before and they flopped. Why is this different?</span><i>+</i></summary><p>Because you copied the WHAT without the WHY. Every breakdown shows why a video worked, so you keep the part that matters and change everything else to fit you. That&rsquo;s the SWAP system, and it&rsquo;s the opposite of copying.</p></details>
+      <details><summary><span>How much time does it take each week?</span><i>+</i></summary><p>About 30 minutes to read a breakdown, then one night to write and film your version. Start with the &ldquo;Do this first&rdquo; summary if you&rsquo;re short on time.</p></details>
+      <details><summary><span>Will this help me make money or get brand deals?</span><i>+</i></summary><p>Not directly, and I won&rsquo;t pretend it does. This is about getting seen: more views, more shares, more followers. Money and brand deals come after attention, and this is how you get the attention.</p></details>
       <details><summary><span>Who is this for?</span><i>+</i></summary><p>Creators building a personal brand on Instagram. Mostly beginners and intermediates, plus advanced creators with 100K+ followers who want fresh patterns to test.</p></details>
       <details><summary><span>How long does a breakdown take to read?</span><i>+</i></summary><p>About 30 minutes, including the step by step at the end.</p></details>
       <details><summary><span>Which creators do you break down?</span><i>+</i></summary><p>A different niche, style and strategy every week, on purpose. Fitness one week, finance the next, then comedy, then a niche you've never heard of. The best strategies usually come from outside your own corner, and I pick creators whose Reels are outperforming their own average so the pattern is real. Members vote on the Creator of the Month.</p></details>
       <details><summary><span>Does the AI write my scripts?</span><i>+</i></summary><p>No, on purpose. You come up with the idea and the rough points, because you know yourself and your audience better than any AI. The AI Script Button helps you make them stronger: sharper hooks, tighter wording, line notes, all based on that creator's best scripts.</p></details>
       <details><summary><span>What's in Your First Viral Reel in 7 Days?</span><i>+</i></summary><p>A short training that takes one breakdown and turns it into a Reel start to finish, a 7-day checklist, the Spot It Yourself guide, and the Viral Idea Scorecard. Every launch buyer gets it, monthly or annual.</p></details>
-      <details><summary><span>What do annual members get?</span><i>+</i></summary><p>The 50 Hooks Behind Millions of Views (each hook with its views and outlier score) and The Trial Reels Playbook (how I test 2 hooks with Trial Reels before my followers ever see the video). Both are annual only and go away when doors close.</p></details>
+      <details><summary><span>What do annual members get?</span><i>+</i></summary><p>The Hook Vault (50 proven hooks matched to each format, each with its views and outlier score), The Trial Reels Playbook (how I test 2 hooks with Trial Reels before my followers ever see the video) and The Script Pack (10 fill-in scripts built from the formats that keep winning). All three are annual only and go away when doors close.</p></details>
       <details><summary><span>Do I get a say in who gets broken down?</span><i>+</i></summary><p>Yes. Members vote on a Creator of the Month, and that creator gets broken down at the end of the month.</p></details>
-      %%SCRIPT_PACK_FAQ%%
       <details><summary><span>Is it just Instagram?</span><i>+</i></summary><p>The data comes from Instagram Reels. The hook, topic and format patterns carry to TikTok and Shorts.</p></details>
       <details><summary><span>Can I cancel?</span><i>+</i></summary><p>Anytime, from your account page. No emails, no calls. You keep access until the end of the period you paid for.</p></details>
       <details><summary><span>Is there a guarantee?</span><i>+</i></summary><p>Yes, the I-Gotchu Guarantee. Read 4 breakdowns and try it. If for any reason you don't like it, ask for a refund within 30 days and we'll handle it for you, on monthly or annual.</p></details>
