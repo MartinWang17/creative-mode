@@ -59,10 +59,9 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <p class="big-line">Those skills make you <em>competitive.</em> They don't make you go <em>viral.</em></p>
       </div>
       <div class="tell">
-      <p>What does? Noticing the patterns audiences are resonating with right now, and breaking them down.</p>
-      <p>One creator I broke down doesn&rsquo;t even talk in her biggest videos. She found a pattern: one sentence on the first frame that labels her before anyone else can (&ldquo;single, childfree, lives alone, no friends&rdquo;). That one pattern drove 72% of her views and took her to 253K followers in 68 posts, and it works in any niche.</p>
-      <p>Once I started spotting patterns like that, I gained <b>224k followers in 30 days.</b></p>
-      <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
+      <p>What does? Spotting the patterns that are working <b>right now</b> and breaking them down.</p>
+      <p class="win">Once I started doing that, I gained <em>224k followers in 30 days.</em></p>
+      <p class="pull">Creator Breakdowns finds those patterns, shows you why they work, and gives you the step by step to use them in your niche.</p>
       </div>
     </div>
   </div>

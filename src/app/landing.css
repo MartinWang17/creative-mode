@@ -439,3 +439,5 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .plan .review .bar{flex:1;height:10px;background:rgba(18,20,17,.55);border:1px solid var(--birch);min-width:0}
 .cm .plan .review .bar i{display:block;height:100%;background:var(--birch)}
 .cm .plan .review.gone{color:var(--muted);border-style:solid;border-color:var(--line)}
+.cm .story .tell .win{font-family:var(--display);font-size:clamp(28px,3vw,42px);line-height:1;color:var(--chalk);margin-top:22px;text-wrap:balance}
+.cm .story .tell .win em{font-style:normal;color:var(--birch)}
