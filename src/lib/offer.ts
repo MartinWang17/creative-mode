@@ -14,7 +14,7 @@ export const offer = {
   // After the close nobody can join until the next launch (waitlist only), which uses the public prices.
   cartOpens: "2026-12-08T09:00:00-05:00",
   cartCloses: "2026-12-13T23:59:00-05:00",
-  // Second annual bonus, announced mid-cart. Hidden on the sales page until this moment.
+  // Annual-only bonus. Shown on the sales page from day one since the Nov 19 offer lock (was a Dec 11 surprise).
   scriptPack: {
     announcedAt: "2026-12-11T09:00:00-05:00",
     name: "Script Pack",
@@ -37,7 +37,7 @@ export const offer = {
       founding: { cents: 19700, label: "$197" },
       public: { cents: 26700, label: "$267" },
       bonus:
-        "The 50 Hooks Behind Millions of Views and The Trial Reels Playbook. Annual members only.",
+        "The Hook Vault (proven hooks matched to each format), The Trial Reels Playbook and The Script Pack. Annual members only.",
       featured: true,
     },
     {

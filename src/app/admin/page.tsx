@@ -13,6 +13,7 @@ import { RESOURCE_COLS, releaseLabel, type Resource } from "@/lib/resources";
 import { createAdminClient } from "@/lib/supabase/server";
 import { SIZES } from "@/lib/tags";
 import { offer } from "@/lib/offer";
+import { getSettings, setSetting, videoEmbedUrl } from "@/lib/settings";
 import { deleteResource, toggleResource } from "./resources/actions";
 
 export const dynamic = "force-dynamic";
@@ -43,9 +44,9 @@ const FORMAT_SUGGESTIONS = [
 const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
 
 // Martin's page: upload a breakdown, publish or unpublish it, see member counts.
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string; upload?: string; msg?: string; comp?: string; cmsg?: string }> }) {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ kit?: string; upload?: string; msg?: string; comp?: string; cmsg?: string; settings?: string }> }) {
   const viewer = await requireAdmin();
-  const { kit, upload: uploadStatus, msg, comp: compStatus, cmsg } = await searchParams;
+  const { kit, upload: uploadStatus, msg, comp: compStatus, cmsg, settings: settingsStatus } = await searchParams;
   const base = siteUrl(await headers());
   const { data: comps } = await createAdminClient()
     .from("members")
@@ -59,6 +60,13 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     .neq("plan", "comp")
     .order("current_period_end", { ascending: false });
   const testMode = (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_test_");
+  const settings = await getSettings();
+  // Annual buyers since the cart opened (for the "first 100 annual" bonus). Not shown publicly.
+  const { count: annualSinceOpen } = await createAdminClient()
+    .from("members")
+    .select("*", { count: "exact", head: true })
+    .eq("plan", "annual")
+    .gte("created_at", new Date(offer.cartOpens).toISOString());
   const db = createAdminClient();
   const [{ data: taggedBreakdowns }, { data: sizeRows }, { count: active }, { count: total }, { count: waitlist }, { data: resources }, { data: survey }, { data: feedback }] = await Promise.all([
     db
@@ -205,6 +213,34 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
   // Sandbox buyers (people who checked out on test keys before launch): turn the test membership into
   // a free one that ends when doors close. A real purchase later replaces it.
+  async function toggleReview(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const error = await setSetting("reel_review_bonus", formData.get("on") === "true");
+    redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
+  }
+
+  async function saveVideo(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const link = String(formData.get("video") ?? "").trim();
+    if (link && !videoEmbedUrl(link)) redirect("/admin?settings=badvideo#launch");
+    const error = await setSetting("sales_video_url", link);
+    redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
+  }
+
+  async function saveProof(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const quotes = String(formData.get("quotes") ?? "")
+      .split("\n")
+      .map((q) => q.trim())
+      .filter(Boolean)
+      .slice(0, 8);
+    const error = await setSetting("proof_quotes", quotes);
+    redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
+  }
+
   async function sandboxToFree(formData: FormData) {
     "use server";
     await requireAdmin();
@@ -464,6 +500,66 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           ))}
           {(breakdowns ?? []).length === 0 && <li className="py-4 text-chalk/60">Nothing uploaded yet.</li>}
         </ul>
+      </section>
+
+      <section id="launch" className="mt-14 scroll-mt-24">
+        <h2 className="label text-sm">Launch switches (sales page)</h2>
+        {settingsStatus === "missing" && (
+          <p className="mt-3 border-2 border-oak p-3 text-sm text-chalk/80">
+            Couldn&apos;t save: the site_settings table isn&apos;t in Supabase yet. Run the site_settings part of
+            supabase/schema.sql in the Supabase SQL editor, then try again.
+          </p>
+        )}
+        {settingsStatus === "badvideo" && (
+          <p className="mt-3 text-sm text-birch">That link isn&apos;t a YouTube or Vimeo video. Copy the link from the video page and try again.</p>
+        )}
+        {settingsStatus === "ok" && <p className="mt-3 text-sm text-birch">Saved. The sales page updates right away.</p>}
+        <div className="mt-4 grid gap-6 border-y-2 border-oak py-5 sm:grid-cols-2">
+          <div>
+            <p className="font-display text-3xl">First 100 annual: Reel review</p>
+            <p className="mt-2 text-sm text-chalk/70">
+              Shows &ldquo;First 100 annual members get a Reel reviewed by me&rdquo; on the sales page and Stripe checkout. Turn it off
+              once 100 are claimed and the copy disappears everywhere.
+            </p>
+            <p className="label mt-3 text-sm text-birch">
+              {settings.reelReviewBonus ? "On" : "Off"} · {annualSinceOpen ?? 0} annual buyers since doors opened
+            </p>
+            <form action={toggleReview} className="mt-3">
+              <input type="hidden" name="on" value={settings.reelReviewBonus ? "false" : "true"} />
+              <button className="label border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">
+                {settings.reelReviewBonus ? "Turn off" : "Turn on"}
+              </button>
+            </form>
+          </div>
+          <form action={saveVideo} className="sm:col-span-2">
+            <p className="font-display text-3xl">Sales video</p>
+            <p className="mt-2 text-sm text-chalk/70">
+              Paste a YouTube (public or unlisted) or Vimeo link. It plays under the headline on the sales page. Leave empty to hide it.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <input
+                name="video"
+                defaultValue={settings.salesVideoUrl}
+                placeholder="https://youtu.be/..."
+                className="min-w-0 flex-1 border-2 border-oak bg-bedrock p-3 text-sm text-chalk"
+              />
+              <button className="label border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">Save video</button>
+            </div>
+          </form>
+          <form action={saveProof}>
+            <p className="font-display text-3xl">Proof next to the guarantee</p>
+            <p className="mt-2 text-sm text-chalk/70">
+              One quote per line, from readers of the free breakdown (no names). Up to 8. Leave empty to hide it.
+            </p>
+            <textarea
+              name="quotes"
+              rows={6}
+              defaultValue={settings.proofQuotes.join("\n")}
+              className="mt-3 w-full border-2 border-oak bg-bedrock p-3 text-sm text-chalk"
+            />
+            <button className="label mt-2 border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">Save quotes</button>
+          </form>
+        </div>
       </section>
 
       <section className="mt-14">
