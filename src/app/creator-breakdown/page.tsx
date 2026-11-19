@@ -47,7 +47,7 @@ export default async function CreatorBreakdownPage({
     .replace("%%WL_NOTE%%", note)
     .replace(
       "%%REVIEW_ROW%%",
-      review ? `<div class="row new hot"><span><b>First 100 annual members:</b> a Reel of yours, reviewed by me</span><span>Limited</span></div>` : "",
+      review ? `<div class="row hot"><span><b>First 100 annual members</b><small>A Reel of yours, reviewed by me</small></span><span>Limited</span></div>` : "",
     )
     .replace("%%REVIEW_CARD%%", review ? `<p class="review"><b>First 100 annual members</b> get a Reel reviewed by me.</p>` : "")
     .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin))

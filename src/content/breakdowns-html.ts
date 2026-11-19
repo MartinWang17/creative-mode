@@ -50,7 +50,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p>You&rsquo;re posting every day and <em>still in a plateau.</em></p>
         <p>You don&rsquo;t know <em>what to post.</em></p>
       </div>
-      <p class="pain-note">Those came up again and again when 140 of my followers told me their top questions. I&rsquo;ve been there too.</p>
+      <p class="pain-note">Those came up again and again when 200+ of my followers told me their top questions. I&rsquo;ve been there too.</p>
     </div>
     <p class="label eyebrow">Why this exists</p>
     <div class="story-copy">
@@ -107,22 +107,27 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <p class="label eyebrow">Every week is different</p>
     <h2 class="big">A different niche, a different style, a different strategy. Every single week.</h2>
     <p class="lead">The best strategies rarely come from your own niche. They come from a corner of the industry you'd never think to look at. Every week, Creator Breakdowns brings you one of those.</p>
-    <div class="niche">
+    <div class="niche three">
       <div class="ncard">
-        <p class="label eyebrow">What happened to me</p>
-        <div class="from"><span>His niche</span><i>→</i><span class="to">Mine</span></div>
-        <h3>I broke down creators in completely different niches from mine.</h3>
-        <p>I found the patterns behind their biggest videos, brought them into my own account and my own topics, and it blew up. 50K to 392K followers in two months. That's the before and after above.</p>
-        <p class="res">Strategy from another niche. Applied to mine. Blew up.</p>
+        <div class="from"><span>Solo lifestyle</span><i>→</i><span class="to">Fitness</span></div>
+        <h3>Label yourself before anyone else can.</h3>
+        <p>A lifestyle creator opens her Reels with one sentence that labels her: &ldquo;single, childfree, lives alone, no friends&rdquo;. That one pattern drove 72% of her views.</p>
+        <p class="res"><span class="label">Same pattern in fitness</span>&ldquo;pov: you&rsquo;re 34, just started lifting, and you&rsquo;re the weakest one in the gym.&rdquo;</p>
       </div>
       <div class="ncard">
-        <p class="label eyebrow">What happened to them</p>
+        <div class="from"><span>Learning</span><i>→</i><span class="to">Cooking</span></div>
+        <h3>Start a timer and learn it on camera.</h3>
+        <p>A creator names something he doesn&rsquo;t understand, starts a timer and learns it in 60 seconds. You stay to see if he pulls it off. One of these did 182x his usual views.</p>
+        <p class="res"><span class="label">Same pattern in cooking</span>&ldquo;Sourdough. I have no clue how it works. Starting timer now.&rdquo;</p>
+      </div>
+      <div class="ncard">
         <div class="from"><span>Gaming edits</span><i>→</i><span class="to">Finance</span></div>
-        <h3>A finance creator blew up with a strategy from video-game editing.</h3>
-        <p>Their videos are finance. Their editing style isn't. They took the way gaming editors cut and pace their videos and dropped it into a niche where nobody was doing it. That's what made it so unique, and that's why it worked.</p>
-        <p class="res">Strategy from another niche. Applied to theirs. Blew up.</p>
+        <h3>Edit a finance video like a gaming video.</h3>
+        <p>A finance creator took the way gaming editors cut and pace their videos and dropped it into a niche where nobody was doing it. That&rsquo;s what made it so unique, and that&rsquo;s why it worked.</p>
+        <p class="res"><span class="label">Same pattern in your niche</span>Borrow the editing from somewhere your niche never looks.</p>
       </div>
     </div>
+    <p class="onepct">Improve your content skills <em>1% every week,</em> just by reading about the top creators&rsquo; strategies.</p>
     <div class="weekly">
       <p><b>That's exactly what you get from Creator Breakdowns:</b> a brand-new, fresh strategy from another part of the industry, every single week, broken down to the point where you can apply it to your own account.</p>
       <a class="pill label" href="#pricing" data-scroll><span class="sq"></span><span>See pricing</span><span aria-hidden="true">→</span></a>
@@ -164,7 +169,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 224k followers in 30 days.</p></div>
       <div class="ni"><p class="n">This is NOT about editing or gear.</p><p class="y">This IS strategy: what to post and why it works. Your phone is enough.</p></div>
       <div class="ni"><p class="n">This is NOT about brand deals or monetization.</p><p class="y">This IS about the part that comes before all of that: knowing what to post so people actually watch, share and follow.</p></div>
-      <div class="ni"><p class="n">This is NOT 1:1 coaching or a community.</p><p class="y">This IS a weekly breakdown you read on your own time, with the step by step to use it that night.</p></div>
+      <div class="ni"><p class="n">This is NOT 1:1 coaching.</p><p class="y">This IS a weekly breakdown you read on your own time, with the step by step to use it that night.</p></div>
     </div>
   </div>
 </section>
@@ -242,21 +247,21 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <div class="sheet">
       <div class="grp">
         <p class="label eyebrow">The core: a new creator decoded every week</p>
-        <div class="row"><span>4 creator breakdowns a month: what went viral, why it went viral, and a step by step to use it in your next Reel. Each one opens with a <b>&ldquo;Do this first&rdquo;</b> summary, so you know exactly where to start</span><span>$267 a year</span></div>
-        <div class="row"><span>The AI Script Button in every breakdown. You bring your idea and rough points; it helps you make them stronger using that creator's best scripts</span><span>Included</span></div>
-        <div class="row"><span>The full library, tagged by difficulty and by each creator's main format, so you find the ones you can actually film</span><span>Included</span></div>
+        <div class="row"><span><b>4 creator breakdowns a month</b><small>What went viral, why, and a &ldquo;Do this first&rdquo; step by step</small></span><span>$267 a year</span></div>
+        <div class="row"><span><b>The AI Script Button</b><small>Bring your idea. It helps you make it stronger</small></span><span>Included</span></div>
+        <div class="row"><span><b>The full library</b><small>Tagged by difficulty and format</small></span><span>Included</span></div>
       </div>
       <!--open--><div class="grp">
         <p class="label eyebrow">Founding bonuses · every launch buyer</p>
-        <div class="row"><span><b>Bonus 1: The Founding Library.</b> 4 creators already decoded, unlocked on day one</span><span>$97</span></div>
-        <div class="row"><span><b>Bonus 2: Your First Viral Reel in 7 Days.</b> The training, the 7-day checklist, the Spot It Yourself guide, and the Viral Idea Scorecard to score any idea before you film it</span><span>$47</span></div>
-        <div class="row"><span>Founding price locked for life ($197 a year instead of $267)</span><span>$70 a year, every year</span></div>
+        <div class="row"><span><b>Bonus 1: The Founding Library</b><small>4 creators already decoded, unlocked on day one</small></span><span>$97</span></div>
+        <div class="row"><span><b>Bonus 2: Your First Viral Reel in 7 Days</b><small>The training, the checklist and the idea scorecard</small></span><span>$47</span></div>
+        <div class="row"><span><b>Founding price, locked for life</b><small>$197 a year instead of $267</small></span><span>$70 a year</span></div>
       </div>
       <div class="grp">
         <p class="label eyebrow">Annual only · gone when doors close</p>
-        <div class="row new"><span><b>Bonus 3: The Hook Vault.</b> 50 proven hooks matched to each format, each with its views and outlier score</span><span>$97</span></div>
-        <div class="row new star"><span><b>Bonus 4: The Trial Reels Playbook.</b> 10x a Reel before your followers ever see it: write 2 hooks, test both as Trial Reels, repost the winner<em class="why-me">This is what helped me turn a video that got me 3K followers into an extra 30K, just by reposting the same video over and over in Trials.</em></span><span>$97</span></div>
-        <div class="row new"><span><b>Bonus 5: The Script Pack.</b> 10 fill-in scripts built from the formats that keep winning</span><span>$37</span></div>
+        <div class="row"><span><b>Bonus 3: The Hook Vault</b><small>50 proven hooks, matched to each format</small></span><span>$97</span></div>
+        <div class="row star"><span><b>Bonus 4: The Trial Reels Playbook</b><small>Test 2 hooks before your followers ever see the video</small><em class="why-me">How I turned a video that got me 3K followers into an extra 30K.</em></span><span>$97</span></div>
+        <div class="row"><span><b>Bonus 5: The Script Pack</b><small>10 fill-in scripts from the formats that keep winning</small></span><span>$37</span></div>
         %%REVIEW_ROW%%
         <div class="row sub"><span>Annual-only bonuses</span><span>$231 of extras</span></div>
       </div>

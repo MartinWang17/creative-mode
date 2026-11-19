@@ -416,3 +416,18 @@ html:has(.cm){scroll-behavior:smooth}
 /* Highlighted Trial Reels bonus */
 .cm .sheet .row.star{background:rgba(214,188,142,.12);border-left:3px solid var(--birch);padding-left:14px;padding-right:14px;margin:6px -14px 0 -17px}
 .cm .sheet .row.star .why-me{display:block;margin-top:8px;font-style:normal;color:var(--birch);font-size:.95em}
+/* Add-it-up sheet: name on one line, short description under it */
+.cm .sheet .row span:first-child b{display:block;font-weight:600;color:var(--chalk)}
+.cm .sheet .row span:first-child small{display:block;margin-top:2px;font-size:14.5px;color:var(--muted)}
+.cm .sheet .row{padding:12px 0;align-items:baseline}
+/* Three pattern cards */
+.cm .niche.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cm .niche.three .ncard{padding:26px 22px}
+.cm .niche.three .ncard .from{margin-top:0}
+.cm .niche.three .ncard h3{font-size:clamp(26px,2.4vw,34px)}
+.cm .niche.three .res{color:var(--chalk);border-top:1px solid var(--line);margin-top:auto;padding-top:16px}
+.cm .niche.three .res .label{display:block;color:var(--birch);margin-bottom:8px;font-size:10px}
+.cm .niche.three .ncard p:not(.res){margin-bottom:20px}
+@media(max-width:900px){.cm .niche.three{grid-template-columns:1fr}}
+.cm .onepct{font-family:var(--display);font-size:clamp(30px,3.6vw,50px);line-height:1;margin:44px 0 0;max-width:26ch;text-wrap:balance;color:var(--chalk)}
+.cm .onepct em{font-style:normal;color:var(--birch)}
