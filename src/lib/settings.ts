@@ -2,14 +2,14 @@ import { hasSupabase } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/server";
 
 // Small switches Martin flips in Admin, stored in Supabase (table site_settings).
-// If the table isn't there yet, everything reads as off/empty.
+// If the table isn't there yet, the Reel review bonus shows (Martin turns it off at 100) and the rest is empty.
 export type Settings = {
   reelReviewBonus: boolean; // "First 100 annual members get a Reel reviewed by Martin"
   proofQuotes: string[]; // Praise next to the guarantee, one quote per line in Admin
   salesVideoUrl: string; // YouTube or Vimeo link for the video at the top of the sales page
 };
 
-const DEFAULTS: Settings = { reelReviewBonus: false, proofQuotes: [], salesVideoUrl: "" };
+const DEFAULTS: Settings = { reelReviewBonus: true, proofQuotes: [], salesVideoUrl: "" };
 
 export async function getSettings(): Promise<Settings> {
   if (!hasSupabase()) return DEFAULTS;
@@ -17,7 +17,7 @@ export async function getSettings(): Promise<Settings> {
   if (error || !data) return DEFAULTS;
   const map = new Map(data.map((r) => [r.key as string, r.value as unknown]));
   return {
-    reelReviewBonus: map.get("reel_review_bonus") === true,
+    reelReviewBonus: map.has("reel_review_bonus") ? map.get("reel_review_bonus") === true : true,
     proofQuotes: Array.isArray(map.get("proof_quotes")) ? (map.get("proof_quotes") as string[]) : [],
     salesVideoUrl: typeof map.get("sales_video_url") === "string" ? (map.get("sales_video_url") as string) : "",
   };

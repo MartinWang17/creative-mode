@@ -408,3 +408,18 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .cm .vid-frame.empty{display:grid;place-content:center;gap:8px;text-align:center;border-style:dashed;color:var(--muted);padding:20px}
 .cm .vid-frame.empty .label{color:var(--birch);font-size:12px}
+/* What this is / isn't: x and check marks with a soft glow */
+.cm .notis .n,.cm .notis .y{display:flex;gap:14px;align-items:flex-start}
+.cm .notis .n::before,.cm .notis .y::before{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font-family:var(--sans);font-size:17px;font-weight:700;line-height:1}
+.cm .notis .n::before{content:"\2715";color:#ff8a80;background:rgba(220,70,60,.16);box-shadow:0 0 18px 2px rgba(220,70,60,.35)}
+.cm .notis .y::before{content:"\2713";color:#8fe3a8;background:rgba(60,190,110,.16);box-shadow:0 0 18px 2px rgba(60,190,110,.35)}
+/* Proof screenshots under the story */
+.cm .receipts{margin-top:48px}
+.cm .receipts .shots{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;margin-top:16px;align-items:start}
+.cm .receipts figure{margin:0;border:1px solid var(--line);background:#0d0f0c}
+.cm .receipts img{display:block;width:100%;height:auto}
+.cm .receipts figcaption{padding:10px 14px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:760px){.cm .receipts .shots{grid-template-columns:1fr}}
+/* Highlighted Trial Reels bonus */
+.cm .sheet .row.star{background:rgba(214,188,142,.12);border-left:3px solid var(--birch);padding-left:14px;padding-right:14px;margin:6px -14px 0 -17px}
+.cm .sheet .row.star .why-me{display:block;margin-top:8px;font-style:normal;color:var(--birch);font-size:.95em}

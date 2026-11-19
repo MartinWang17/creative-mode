@@ -28,7 +28,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <aside class="cred" aria-label="Who's behind this">
         <div class="who"><span class="label eyebrow">Built by Martin Wang</span><a href="https://www.instagram.com/martinwang.mp4/" target="_blank" rel="noreferrer">@martinwang.mp4</a></div>
         <div class="st">
-          <div><b>200K</b><small>followers in 45 days, after a 6-month plateau</small></div>
+          <div><b>224K</b><small>followers in 30 days, after a 6-month plateau</small></div>
           <div><b>8 / 11</b><small>Reels went viral on a brand-new account</small></div>
           <div><b>200M</b><small>views on my own videos, 500M+ across my own videos and the clients I&rsquo;ve helped</small></div>
         </div>
@@ -47,7 +47,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <p class="label eyebrow">Sound familiar?</p>
       <div class="pain-list">
         <p>You&rsquo;re stuck at <em>200 views.</em></p>
-        <p>You&rsquo;re posting every day and <em>nothing works.</em></p>
+        <p>You&rsquo;re posting every day and <em>still in a plateau.</em></p>
         <p>You don&rsquo;t know <em>what to post.</em></p>
       </div>
       <p class="pain-note">Those came up again and again when 140 of my followers told me their top questions. I&rsquo;ve been there too.</p>
@@ -61,8 +61,15 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="tell">
       <p>What does? Noticing the patterns audiences are resonating with right now, and breaking them down.</p>
       <p>One creator I broke down doesn&rsquo;t even talk in her biggest videos. She found a pattern: one sentence on the first frame that labels her before anyone else can (&ldquo;single, childfree, lives alone, no friends&rdquo;). That one pattern drove 72% of her views and took her to 253K followers in 68 posts, and it works in any niche.</p>
-      <p>Once I started spotting patterns like that, I gained <b>200k followers in 45 days.</b></p>
+      <p>Once I started spotting patterns like that, I gained <b>224k followers in 30 days.</b></p>
       <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
+      </div>
+    </div>
+    <div class="receipts">
+      <p class="label eyebrow">The receipts · my account on November 19</p>
+      <div class="shots">
+        <figure><img src="/landing/proof-profile.png" alt="Martin's Instagram profile: martinwang.mp4, 392K followers" width="1038" height="452" loading="lazy"><figcaption>392K followers today</figcaption></figure>
+        <figure class="phone"><img src="/landing/proof-dashboard.jpg" alt="Instagram dashboard, last 30 days: 12.1M views and +224,608 net followers" width="660" height="670" loading="lazy"><figcaption>+224,608 followers in 30 days</figcaption></figure>
       </div>
     </div>
   </div>
@@ -137,7 +144,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <p class="lead">Every breakdown runs on the same four steps. You learn them once in the free training, then practise them on a new creator every week.</p>
     <div class="steps4">
       <div class="s4"><span class="k">S</span><h3>Spot it</h3><p>Find the Reels that did 10x or more of the creator's usual views. Check them against the 6 levers that make a video worth using. If it doesn't hit them, skip it.</p></div>
-      <div class="s4"><span class="k">W</span><h3>Why it worked</h3><p>Find the deeper psychological reason it went viral. This is the part most people skip, and it's exactly why I break down whole accounts to spot the patterns.</p></div>
+      <div class="s4"><span class="k">W</span><h3>Why it worked</h3><p>Use the <b>DO &rarr; WHY &rarr; HOW</b> method: what the video DOES, WHY that works on people, and HOW you&rsquo;d do it in your niche. This is the part most people skip, and it's exactly why I break down whole accounts to spot the patterns.</p></div>
       <div class="s4"><span class="k">A</span><h3>Adapt the structure</h3><p>Keep the hook, the format and the order. Not the video.</p></div>
       <div class="s4"><span class="k">P</span><h3>Put yourself in</h3><p>Your own story, your niche, your face. Because you know why it worked, you can change everything else and keep what matters. That's why it's never copying.</p></div>
     </div>
@@ -149,7 +156,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <h2 class="big">Tried copying viral videos and they flopped?</h2>
     <div class="flop-copy">
       <p class="big-line">That&rsquo;s because you copied the <em>WHAT</em> without the <em>WHY.</em></p>
-      <p class="pull">Better hooks make it easier to catch fish. But if you&rsquo;re fishing in an empty lake, it doesn&rsquo;t matter how good your hook is. You have to know where the fish are. That&rsquo;s exactly what Creator Breakdowns solves.</p>
+      <p class="pull">The <b>DO &rarr; WHY &rarr; HOW</b> method fixes that: see what the video does, understand why it worked, then work out how to make it yours. Creator Breakdowns does that for you every week, so you don&rsquo;t have to spend 12 hours analyzing videos and hunting for patterns.</p>
     </div>
   </div>
 </section>
@@ -160,8 +167,8 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <div class="notis">
       <div class="ni"><p class="n">This is NOT teaching you about branding.</p><p class="y">This IS teaching you how to take any viral format or concept that's working for someone else and make it go viral for you. That's how you get lots of attention for your brand.</p></div>
       <div class="ni"><p class="n">This is NOT a course teaching you how to write hooks and storytelling.</p><p class="y">This IS giving you the step by step process behind how to make each viral concept your own, and the underlying psychology of why it went viral.</p></div>
-      <div class="ni"><p class="n">This is NOT promising you money.</p><p class="y">This IS showing you exactly how I've been able to go viral 8 out of 11 times on a new account and grow 200k followers in 45 days.</p></div>
-      <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 200k followers in 45 days.</p></div>
+      <div class="ni"><p class="n">This is NOT promising you money.</p><p class="y">This IS showing you exactly how I've been able to go viral 8 out of 11 times on a new account and grow 224k followers in 30 days.</p></div>
+      <div class="ni"><p class="n">This is NOT an “easy way out”.</p><p class="y">This DOES take some work, but it really works. I was stuck at a plateau for 6 months. Then I started doing this, and for the same 1 hour a day of effort I grew 224k followers in 30 days.</p></div>
       <div class="ni"><p class="n">This is NOT about editing or gear.</p><p class="y">This IS strategy: what to post and why it works. Your phone is enough.</p></div>
       <div class="ni"><p class="n">This is NOT about brand deals or monetization.</p><p class="y">This IS about the part that comes before all of that: knowing what to post so people actually watch, share and follow.</p></div>
       <div class="ni"><p class="n">This is NOT 1:1 coaching or a community.</p><p class="y">This IS a weekly breakdown you read on your own time, with the step by step to use it that night.</p></div>
@@ -173,7 +180,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Peek inside</p>
     <h2 class="big">This is what a breakdown looks like.</h2>
-    <p class="lead">Ten pages from the free breakdown. The numbers, the charts, and the subtle things the creator does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read the whole thing free right now.</p>
+    <p class="lead">Ten pages from the free breakdown. The numbers, the charts, and the subtle things the creator does that nobody else noticed. Every Reel it quotes links to the Reel.</p>
     <div class="pages">
       <figure class="page"><img src="/landing/peek-01.jpg" alt="1 · What matters most (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · What matters most</figcaption></figure>
       <figure class="page"><img src="/landing/peek-02.jpg" alt="2 · The turn: one video split the account (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The turn: one video split the account</figcaption></figure>
@@ -187,7 +194,6 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <figure class="page"><img src="/landing/peek-10.jpg" alt="10 · All 100 Reels, flop to 42.8x (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · All 100 Reels, flop to 42.8x</figcaption></figure>
     </div>
     <p class="note">Every breakdown also covers the creator&rsquo;s best format in one line, how to apply it to your niche, the AI Script Button, and every Reel in a sortable table.</p>
-    <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read a full breakdown free</span><span aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -256,7 +262,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <div class="grp">
         <p class="label eyebrow">Annual only · gone when doors close</p>
         <div class="row new"><span><b>Bonus 3: The Hook Vault.</b> 50 proven hooks matched to each format, each with its views and outlier score</span><span>$97</span></div>
-        <div class="row new"><span><b>Bonus 4: The Trial Reels Playbook.</b> 10x a Reel before your followers ever see it: write 2 hooks, test both as Trial Reels, repost the winner</span><span>$97</span></div>
+        <div class="row new star"><span><b>Bonus 4: The Trial Reels Playbook.</b> 10x a Reel before your followers ever see it: write 2 hooks, test both as Trial Reels, repost the winner<em class="why-me">This is what helped me turn a video that got me 3K followers into an extra 30K, just by reposting the same video over and over in Trials.</em></span><span>$97</span></div>
         <div class="row new"><span><b>Bonus 5: The Script Pack.</b> 10 fill-in scripts built from the formats that keep winning</span><span>$37</span></div>
         %%REVIEW_ROW%%
         <div class="row sub"><span>Annual-only bonuses</span><span>$231 of extras</span></div>
