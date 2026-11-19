@@ -446,3 +446,12 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .weekly.stack{display:block;margin-top:40px;padding:34px 34px 32px}
 .cm .weekly.stack .onepct{margin:0;max-width:34ch}
 .cm .weekly.stack p:not(.onepct){margin-top:18px;max-width:70ch}
+/* DMs about the free breakdown */
+.cm .fb .dms{columns:3;column-gap:16px;margin-top:40px}
+.cm .fb .dms img{display:block;width:100%;height:auto;margin:0 0 16px;border:1px solid var(--line);break-inside:avoid}
+.cm .fb .note{margin-top:8px;color:var(--muted);font-size:14px}
+@media(max-width:900px){.cm .fb .dms{columns:2}}
+@media(max-width:560px){.cm .fb .dms{columns:1}}
+.cm .fb .dms .dm{break-inside:avoid;margin:0 0 16px;border:1px solid var(--line);background:#0c0f14;padding:14px}
+.cm .fb .dms .dm{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.35;color:#f2f2f2}
+.cm .fb .dms .dm{box-shadow:inset 0 0 0 14px #0c0f14;background:#25282d;border-radius:0;padding:26px 28px}

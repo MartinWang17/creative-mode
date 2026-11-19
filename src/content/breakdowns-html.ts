@@ -186,6 +186,25 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <p class="note">Every breakdown also covers the creator&rsquo;s best format in one line, how to apply it to your niche, the AI Script Button, and every Reel in a sortable table.</p>
   </div>
 </section>
+<section class="band fb">
+  <div class="wrap">
+    <p class="label eyebrow">From the free breakdown</p>
+    <h2 class="big">I gave one breakdown away for free. Here&rsquo;s what people said.</h2>
+    <p class="lead">These are real DMs about the free one. Members get a new breakdown every week.</p>
+    <div class="dms">
+      <img src="/landing/fb-01.jpg" alt="DM: This is something people would pay for. So incredibly grateful to you." width="900" height="580" loading="lazy">
+      <img src="/landing/fb-02.jpg" alt="DM: I would've paid 100 dollars for this." width="834" height="228" loading="lazy">
+      <p class="dm">thanks for making this breakdown, it was so easy to understand! this was my first take on it 😆 the ai prompt template you added made scripting it so easy creating this reel took me under an hour 🙏🙏</p>
+      <img src="/landing/fb-04.jpg" alt="DM: One of the best work I have ever seen." width="900" height="369" loading="lazy">
+      <img src="/landing/fb-05.jpg" alt="DM: Just finished reading it and made a script. Genuinely really good breakdown." width="894" height="480" loading="lazy">
+      <img src="/landing/fb-06.jpg" alt="DM: Actionable and goated. I had a bunch of ideas on how to incorporate that into my own content." width="900" height="648" loading="lazy">
+      <img src="/landing/fb-07.jpg" alt="DM: Man this is gold. You went all in." width="900" height="476" loading="lazy">
+      <img src="/landing/fb-08.jpg" alt="DM: That freebie is cracked. Very very valuable." width="900" height="473" loading="lazy">
+      <img src="/landing/fb-09.jpg" alt="DM: I just read through it, it's gold." width="900" height="252" loading="lazy">
+    </div>
+    <p class="note">Names and photos hidden for privacy.</p>
+  </div>
+</section>
 
 <section class="band course-band">
   <div class="wrap">
