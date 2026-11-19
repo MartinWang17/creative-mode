@@ -1,5 +1,6 @@
 import { hasSupabase } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/server";
+import { offer } from "@/lib/offer";
 
 // Small switches Martin flips in Admin, stored in Supabase (table site_settings).
 // If the table isn't there yet, the Reel review bonus shows (Martin turns it off at 100) and the rest is empty.
@@ -50,4 +51,19 @@ export function videoEmbedUrl(link: string): string | null {
     if (m) return `https://player.vimeo.com/video/${m[1]}${m[2] ? `?h=${m[2]}` : ""}`;
   }
   return null;
+}
+
+export const REEL_REVIEWS = 100;
+
+// How many of the first-100 Reel reviews are left: 100 minus the real number of annual members
+// who joined since the cart opened. Never a made-up number.
+export async function reelReviewsLeft(): Promise<number> {
+  if (!hasSupabase()) return REEL_REVIEWS;
+  const { count, error } = await createAdminClient()
+    .from("members")
+    .select("*", { count: "exact", head: true })
+    .eq("plan", "annual")
+    .gte("created_at", new Date(offer.cartOpens).toISOString());
+  if (error) return REEL_REVIEWS;
+  return Math.max(0, REEL_REVIEWS - (count ?? 0));
 }

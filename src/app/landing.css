@@ -431,3 +431,11 @@ html:has(.cm){scroll-behavior:smooth}
 @media(max-width:900px){.cm .niche.three{grid-template-columns:1fr}}
 .cm .onepct{font-family:var(--display);font-size:clamp(30px,3.6vw,50px);line-height:1;margin:44px 0 0;max-width:26ch;text-wrap:balance;color:var(--chalk)}
 .cm .onepct em{font-style:normal;color:var(--birch)}
+/* First-100 Reel review: how many are left */
+.cm .plan .review p{margin:0}
+.cm .plan .review .left{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cm .plan .review .left span{white-space:nowrap}
+.cm .plan .review .left span b{color:var(--chalk)}
+.cm .plan .review .bar{flex:1;height:10px;background:rgba(18,20,17,.55);border:1px solid var(--birch);min-width:0}
+.cm .plan .review .bar i{display:block;height:100%;background:var(--birch)}
+.cm .plan .review.gone{color:var(--muted);border-style:solid;border-color:var(--line)}

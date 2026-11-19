@@ -3,7 +3,7 @@ import LandingFx from "@/components/LandingFx";
 import { planButtonHtml } from "@/components/PlanButton";
 import { breakdownsHtml } from "@/content/breakdowns-html";
 import { cartClosed, offer } from "@/lib/offer";
-import { getSettings, videoEmbedUrl } from "@/lib/settings";
+import { getSettings, reelReviewsLeft, REEL_REVIEWS, videoEmbedUrl } from "@/lib/settings";
 import { getViewer } from "@/lib/members";
 
 // Rendered per request so the plan buttons switch on by themselves when the cart opens.
@@ -39,7 +39,15 @@ export default async function CreatorBreakdownPage({
   const isAdmin = !!(await getViewer())?.isAdmin;
   const settings = await getSettings();
   const note = waitlist && WL_NOTES[waitlist] ? `<p class="wl-note">${WL_NOTES[waitlist]}</p>` : "";
-  const review = settings.reelReviewBonus;
+  const left = settings.reelReviewBonus ? await reelReviewsLeft() : 0;
+  const review = settings.reelReviewBonus && left > 0;
+  const gone = settings.reelReviewBonus && left === 0;
+  const pct = Math.round((left / REEL_REVIEWS) * 100);
+  const reviewCard = review
+    ? `<div class="review"><p><b>First ${REEL_REVIEWS} annual members</b> get a Reel reviewed by me.</p><div class="left"><div class="bar" role="img" aria-label="${left} of ${REEL_REVIEWS} Reel reviews left"><i style="width:${pct}%"></i></div><span><b>${left}</b> of ${REEL_REVIEWS} left</span></div></div>`
+    : gone
+      ? `<p class="review gone">All ${REEL_REVIEWS} Reel reviews have been claimed.</p>`
+      : "";
   const html = breakdownsHtml
     .replace(closed ? /<!--open-->[\s\S]*?<!--\/open-->/g : /<!--closed-->[\s\S]*?<!--\/closed-->/g, "")
     .replace("%%PLAN_ANNUAL%%", planButtonHtml("annual", true, isAdmin))
@@ -47,9 +55,9 @@ export default async function CreatorBreakdownPage({
     .replace("%%WL_NOTE%%", note)
     .replace(
       "%%REVIEW_ROW%%",
-      review ? `<div class="row hot"><span><b>First 100 annual members</b><small>A Reel of yours, reviewed by me</small></span><span>Limited</span></div>` : "",
+      review ? `<div class="row hot"><span><b>First 100 annual members</b><small>A Reel of yours, reviewed by me</small></span><span>${left} left</span></div>` : "",
     )
-    .replace("%%REVIEW_CARD%%", review ? `<p class="review"><b>First 100 annual members</b> get a Reel reviewed by me.</p>` : "")
+    .replace("%%REVIEW_CARD%%", reviewCard)
     .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin))
     .replace("%%VIDEO%%", videoHtml(settings.salesVideoUrl, isAdmin));
   return (
