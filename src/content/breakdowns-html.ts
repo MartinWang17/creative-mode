@@ -106,7 +106,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <p class="label eyebrow">Every week is different</p>
     <h2 class="big">A different niche, a different style, a different strategy. Every single week.</h2>
     <p class="lead">The best strategies rarely come from your own niche. They come from a corner of the industry you'd never think to look at. Every week, Creator Breakdowns brings you one of those.</p>
-    <div class="niche three">
+    <div class="niche three two">
       <div class="ncard">
         <div class="from"><span>Solo lifestyle</span><i>→</i><span class="to">Fitness</span></div>
         <h3>Label yourself before anyone else can.</h3>
@@ -119,17 +119,10 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p>A creator names something he doesn&rsquo;t understand, starts a timer and learns it in 60 seconds. You stay to see if he pulls it off. One of these did 182x his usual views.</p>
         <p class="res"><span class="label">Same pattern in cooking</span>&ldquo;Sourdough. I have no clue how it works. Starting timer now.&rdquo;</p>
       </div>
-      <div class="ncard">
-        <div class="from"><span>Gaming edits</span><i>→</i><span class="to">Finance</span></div>
-        <h3>Edit a finance video like a gaming video.</h3>
-        <p>A finance creator took the way gaming editors cut and pace their videos and dropped it into a niche where nobody was doing it. That&rsquo;s what made it so unique, and that&rsquo;s why it worked.</p>
-        <p class="res"><span class="label">Same pattern in your niche</span>Borrow the editing from somewhere your niche never looks.</p>
-      </div>
     </div>
     <p class="onepct">Improve your content skills <em>1% every week,</em> just by reading about the top creators&rsquo; strategies.</p>
     <div class="weekly">
       <p><b>That's exactly what you get from Creator Breakdowns:</b> a brand-new, fresh strategy from another part of the industry, every single week, broken down to the point where you can apply it to your own account.</p>
-      <a class="pill label" href="#pricing" data-scroll><span class="sq"></span><span>See pricing</span><span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
