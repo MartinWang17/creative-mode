@@ -173,18 +173,18 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Peek inside</p>
     <h2 class="big">This is what a breakdown looks like.</h2>
-    <p class="lead">Ten pages from a real breakdown, blurred here out of respect for the creator. The numbers, the charts, and the subtle things they do that nobody else noticed. Every Reel it quotes links to the Reel, and you can read a full breakdown free right now.</p>
+    <p class="lead">Ten pages from the free breakdown. The numbers, the charts, and the subtle things the creator does that nobody else noticed. Every Reel it quotes links to the Reel, and you can read the whole thing free right now.</p>
     <div class="pages">
-      <figure class="page blur"><img src="/landing/peek-01.jpg" alt="1 · The story (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · The story</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-02.jpg" alt="2 · The surprising stat (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The surprising stat</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-03.jpg" alt="3 · The turn (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · The turn</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-04.jpg" alt="4 · The hook (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · The hook</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-05.jpg" alt="5 · Subtle pattern 1 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 1</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-06.jpg" alt="6 · Subtle pattern 2 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 2</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-07.jpg" alt="7 · Subtle pattern 3 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Subtle pattern 3</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-08.jpg" alt="8 · Subtle pattern 4 (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · Subtle pattern 4</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-09.jpg" alt="9 · Where the views come from (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Where the views come from</figcaption></figure>
-      <figure class="page blur"><img src="/landing/peek-10.jpg" alt="10 · Every Reel, flop to outlier (blurred page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · Every Reel, flop to outlier</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-01.jpg" alt="1 · What matters most (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">1 · What matters most</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-02.jpg" alt="2 · The turn: one video split the account (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">2 · The turn: one video split the account</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-03.jpg" alt="3 · The hook (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">3 · The hook</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-04.jpg" alt="4 · Subtle pattern 1: a virtue plus mischief (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">4 · Subtle pattern 1: a virtue plus mischief</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-05.jpg" alt="5 · Subtle pattern 2: the job-title comparison (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">5 · Subtle pattern 2: the job-title comparison</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-06.jpg" alt="6 · Subtle pattern 3: same trait, 32x the views (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">6 · Subtle pattern 3: same trait, 32x the views</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-07.jpg" alt="7 · Where the views come from (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">7 · Where the views come from</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-08.jpg" alt="8 · The core pattern (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">8 · The core pattern</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-09.jpg" alt="9 · Share of Reels vs share of views (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">9 · Share of Reels vs share of views</figcaption></figure>
+      <figure class="page"><img src="/landing/peek-10.jpg" alt="10 · All 100 Reels, flop to 42.8x (page from a real breakdown)" width="1140" height="855" loading="lazy"><figcaption class="label">10 · All 100 Reels, flop to 42.8x</figcaption></figure>
     </div>
     <p class="note">Every breakdown also covers the creator&rsquo;s best format in one line, how to apply it to your niche, the AI Script Button, and every Reel in a sortable table.</p>
     <a class="pill label" href="/free-resource" style="margin-top:22px"><span class="sq"></span><span>Read a full breakdown free</span><span aria-hidden="true">→</span></a>
@@ -243,7 +243,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
     <div class="sheet">
       <div class="grp">
         <p class="label eyebrow">The core: a new creator decoded every week</p>
-        <div class="row"><span>4 creator breakdowns a month: what went viral, why it went viral, and a step by step to use it in your next Reel. Each one opens with a <b>&ldquo;Do this first&rdquo;</b> summary and a <b>&ldquo;Why people followed&rdquo;</b> line, so you know what turns views into followers</span><span>$267 a year</span></div>
+        <div class="row"><span>4 creator breakdowns a month: what went viral, why it went viral, and a step by step to use it in your next Reel. Each one opens with a <b>&ldquo;Do this first&rdquo;</b> summary, so you know exactly where to start</span><span>$267 a year</span></div>
         <div class="row"><span>The AI Script Button in every breakdown. You bring your idea and rough points; it helps you make them stronger using that creator's best scripts</span><span>Included</span></div>
         <div class="row"><span>The full library, tagged by difficulty and by each creator's main format, so you find the ones you can actually film</span><span>Included</span></div>
       </div>
