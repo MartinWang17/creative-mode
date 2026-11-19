@@ -65,13 +65,6 @@ export const breakdownsHtml = `<div class="wrap topbar">
       <p class="pull">Creator Breakdown finds these patterns first, shows you why they work, and gives you the step by step to use them in your own niche.</p>
       </div>
     </div>
-    <div class="receipts">
-      <p class="label eyebrow">The receipts · my account on November 19</p>
-      <div class="shots">
-        <figure><img src="/landing/proof-profile.png" alt="Martin's Instagram profile: martinwang.mp4, 392K followers" width="1038" height="452" loading="lazy"><figcaption>392K followers today</figcaption></figure>
-        <figure class="phone"><img src="/landing/proof-dashboard.jpg" alt="Instagram dashboard, last 30 days: 12.1M views and +224,608 net followers" width="660" height="670" loading="lazy"><figcaption>+224,608 followers in 30 days</figcaption></figure>
-      </div>
-    </div>
   </div>
 </section>
 <section class="scene" id="scene-promise" data-label="The promise">
@@ -96,14 +89,14 @@ export const breakdownsHtml = `<div class="wrap topbar">
   <div class="wrap">
     <p class="label eyebrow">Proof</p>
     <h2 class="big">Patterns from other niches, applied to my own account.</h2>
-    <p class="lead">I broke down creators in completely different niches from mine, pulled out the patterns behind their best Reels, and put my own story into them. The before was taken on <b style="color:var(--chalk);font-weight:500">September 20</b>. The after on <b style="color:var(--chalk);font-weight:500">October 27</b>.</p>
+    <p class="lead">I broke down creators in completely different niches from mine, pulled out the patterns behind their best Reels, and put my own story into them. The before was taken on <b style="color:var(--chalk);font-weight:500">September 20</b>. The after on <b style="color:var(--chalk);font-weight:500">November 19</b>.</p>
     <div class="ba">
       <figure class="shot before"><img src="/landing/before.jpg" alt="Martin Wang's Instagram profile at 50K followers" width="760" height="446"><figcaption class="tag label">Before · Sept 20 · 50K</figcaption></figure>
-      <figure class="shot after"><img src="/landing/after.jpg" alt="Martin Wang's Instagram profile at 167K followers" width="760" height="301"><figcaption class="tag label">After · Oct 27 · 167K</figcaption></figure>
+      <figure class="shot after"><img src="/landing/proof-profile.png" alt="Martin Wang's Instagram profile at 392K followers" width="1038" height="452"><figcaption class="tag label">After · Nov 19 · 392K</figcaption></figure>
     </div>
     <div class="stats">
-      <div class="stat"><b>+117K</b><small>followers gained</small></div>
-      <div class="stat"><b>3.3x</b><small>the account size</small></div>
+      <div class="stat"><b>+342K</b><small>followers gained in 2 months</small></div>
+      <div class="stat"><b>7.8x</b><small>the account size</small></div>
       <div class="stat"><b>0</b><small>courses. Just patterns from other niches</small></div>
     </div>
   </div>
@@ -119,7 +112,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <p class="label eyebrow">What happened to me</p>
         <div class="from"><span>His niche</span><i>→</i><span class="to">Mine</span></div>
         <h3>I broke down creators in completely different niches from mine.</h3>
-        <p>I found the patterns behind their biggest videos, brought them into my own account and my own topics, and it blew up. 50K to 167K followers in a few weeks. That's the before and after above.</p>
+        <p>I found the patterns behind their biggest videos, brought them into my own account and my own topics, and it blew up. 50K to 392K followers in two months. That's the before and after above.</p>
         <p class="res">Strategy from another niche. Applied to mine. Blew up.</p>
       </div>
       <div class="ncard">
@@ -212,7 +205,7 @@ export const breakdownsHtml = `<div class="wrap topbar">
         <div class="receipts">
           <div><b>$5K+</b><small>on two courses. Nothing to show for it</small></div>
           <div><b>44</b><small>followers after 35 posts</small></div>
-          <div><b>167K</b><small>once I started breaking creators down</small></div>
+          <div><b>392K</b><small>once I started breaking creators down</small></div>
         </div>
       </div>
     </div>
