@@ -50,9 +50,8 @@ export default function IdeaFilterPage() {
                 advice with no levers.
               </li>
               <li>There&apos;s a celebrity or a famous face in it.</li>
-              <li>The production is something you can&apos;t match yet.</li>
-              <li>Their face, voice or delivery is carrying the video, not the idea.</li>
-              <li>It&apos;s general advice that people only trust because of who&apos;s saying it.</li>
+              <li>The production is something you can&apos;t match yet, like a Lambo in the background.</li>
+              <li>Their face, voice or delivery is carrying the video, not <em>just</em> the idea.</li>
             </ul>
           </div>
         </section>
