@@ -1,16 +1,17 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const IDEA_FILTER = "/grow-1plc2-free-resource";
+const FREEBIES = ["/grow-1plc1-free-resource", "/grow-1plc2-free-resource"];
 
 // Keeps the Supabase login session fresh on every page load.
 export async function middleware(request: NextRequest) {
-  // The PLC 2 freebie is shared as /grow-1PLC2-free-resource; serve it for any casing of that path.
+  // The PLC freebies are shared with capitals (/grow-1PLC1-free-resource); serve them for any casing of the path.
   const path = request.nextUrl.pathname;
-  if (path.toLowerCase() === IDEA_FILTER) {
-    if (path === IDEA_FILTER) return NextResponse.next();
+  const lower = path.toLowerCase();
+  if (FREEBIES.includes(lower)) {
+    if (path === lower) return NextResponse.next();
     const to = request.nextUrl.clone();
-    to.pathname = IDEA_FILTER;
+    to.pathname = lower;
     return NextResponse.rewrite(to);
   }
 
@@ -34,5 +35,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/library/:path*", "/resources/:path*", "/api/resources/:path*", "/account/:path*", "/admin/:path*", "/api/breakdowns/:path*", "/api/portal", "/([gG][rR][oO][wW]-1[pP][lL][cC]2-[fF][rR][eE][eE]-[rR][eE][sS][oO][uU][rR][cC][eE])"],
+  matcher: ["/library/:path*", "/resources/:path*", "/api/resources/:path*", "/account/:path*", "/admin/:path*", "/api/breakdowns/:path*", "/api/portal", "/([gG][rR][oO][wW]-1[pP][lL][cC][12]-[fF][rR][eE][eE]-[rR][eE][sS][oO][uU][rR][cC][eE])"],
 };

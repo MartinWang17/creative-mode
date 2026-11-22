@@ -1,0 +1,80 @@
+/* DO, WHY, HOW worksheet (PLC episode 1 freebie). Scoped copy of /launch/plc1-worksheet-page styles. */
+.dwh{--bedrock:#121411; --forest:#1F4A33; --chalk:#F2EFE7; --birch:#D6BC8E;
+  --muted:#a3a59b; --line:#2b2f29; --card:#191c18; --field:#20241f; --good:#7fc49a;
+  --display:var(--font-silkscreen),"Silkscreen","Courier New",monospace;
+  --body:var(--font-bricolage),"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;}
+.dwh *,.dwh *::before,.dwh *::after{box-sizing:border-box}
+.dwh{background:var(--bedrock);color:var(--chalk);font-family:var(--body);font-size:17px;line-height:1.55;min-height:100vh}
+.dwh .wrap{max-width:720px;margin:0 auto;padding-block:40px 120px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+.dwh .eyebrow{font-family:var(--display);color:var(--birch);font-size:13px;letter-spacing:.08em}
+.dwh h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,6.5vw,42px);line-height:1.08;margin:8px 0 12px;text-wrap:balance}
+.dwh h2{font-family:var(--display);font-weight:700;font-size:clamp(19px,4.6vw,24px);line-height:1.2;margin:0;text-wrap:balance}
+.dwh h3{margin:0;font-size:19px;font-weight:800;line-height:1.25}
+.dwh p{margin:0}
+.dwh a{color:var(--birch)}
+.dwh .lead{color:var(--muted);max-width:60ch}
+.dwh .step{display:grid;gap:16px}
+.dwh .step-head{display:flex;gap:12px;align-items:baseline}
+.dwh .step-head .num{font-family:var(--display);color:var(--bedrock);background:var(--birch);border-radius:8px;padding:2px 8px;font-size:14px;flex:none}
+.dwh .muted{color:var(--muted)}
+.dwh .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px}
+.dwh .q{display:grid;gap:10px}
+.dwh .test{font-size:15px;color:var(--muted)}
+.dwh .test b{color:var(--chalk)}
+.dwh .ex{font-size:15px;border-left:2px solid var(--forest);padding-left:12px;display:grid;gap:2px}
+.dwh .ex i{color:var(--muted);font-style:normal;font-family:var(--display);font-size:11px;letter-spacing:.06em;margin-right:6px}
+.dwh .ex span{color:var(--birch)}
+.dwh label.f{display:grid;gap:6px;font-weight:600;font-size:15px}
+.dwh input[type=text],.dwh input[type=url],.dwh input[type=number],.dwh textarea{font:inherit;font-size:16px;color:var(--chalk);background:var(--field);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+.dwh textarea{min-height:84px;resize:vertical;line-height:1.45}
+.dwh input:focus-visible,.dwh textarea:focus-visible,.dwh button:focus-visible{outline:2px solid var(--birch);outline-offset:2px}
+.dwh ::placeholder{color:#6f7268}
+.dwh .checks{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.dwh .checks label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.dwh .checks input{appearance:none;flex:none;width:24px;height:24px;margin-top:1px;border:2px solid var(--muted);border-radius:7px;display:grid;place-items:center;cursor:pointer}
+.dwh .checks input:checked{background:var(--birch);border-color:var(--birch)}
+.dwh .checks input:checked::after{content:"";width:6px;height:11px;border:solid var(--bedrock);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.dwh .formats{display:grid;gap:8px}
+.dwh .frow{display:grid;grid-template-columns:28px minmax(0,2fr) minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) 54px;gap:6px;align-items:center}
+.dwh .frow.hd{font-size:12px;color:var(--muted);font-weight:600}
+.dwh .frow .i{font-family:var(--display);color:var(--muted);font-size:13px;text-align:center}
+.dwh .frow input{padding:8px 9px;font-size:15px}
+.dwh .mult{font-variant-numeric:tabular-nums;font-weight:800;font-size:14px;text-align:right;color:var(--muted)}
+.dwh .mult.hot{color:var(--good)}
+.dwh .tip{font-size:15px;color:var(--muted)}
+.dwh .tip b{color:var(--chalk)}
+.dwh .row3{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:8px}
+.dwh .beats{display:grid;gap:8px;counter-reset:b}
+.dwh .beats label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:center}
+.dwh .beats label::before{counter-increment:b;content:counter(b);font-family:var(--display);color:var(--muted);font-size:13px;text-align:center}
+.dwh .next{background:var(--forest);border-radius:14px;padding:16px;font-size:16px}
+.dwh .next b{color:var(--birch)}
+.dwh table.worked{width:100%;border-collapse:collapse;font-size:15px}
+.dwh .worked th,.dwh .worked td{text-align:left;padding:10px 8px;border-top:1px solid var(--line);vertical-align:top}
+.dwh .worked th{font-family:var(--display);font-weight:400;font-size:12px;letter-spacing:.06em;color:var(--birch);width:7.5rem}
+.dwh .bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(18,20,17,.96);border-top:1px solid var(--line);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.dwh .bar-in{max-width:720px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dwh .status{flex:1;min-width:0;font-size:14px;color:var(--muted)}
+.dwh .status.ok{color:var(--good)}
+.dwh .btn{font:700 15px var(--body);border-radius:10px;padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--chalk)}
+.dwh .btn.primary{background:var(--birch);border-color:var(--birch);color:var(--bedrock)}
+.dwh .btn:hover{border-color:var(--birch)}
+.dwh #copybox{width:100%;min-height:120px;margin-top:8px}
+.dwh .foot{color:var(--muted);font-size:13px}
+.dwh .notice{border:1px solid var(--birch);border-radius:12px;padding:12px 14px;font-size:15px;margin-top:-16px}
+.dwh .notice b{color:var(--birch)}
+@media (max-width:600px){
+.dwh .frow{grid-template-columns:24px minmax(0,1fr) minmax(0,1fr);grid-template-areas:"i link link" ". fmt fmt" ". v u";row-gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.dwh .frow.hd{display:none}
+.dwh .frow .i{grid-area:i}
+.dwh .frow .c-link{grid-area:link}
+.dwh .frow .c-fmt{grid-area:fmt}
+.dwh .frow .c-v{grid-area:v}
+.dwh .frow .c-u{grid-area:u}
+.dwh .frow .mult{grid-column:2 / -1;text-align:left}
+.dwh .row3{grid-template-columns:1fr 1fr}
+.dwh .status{flex-basis:100%;font-size:13px}
+.dwh .bar-in .btn{flex:1}
+.dwh .row3 .wide{grid-column:1 / -1}
+}
