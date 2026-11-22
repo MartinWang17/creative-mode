@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { bricolage } from "@/lib/fonts";
 import IdeaFilter from "@/components/IdeaFilter";
 import "./idea-filter.css";
 
 // PLC episode 2 free resource (GROW keyword): the Idea Filter checklist.
 // Shared as /grow-1PLC2-free-resource; middleware sends any other casing of the path here.
-const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], weight: ["400", "600", "800"] });
 
 export const metadata: Metadata = {
   title: "The Idea Filter | Creative Mode",
