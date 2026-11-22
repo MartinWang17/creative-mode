@@ -80,7 +80,9 @@ export default function IdeaFilter() {
       ? ["Skip it", "Tick the levers your idea pulls."]
       : c === 1
         ? ["Worth a try", "One lever. Can you add a second?"]
-        : ["You've probably got a viral video", "Now check it against the big rule below."];
+        : c === LEVERS.length
+          ? ["DAMN 🫪", "All 6. Now check it against the big rule below."] // easter egg for ticking every lever
+          : ["You've probably got a viral video", "Now check it against the big rule below."];
 
   return (
     <>
