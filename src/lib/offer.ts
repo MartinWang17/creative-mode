@@ -53,7 +53,8 @@ export const offer = {
   ],
   // The free 3-part series behind /series (keyword GROW). An episode shows from its release time (Eastern);
   // until then its card is locked. Titles and video links can be changed in Admin; these titles are the fallback.
-  // "resource" is the free page that goes with the episode (null hides the button).
+  // "resource" is the free page that goes with the episode. Episode 3 has none: its call to action is
+  // first access to Creator Breakdowns, which /series fills in from the cart dates.
   series: [
     {
       n: 1,

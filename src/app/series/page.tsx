@@ -133,12 +133,29 @@ export default async function SeriesPage({ searchParams }: { searchParams: Promi
                       <p>Check back in a little bit.</p>
                     </div>
                   )}
-                  {e.resource && (
+                  {e.resource ? (
                     <a className="pill label solid" href={e.resource.href}>
                       <span className="sq"></span>
                       <span>{e.resource.label}</span>
                       <span aria-hidden="true">→</span>
                     </a>
+                  ) : doorsOpen(now) ? (
+                    <a className="pill label solid" href="/creator-breakdown">
+                      <span className="sq"></span>
+                      <span>Get first access</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  ) : cartClosed(now) ? (
+                    <a className="pill label solid" href="/creator-breakdowns-waitlist">
+                      <span className="sq"></span>
+                      <span>Join the waitlist</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  ) : (
+                    <p className="sr-first">
+                      <b>You&apos;re on the list for first access.</b> Doors to Creator Breakdowns open Tuesday, Dec 8 at 9am ET, and
+                      I&apos;ll email you the link the moment they do.
+                    </p>
                   )}
                 </>
               ) : (
