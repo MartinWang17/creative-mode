@@ -8,9 +8,12 @@ export type Settings = {
   reelReviewBonus: boolean; // "First 100 annual members get a Reel reviewed by Martin"
   proofQuotes: string[]; // Praise next to the guarantee, one quote per line in Admin
   salesVideoUrl: string; // YouTube or Vimeo link for the video at the top of the sales page
+  seriesEpisodes: SeriesEpisode[]; // /series: per episode, an optional title override and the video link
 };
 
-const DEFAULTS: Settings = { reelReviewBonus: true, proofQuotes: [], salesVideoUrl: "" };
+export type SeriesEpisode = { title: string; video: string };
+
+const DEFAULTS: Settings = { reelReviewBonus: true, proofQuotes: [], salesVideoUrl: "", seriesEpisodes: [] };
 
 export async function getSettings(): Promise<Settings> {
   if (!hasSupabase()) return DEFAULTS;
@@ -21,10 +24,16 @@ export async function getSettings(): Promise<Settings> {
     reelReviewBonus: map.has("reel_review_bonus") ? map.get("reel_review_bonus") === true : true,
     proofQuotes: Array.isArray(map.get("proof_quotes")) ? (map.get("proof_quotes") as string[]) : [],
     salesVideoUrl: typeof map.get("sales_video_url") === "string" ? (map.get("sales_video_url") as string) : "",
+    seriesEpisodes: Array.isArray(map.get("series_episodes"))
+      ? (map.get("series_episodes") as Partial<SeriesEpisode>[]).map((e) => ({
+          title: typeof e?.title === "string" ? e.title : "",
+          video: typeof e?.video === "string" ? e.video : "",
+        }))
+      : [],
   };
 }
 
-export async function setSetting(key: "reel_review_bonus" | "proof_quotes" | "sales_video_url", value: unknown) {
+export async function setSetting(key: "reel_review_bonus" | "proof_quotes" | "sales_video_url" | "series_episodes", value: unknown) {
   const { error } = await createAdminClient()
     .from("site_settings")
     .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: "key" });

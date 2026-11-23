@@ -459,3 +459,19 @@ html:has(.cm){scroll-behavior:smooth}
 .cm .fb .dm-wide + .dms{margin-top:0}
 .cm .fb .dms .dm{display:none}
 @media(max-width:900px){.cm .fb .dm-wide{display:none}.cm .fb .dm-wide + .dms{margin-top:40px}.cm .fb .dms .dm{display:block}}
+
+/* /series: the free 3-part series (keyword GROW) */
+.cm .sr-hero h1{max-width:22ch;font-size:clamp(34px,4.8vw,64px)}
+.cm .sr{padding-block:10px 90px}
+.cm .sr .wrap{display:flex;flex-direction:column;gap:22px;max-width:980px}
+.cm .sr-ep{border:2px solid var(--line);padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:16px;align-items:flex-start;min-width:0}
+.cm .sr-ep h2{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.4vw,28px);line-height:1.2;margin:0;text-wrap:balance}
+.cm .sr-ep .vid-frame{width:100%;max-width:none;margin:0}
+.cm .sr-ep.locked{border-style:dashed;gap:10px}
+.cm .sr-ep.locked h2{color:var(--muted)}
+.cm .sr-ep.locked .eyebrow{color:var(--muted)}
+.cm .sr-gate{color:var(--birch);font-weight:600}
+.cm .sr-doors{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;background:var(--forest);color:var(--chalk);padding:14px 18px;text-decoration:none}
+.cm .sr-doors span{color:var(--birch);font-weight:600}
+.cm .sr-preview{color:var(--birch);border:2px dashed var(--birch);padding:10px 14px;margin:0 0 12px}
+@media(max-width:560px){.cm .sr-ep .pill{width:100%;justify-content:center;padding:14px 16px;letter-spacing:.12em}}

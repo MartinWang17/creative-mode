@@ -229,6 +229,18 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
   }
 
+  async function saveSeries(formData: FormData) {
+    "use server";
+    await requireAdmin();
+    const episodes = offer.series.map((e) => ({
+      title: String(formData.get(`title${e.n}`) ?? "").trim().slice(0, 160),
+      video: String(formData.get(`video${e.n}`) ?? "").trim(),
+    }));
+    if (episodes.some((e) => e.video && !videoEmbedUrl(e.video))) redirect("/admin?settings=badvideo#launch");
+    const error = await setSetting("series_episodes", episodes);
+    redirect("/admin?" + (error ? "settings=missing" : "settings=ok") + "#launch");
+  }
+
   async function saveProof(formData: FormData) {
     "use server";
     await requireAdmin();
@@ -545,6 +557,34 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               />
               <button className="label border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">Save video</button>
             </div>
+          </form>
+          <form action={saveSeries} className="sm:col-span-2">
+            <p className="font-display text-3xl">Free series (/series)</p>
+            <p className="mt-2 text-sm text-chalk/70">
+              The page people get from the GROW keyword. Each episode appears on its date (Dec 2, 4, 6) and stays. Paste the
+              YouTube link on release day; until then the card says the video is on its way. Leave a title empty to use
+              the built-in one. To see the page as it will look on another day, open /series?at=2026-12-04.
+            </p>
+            {offer.series.map((e, i) => (
+              <div key={e.n} className="mt-3 flex flex-wrap gap-2">
+                <span className="label w-full text-sm text-birch">
+                  Episode {e.n} · {e.drops}
+                </span>
+                <input
+                  name={`title${e.n}`}
+                  defaultValue={settings.seriesEpisodes[i]?.title ?? ""}
+                  placeholder={e.title}
+                  className="min-w-0 flex-[2_1_280px] border-2 border-oak bg-bedrock p-3 text-sm text-chalk"
+                />
+                <input
+                  name={`video${e.n}`}
+                  defaultValue={settings.seriesEpisodes[i]?.video ?? ""}
+                  placeholder="https://youtu.be/..."
+                  className="min-w-0 flex-[1_1_220px] border-2 border-oak bg-bedrock p-3 text-sm text-chalk"
+                />
+              </div>
+            ))}
+            <button className="label mt-3 border-2 border-birch px-4 py-2 text-sm text-birch hover:bg-forest">Save series</button>
           </form>
           <form action={saveProof}>
             <p className="font-display text-3xl">Proof next to the guarantee</p>

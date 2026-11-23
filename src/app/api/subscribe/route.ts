@@ -7,7 +7,7 @@ import { SIGNUP_EMAIL_COOKIE } from "@/components/InlineSurvey";
 // The free-resource page posts here. Adds the email to Kit; if Kit isn't set up or fails,
 // keeps the email in the waitlist table so nothing is lost, and the page still hands over the link.
 // Each free page sends its name as "source"; it decides the extra Kit tag and where we send them back.
-const SOURCES = { "free-resource": "free-resource", formats: "formats" } as const;
+const SOURCES = { "free-resource": "free-resource", formats: "formats", series: "series" } as const;
 type Source = keyof typeof SOURCES;
 
 export async function POST(request: NextRequest) {
