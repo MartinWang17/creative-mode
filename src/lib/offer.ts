@@ -51,6 +51,32 @@ export const offer = {
       featured: false,
     },
   ],
+  // The free 3-part series behind /series (keyword GROW). An episode shows from its release time (Eastern);
+  // until then its card is locked. Titles and video links can be changed in Admin; these titles are the fallback.
+  // "resource" is the free page that goes with the episode (null hides the button).
+  series: [
+    {
+      n: 1,
+      releases: "2026-12-02T00:00:00-05:00",
+      drops: "Dec 2",
+      title: "How I grew 224k followers in 30 days after plateauing for 6 months",
+      resource: { href: "/grow-1PLC1-free-resource", label: "Get the DO → WHY → HOW worksheet" },
+    },
+    {
+      n: 2,
+      releases: "2026-12-04T00:00:00-05:00",
+      drops: "Dec 4",
+      title: "How to Get More Views Than You Deserve (My 6-Lever Framework)",
+      resource: { href: "/grow-1PLC2-free-resource", label: "Get the Idea Filter" },
+    },
+    {
+      n: 3,
+      releases: "2026-12-06T00:00:00-05:00",
+      drops: "Dec 6",
+      title: "You're wasting 81% of your effort (here's how to fix it)",
+      resource: null,
+    },
+  ] as { n: number; releases: string; drops: string; title: string; resource: { href: string; label: string } | null }[],
   // Shown on the Terms, Privacy and Refund pages and in the footer.
   contactEmail: "martin@joincreativemode.com",
   guarantee:
