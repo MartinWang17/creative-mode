@@ -59,7 +59,7 @@ export default function IdeaFilterPage() {
           <b>NEXT</b>
           <p>
             A full breakdown of one creator takes me about 12 hours. In episode 3, I show you how to skip that and how
-            my student Lukas used this exact process to go from 2,000 views to over 700,000.
+            Lukas used this exact process to go from 2,000 views to over 800,000.
           </p>
         </section>
 
