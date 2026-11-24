@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     success_url: `${base}/welcome?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/creator-breakdown#pricing`,
     ...(plan === "annual" && (await getSettings()).reelReviewBonus && (await reelReviewsLeft()) > 0
-      ? { custom_text: { submit: { message: "First 100 annual members get a Reel reviewed by Martin. You'll get the details by email after you join." } } }
+      ? { custom_text: { submit: { message: "First 100 annual members get a Reel reviewed by Martin, delivered before January 1, 2027. You'll get the details by email after you join." } } }
       : {}),
   });
   return NextResponse.redirect(session.url!, 303);
