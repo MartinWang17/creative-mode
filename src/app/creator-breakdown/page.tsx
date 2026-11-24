@@ -44,7 +44,7 @@ export default async function CreatorBreakdownPage({
   const gone = settings.reelReviewBonus && left === 0;
   const pct = Math.round((left / REEL_REVIEWS) * 100);
   const reviewCard = review
-    ? `<div class="review"><p><b>First ${REEL_REVIEWS} annual members</b> get a Reel reviewed by me.</p><div class="left"><div class="bar" role="img" aria-label="${left} of ${REEL_REVIEWS} Reel reviews left"><i style="width:${pct}%"></i></div><span><b>${left}</b> of ${REEL_REVIEWS} left</span></div></div>`
+    ? `<div class="review"><p><b>First ${REEL_REVIEWS} annual members</b> get a Reel reviewed by me, delivered before January 1, 2027.</p><div class="left"><div class="bar" role="img" aria-label="${left} of ${REEL_REVIEWS} Reel reviews left"><i style="width:${pct}%"></i></div><span><b>${left}</b> of ${REEL_REVIEWS} left</span></div></div>`
     : gone
       ? `<p class="review gone">All ${REEL_REVIEWS} Reel reviews have been claimed.</p>`
       : "";
@@ -55,7 +55,7 @@ export default async function CreatorBreakdownPage({
     .replace("%%WL_NOTE%%", note)
     .replace(
       "%%REVIEW_ROW%%",
-      review ? `<div class="row hot"><span><b>First 100 annual members</b><small>A Reel of yours, reviewed by me</small></span><span>${left} left</span></div>` : "",
+      review ? `<div class="row hot"><span><b>First 100 annual members</b><small>A Reel of yours, reviewed by me before January 1, 2027</small></span><span>${left} left</span></div>` : "",
     )
     .replace("%%REVIEW_CARD%%", reviewCard)
     .replace("%%PROOF%%", proofHtml(settings.proofQuotes, isAdmin))

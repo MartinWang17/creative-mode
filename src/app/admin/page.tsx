@@ -530,7 +530,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <div>
             <p className="font-display text-3xl">First 100 annual: Reel review</p>
             <p className="mt-2 text-sm text-chalk/70">
-              Shows &ldquo;First 100 annual members get a Reel reviewed by me&rdquo; on the sales page and Stripe checkout. Turn it off
+              Shows &ldquo;First 100 annual members get a Reel reviewed by me, delivered before January 1, 2027&rdquo; on the sales page and Stripe checkout. Turn it off
               once 100 are claimed and the copy disappears everywhere.
             </p>
             <p className="label mt-3 text-sm text-birch">
