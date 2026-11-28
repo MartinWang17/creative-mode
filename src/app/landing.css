@@ -477,3 +477,6 @@ html:has(.cm){scroll-behavior:smooth}
 @media(max-width:560px){.cm .sr-ep .pill{width:100%;justify-content:center;padding:14px 16px;letter-spacing:.12em}}
 .cm .sr-first{margin:0;border-left:3px solid var(--birch);padding:4px 0 4px 14px;color:var(--muted);max-width:60ch}
 .cm .sr-first b{color:var(--chalk)}
+.cm .sr-again{margin-top:18px;color:var(--muted)}
+.cm .sr-again summary{cursor:pointer;color:var(--birch);font-weight:600;width:fit-content}
+.cm .sr-again .wl-form{margin-top:14px}

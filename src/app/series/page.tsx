@@ -86,7 +86,23 @@ export default async function SeriesPage({ searchParams }: { searchParams: Promi
           </p>
           <div id="signup">
             {unlocked ? (
-              <p className="when">{started ? "You're in. Start with the newest episode." : `You're on the list. Episode 1 drops ${first.drops}.`}</p>
+              <>
+                <p className="when">{started ? "You're in. Start with the newest episode." : `You're on the list. Episode 1 drops ${first.drops}.`}</p>
+                {/* Always leave a way to enter an email: a shared phone, or someone who wants it at another address. */}
+                <details className="sr-again">
+                  <summary>Not signed up yet, or want it at a different email?</summary>
+                  <form action="/api/subscribe" method="post" className="wl-form">
+                    <input type="hidden" name="source" value="series" />
+                    <input type="email" name="email" required placeholder="you@email.com" aria-label="Email" />
+                    <button type="submit" className="pill label solid">
+                      <span className="sq"></span>
+                      <span>Save my spot</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </form>
+                </details>
+                {note && <p className="wl-note">{note}</p>}
+              </>
             ) : (
               <>
                 <form action="/api/subscribe" method="post" className="wl-form">
