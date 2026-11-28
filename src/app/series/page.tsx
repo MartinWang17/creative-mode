@@ -77,7 +77,7 @@ export default async function SeriesPage({ searchParams }: { searchParams: Promi
         <div className="wrap">
           <p className="label eyebrow">Free series · {offer.series.length} episodes</p>
           <h1>
-            How I grew <em>224k followers in 30 days</em> after plateauing for 6 months.
+            How I grew <em>224k followers in 30 days</em> after 6 months of nothing.
           </h1>
           <p className="lead">
             {started

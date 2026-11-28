@@ -60,7 +60,7 @@ export const offer = {
       n: 1,
       releases: "2026-12-02T00:00:00-05:00",
       drops: "Dec 2",
-      title: "How I grew 224k followers in 30 days after plateauing for 6 months",
+      title: "How I Grew 224k Followers in 30 Days After 6 Months of Nothing…",
       resource: { href: "/grow-1PLC1-free-resource", label: "Get the DO → WHY → HOW worksheet" },
     },
     {
