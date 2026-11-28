@@ -83,10 +83,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   ]);
   const feedbackMissing = !feedback;
   const ratingEmoji: Record<string, string> = { meh: "😕", good: "🙂", love: "🤩" };
-  const [kitLaunch, kitFree, kitFormats] = await Promise.all([
+  const [kitLaunch, kitFree, kitFormats, kitSeries] = await Promise.all([
     tagCount(process.env.KIT_TAG || "launch-list"),
     tagCount("free-resource"),
     tagCount("formats"),
+    tagCount("series"),
   ]);
   const surveyMissing = !survey;
   // If the format/difficulty columns aren't added yet, still list breakdowns (without tags).
@@ -323,6 +324,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <Stat value={kitLaunch ?? "?"} label="on the launch list in Kit (every free sign-up)" />
         <Stat value={kitFree ?? "?"} label="free breakdown sign-ups (Kit tag free-resource)" />
         <Stat value={kitFormats ?? "?"} label="formats sign-ups (Kit tag formats)" />
+        <Stat value={kitSeries ?? "?"} label="series sign-ups from GROW (Kit tag series)" />
         <Stat value={waitlist ?? 0} label="waitlist page sign-ups (site table, not the free resources)" />
         <Stat value={(survey ?? []).length} label="survey answers" />
       </div>
